@@ -1,6 +1,6 @@
 module.exports = {
   content: [
-    "./index.html",
+    "./secotogpt.html",
     "./src/**/*.{html,js}",
     "./src/paginas/**/*.html",
     "./src/componentes/**/*.js"

@@ -94,7 +94,7 @@ http://localhost:3000
 
 ```
 SecotoGpt/
-├── 📄 index.html              # Página principal
+├── 📄 secotogpt.html          # Página principal
 ├── 📦 package.json            # Configuración del proyecto
 ├── ⚙️ postcss.config.js       # Configuración PostCSS
 ├── 🎨 tailwind.config.js      # Configuración TailwindCSS
