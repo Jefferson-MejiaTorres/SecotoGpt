@@ -713,26 +713,37 @@ class HeaderManager {
       });
     });
   }
-
   /* ===== NAVEGACIÓN Y SCROLL ===== */
   initializeNavigation() {
-    // Links de navegación con scroll suave
+    // Links de navegación con scroll suave (solo mantenemos efectos visuales)
     const navLinks = document.querySelectorAll('a[href^="#"]');
     
     navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-          this.smoothScrollTo(targetElement);
-          this.updateActiveNavLink(targetId);
-          this.addNavClickEffect(link);
-        }
-      });
+      const targetId = link.getAttribute('href');
       
-      // Efectos de hover mejorados
+      // Solo aplicar funcionalidad de scroll a secciones que SÍ deben mantenerla
+      // Excluir: inicio, historia, contacto (para futuras páginas propias)
+      if (!['#inicio', '#historia', '#contacto'].includes(targetId)) {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            this.smoothScrollTo(targetElement);
+            this.updateActiveNavLink(targetId);
+            this.addNavClickEffect(link);
+          }
+        });
+      } else {
+        // Para los botones que van a páginas propias, solo prevenimos comportamiento por ahora
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          // TODO: Aquí se añadirá navegación a páginas propias en el futuro
+          console.log(`Navegación a ${targetId} deshabilitada temporalmente para futuras páginas propias`);
+        });
+      }
+      
+      // Efectos de hover mejorados (mantener para todos)
       link.addEventListener('mouseenter', () => {
         this.addNavHoverEffect(link);
       });
@@ -742,7 +753,7 @@ class HeaderManager {
       });
     });
     
-    // Navegación activa basada en scroll
+    // Navegación activa basada en scroll (mantener)
     this.initializeScrollSpy();
   }
 
@@ -922,10 +933,16 @@ class HeaderManager {
   }
 
   /* ===== FUNCIONES DE NAVEGACIÓN MEJORADAS ===== */
-  
-  navigateToSection(sectionId) {
+    navigateToSection(sectionId) {
     // Limpiar el símbolo # si existe
     const cleanId = sectionId.replace('#', '');
+    
+    // Deshabilitar navegación interna para secciones que tendrán páginas propias
+    if (['inicio', 'historia', 'contacto'].includes(cleanId)) {
+      console.log(`Navegación a ${cleanId} deshabilitada para futuras páginas propias`);
+      return;
+    }
+    
     const targetElement = document.getElementById(cleanId) || document.querySelector(`[data-section="${cleanId}"]`);
     
     if (targetElement) {
@@ -942,12 +959,6 @@ class HeaderManager {
       if (history.pushState) {
         history.pushState(null, null, `#${cleanId}`);
       }
-    } else if (cleanId === 'inicio') {
-      // Scroll al top para inicio
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
     }
   }
   
@@ -1143,6 +1154,13 @@ class HeaderManager {
 function navigateToSection(sectionId) {
   // Limpiar el símbolo # si existe
   const cleanId = sectionId.replace('#', '');
+  
+  // Deshabilitar navegación interna para secciones que tendrán páginas propias
+  if (['inicio', 'historia', 'contacto'].includes(cleanId)) {
+    console.log(`Navegación a ${cleanId} deshabilitada para futuras páginas propias`);
+    return;
+  }
+  
   const targetElement = document.getElementById(cleanId) || document.querySelector(`[data-section="${cleanId}"]`);
   
   if (targetElement) {
@@ -1159,12 +1177,6 @@ function navigateToSection(sectionId) {
     if (history.pushState) {
       history.pushState(null, null, `#${cleanId}`);
     }
-  } else if (cleanId === 'inicio') {
-    // Scroll al top para inicio
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
   }
 }
 

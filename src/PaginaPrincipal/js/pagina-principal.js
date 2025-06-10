@@ -98,15 +98,22 @@ class PaginaPrincipal {
                 effect.remove();
             }
         }, 650);
-    }
-
-    /* ===== SCROLL SUAVE ===== */
+    }    /* ===== SCROLL SUAVE ===== */
     setupSmoothScrolling() {
         // Enhanced smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                
+                // Deshabilitar scroll para botones que irán a páginas propias
+                if (['#inicio', '#historia', '#contacto'].includes(targetId)) {
+                    e.preventDefault();
+                    console.log(`Navegación a ${targetId} deshabilitada para futuras páginas propias`);
+                    return;
+                }
+                
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(targetId);
                 
                 if (target) {
                     target.scrollIntoView({
