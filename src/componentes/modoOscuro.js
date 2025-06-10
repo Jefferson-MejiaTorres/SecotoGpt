@@ -1,6 +1,12 @@
 // Lógica para alternar modo oscuro/claro
-document.addEventListener('DOMContentLoaded', function() {
+function initializeModoOscuro() {
   const btn = document.getElementById('modoOscuroBtn');
+  if (!btn) {
+    // Si el botón no existe aún, intentar de nuevo en 100ms
+    setTimeout(initializeModoOscuro, 100);
+    return;
+  }
+
   const body = document.body;
   const html = document.documentElement;
   const icon = btn.querySelector('span');
@@ -28,6 +34,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 150);
   }
 
+  // Remover listener existente si ya existe
+  btn.removeEventListener('click', toggleDarkMode);
   btn.addEventListener('click', toggleDarkMode);
 
   // Mantener preferencia al recargar
@@ -39,9 +47,16 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Detectar preferencia del sistema
-  if (!localStorage.getItem('secotogpt-dark')) {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      toggleDarkMode();
-    }
+  if (!localStorage.getItem('secotogpt-dark') && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    body.classList.add('dark');
+    html.classList.add('dark');
+    icon.className = 'bi bi-sun';
+    btn.title = 'Modo claro';
   }
+}
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', function() {
+  // Intentar inicializar inmediatamente
+  initializeModoOscuro();
 });

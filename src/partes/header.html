@@ -1,0 +1,33 @@
+<!-- Header Component -->
+<header class="shadow-sm sticky-top bg-white dark:bg-[var(--color-bg)] transition-colors duration-500">
+  <nav class="container d-flex align-items-center justify-content-between py-3">
+    <div class="d-flex align-items-center gap-2">
+      <img src="./public/logo_secotogpt.svg" alt="Logo SeCoToGpt" height="40"/>
+      <h1 class="mb-0 secotogpt-logo-nombre">
+        <span class="secotogpt-nombre-se">Se</span>
+        <span class="secotogpt-nombre-co">Co</span>
+        <span class="secotogpt-nombre-to">To</span>
+        <span class="secotogpt-nombre-gpt">Gpt</span>
+      </h1>
+    </div>
+    <form class="d-none d-md-flex align-items-center" role="search">
+      <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
+    </form>
+    <ul class="nav gap-3">
+      <li class="nav-item">
+        <a class="nav-link active" href="#inicio">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#historia">Historia</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#contacto">Contáctanos</a>
+      </li>
+      <li class="nav-item">
+        <button id="modoOscuroBtn" class="btn btn-outline-secondary btn-sm" title="Modo oscuro/claro">
+          <span class="bi bi-moon"></span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</header>
