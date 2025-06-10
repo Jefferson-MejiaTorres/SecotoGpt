@@ -1,0 +1,362 @@
+/* ===== EFECTOS ESPECIALES Y ANIMACIONES AVANZADAS ===== */
+/* Mejoras visuales adicionales para la experiencia de usuario */
+
+/* ===== INDICADOR DE PROGRESO DE SCROLL ===== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.scroll-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-se), var(--color-co), var(--color-to), var(--color-gpt));
+    width: 0%;
+    transition: width 0.1s ease;
+}
+
+/* ===== ANIMACIONES DE ENTRADA ESCALONADAS ===== */
+.stagger-animation {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: staggerIn 0.6s ease-out forwards;
+}
+
+.stagger-animation:nth-child(1) { animation-delay: 0.1s; }
+.stagger-animation:nth-child(2) { animation-delay: 0.2s; }
+.stagger-animation:nth-child(3) { animation-delay: 0.3s; }
+.stagger-animation:nth-child(4) { animation-delay: 0.4s; }
+
+@keyframes staggerIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== EFECTOS DE CRISTAL Y GLASSMORPHISM ===== */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.dark .glass-effect {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== EFECTOS DE HOVER MEJORADOS ===== */
+.enhanced-hover {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.enhanced-hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+.enhanced-hover:hover::before {
+    left: 100%;
+}
+
+/* ===== ANIMACIONES DE TEXTO ===== */
+.text-reveal {
+    overflow: hidden;
+}
+
+.text-reveal span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%);
+    animation: textReveal 0.8s ease-out forwards;
+}
+
+@keyframes textReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== PARTÍCULAS FLOTANTES ===== */
+.floating-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.particle {
+    position: absolute;
+    background: var(--color-se);
+    border-radius: 50%;
+    opacity: 0.1;
+    animation: float 20s infinite linear;
+}
+
+.particle:nth-child(1) {
+    width: 4px;
+    height: 4px;
+    left: 10%;
+    animation-delay: 0s;
+    background: var(--color-se);
+}
+
+.particle:nth-child(2) {
+    width: 6px;
+    height: 6px;
+    left: 20%;
+    animation-delay: 2s;
+    background: var(--color-co);
+}
+
+.particle:nth-child(3) {
+    width: 3px;
+    height: 3px;
+    left: 30%;
+    animation-delay: 4s;
+    background: var(--color-to);
+}
+
+.particle:nth-child(4) {
+    width: 5px;
+    height: 5px;
+    left: 40%;
+    animation-delay: 6s;
+    background: var(--color-gpt);
+}
+
+.particle:nth-child(5) {
+    width: 4px;
+    height: 4px;
+    left: 50%;
+    animation-delay: 8s;
+    background: var(--color-se);
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.1;
+    }
+    90% {
+        opacity: 0.1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ===== EFECTOS DE PULSO ===== */
+.pulse-effect {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(168, 237, 234, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(168, 237, 234, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(168, 237, 234, 0);
+    }
+}
+
+/* ===== LOADING SKELETON ===== */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+.dark .skeleton {
+    background: linear-gradient(90deg, #2d3748 25%, #4a5568 50%, #2d3748 75%);
+    background-size: 200% 100%;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* ===== EFECTOS DE ESCALADO SUAVE ===== */
+.scale-hover {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scale-hover:hover {
+    transform: scale(1.05);
+}
+
+/* ===== ANIMACIONES DE APARICIÓN ===== */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fade-in-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.fade-in-right {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fade-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===== EFECTOS DE GRADIENT ANIMADO ===== */
+.animated-gradient {
+    background: linear-gradient(45deg, var(--color-se), var(--color-co), var(--color-to), var(--color-gpt));
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ===== MICROINTERACCIONES ===== */
+.micro-bounce {
+    transition: transform 0.2s ease;
+}
+
+.micro-bounce:active {
+    transform: scale(0.95);
+}
+
+.micro-rotate {
+    transition: transform 0.3s ease;
+}
+
+.micro-rotate:hover {
+    transform: rotate(5deg);
+}
+
+/* ===== EFECTOS DE BORDE ANIMADO ===== */
+.animated-border {
+    position: relative;
+    border: 2px solid transparent;
+    background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+                linear-gradient(45deg, var(--color-se), var(--color-co), var(--color-to)) border-box;
+}
+
+.animated-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, var(--color-se), var(--color-co), var(--color-to), var(--color-gpt));
+    border-radius: inherit;
+    z-index: -1;
+    animation: borderRotate 3s linear infinite;
+}
+
+@keyframes borderRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* ===== RESPONSIVIDAD PARA EFECTOS ===== */
+@media (max-width: 768px) {
+    .floating-particles {
+        display: none; /* Deshabilitar partículas en móvil para rendimiento */
+    }
+    
+    .enhanced-hover::before {
+        display: none; /* Simplificar efectos en móvil */
+    }
+    
+    .scale-hover:hover {
+        transform: none; /* Deshabilitar escalado en touch */
+    }
+}
+
+/* ===== MODO REDUCCIÓN DE MOVIMIENTO ===== */
+@media (prefers-reduced-motion: reduce) {
+    .floating-particles,
+    .pulse-effect,
+    .animated-gradient,
+    .animated-border::before {
+        animation: none;
+    }
+    
+    .enhanced-hover::before,
+    .text-reveal span {
+        transition: none;
+    }
+}
+
+/* ===== VARIABLES CSS PERSONALIZADAS ===== */
+:root {
+    --animation-speed: 0.3s;
+    --easing: cubic-bezier(0.4, 0, 0.2, 1);
+    --hover-lift: -4px;
+}
+
+.fast-animation {
+    --animation-speed: 0.15s;
+}
+
+.slow-animation {
+    --animation-speed: 0.6s;
+}

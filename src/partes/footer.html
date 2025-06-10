@@ -1,34 +1,227 @@
-<!-- Footer Component -->
-<footer class="text-center py-4 mt-auto bg-light dark:bg-[var(--color-bg)] transition-colors">
-  <div class="container">
-    <!-- Copyright principal -->
-    <div class="row">
-      <div class="col-12">
-        <small>&copy; 2025 SeCoToGpt. Proyecto académico para Plataformas Tecnológicas.</small>
+<!-- Footer Component Moderno Responsive -->
+<footer class="footer-modern">
+  <div class="container-fluid px-lg-5">
+    <div class="footer-content">
+      <!-- Copyright centrado arriba de todo -->
+      <div class="footer-copyright-top">
+        <div class="copyright-container">
+          <!-- Logo del Footer (izquierda) -->
+          <div class="footer-logo">
+            <div class="footer-logo-container">
+              <!-- SVG Logo -->
+              <div class="footer-logo-svg">
+                <img src="./imagenes/logo_secotogpt.svg" alt="SeCoToGpt Logo" class="footer-logo-image">
+              </div>
+              <!-- Texto del Logo -->
+              <div class="footer-logo-text">
+                <span class="footer-logo-se">Se</span>
+                <span class="footer-logo-co">Co</span>
+                <span class="footer-logo-to">To</span>
+                <span class="footer-logo-gpt">Gpt</span>
+              </div>
+            </div>
+            <p class="footer-logo-subtitle">Plataformas Tecnológicas</p>
+          </div>
+          
+          <!-- Copyright centrado -->
+          <div class="copyright-center">
+            <p class="copyright-text-main">
+              &copy; <span class="footer-year">2025</span> SeCoToGpt
+            </p>
+            <p class="copyright-text-secondary">
+              Proyecto académico para el estudio de Plataformas Tecnológicas
+            </p>
+            <p class="copyright-text-tertiary">
+              Desarrollado con 💚 para el aprendizaje colaborativo
+            </p>
+          </div>
+          
+          <!-- Enlaces Sociales (derecha) -->
+          <div class="social-links">
+            <a href="https://github.com/Jefferson-MejiaTorres/SecotoGpt" 
+               class="social-link social-github" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               aria-label="GitHub Repository">
+              <i class="bi bi-github"></i>
+            </a>
+            <a href="mailto:secotogpt@universidad.edu" 
+               class="social-link social-email"
+               aria-label="Contacto por Email">
+              <i class="bi bi-envelope-fill"></i>
+            </a>
+            <a href="#" 
+               class="social-link social-university"
+               aria-label="Portal Universitario">
+              <i class="bi bi-mortarboard-fill"></i>
+            </a>
+          </div>
+        </div>
+      </div>      <!-- Secciones del Footer con iconos centrados y contenido desplegable -->
+      <div class="footer-sections">
+        <!-- Iconos centrados y alineados horizontalmente -->
+        <div class="footer-icons-row">
+          <div class="footer-icon-item" data-section="navegacion">
+            <div class="footer-main-icon">
+              <i class="bi bi-compass"></i>
+            </div>
+            <span class="footer-icon-label">Navegación & Proyecto</span>
+            <i class="bi bi-chevron-down footer-toggle-icon"></i>
+          </div>
+          
+          <div class="footer-icon-item" data-section="modulos">
+            <div class="footer-main-icon">
+              <i class="bi bi-collection"></i>
+            </div>
+            <span class="footer-icon-label">Módulos de Estudio</span>
+            <i class="bi bi-chevron-down footer-toggle-icon"></i>
+          </div>
+          
+          <div class="footer-icon-item" data-section="contacto">
+            <div class="footer-main-icon">
+              <i class="bi bi-info-circle"></i>
+            </div>
+            <span class="footer-icon-label">Contacto & Recursos</span>
+            <i class="bi bi-chevron-down footer-toggle-icon"></i>
+          </div>
+          
+          <div class="footer-icon-item" data-section="estado">
+            <div class="footer-main-icon">
+              <i class="bi bi-gear"></i>
+            </div>
+            <span class="footer-icon-label">Estado del Sistema</span>
+            <i class="bi bi-chevron-down footer-toggle-icon"></i>
+          </div>
+        </div>
+
+        <!-- Contenido desplegable de cada sección -->
+        <div class="footer-collapsible-content">
+          <!-- Navegación & Proyecto -->
+          <div class="footer-dropdown-section" id="navegacion-content" data-section="navegacion">
+            <div class="footer-dropdown-grid">
+              <a href="./secotogpt.html" class="footer-dropdown-link">
+                <i class="bi bi-house-fill"></i>
+                <span>Página Principal</span>
+              </a>
+              <a href="#historia" class="footer-dropdown-link">
+                <i class="bi bi-clock-history"></i>
+                <span>Historia de Sistemas</span>
+              </a>
+              <div class="footer-dropdown-link footer-info-item">
+                <i class="bi bi-book"></i>
+                <span>Plataformas Tecnológicas</span>
+              </div>
+              <div class="footer-dropdown-link footer-info-item">
+                <i class="bi bi-calendar-event"></i>
+                <span>Semestre 2025-I</span>
+              </div>
+              <div class="footer-dropdown-link footer-info-item">
+                <i class="bi bi-building"></i>
+                <span>Facultad de Ingeniería</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Módulos de Estudio -->
+          <div class="footer-dropdown-section" id="modulos-content" data-section="modulos">
+            <div class="footer-dropdown-grid">
+              <a href="./src/paginas/sistemas_operativos.html" class="footer-dropdown-link">
+                <i class="bi bi-cpu"></i>
+                <span>Sistemas Operativos</span>
+              </a>
+              <a href="./src/paginas/gestion_procesos.html" class="footer-dropdown-link">
+                <i class="bi bi-diagram-3"></i>
+                <span>Gestión de Procesos</span>
+              </a>
+              <a href="./src/paginas/gestion_memoria.html" class="footer-dropdown-link">
+                <i class="bi bi-memory"></i>
+                <span>Gestión de Memoria</span>
+              </a>
+              <a href="./src/paginas/gestion_almacenamiento.html" class="footer-dropdown-link">
+                <i class="bi bi-hdd-stack"></i>
+                <span>Sistemas de Archivos</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Contacto & Recursos -->
+          <div class="footer-dropdown-section" id="contacto-content" data-section="contacto">
+            <div class="footer-dropdown-grid">
+              <a href="mailto:secotogpt@universidad.edu" class="footer-dropdown-link">
+                <i class="bi bi-envelope-fill"></i>
+                <span>secotogpt@universidad.edu</span>
+              </a>
+              <div class="footer-dropdown-link footer-info-item">
+                <i class="bi bi-geo-alt-fill"></i>
+                <span>Campus Universitario</span>
+              </div>
+              <a href="https://github.com/Jefferson-MejiaTorres/SecotoGpt" class="footer-dropdown-link" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-github"></i>
+                <span>Repositorio GitHub</span>
+              </a>
+              <a href="https://github.com/Jefferson-MejiaTorres/SecotoGpt/blob/main/LICENSE" class="footer-dropdown-link" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-code-square"></i>
+                <span>Licencia Open Source</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Estado del Sistema -->
+          <div class="footer-dropdown-section" id="estado-content" data-section="estado">
+            <div class="footer-dropdown-grid">
+              <div class="footer-dropdown-link footer-status-item">
+                <i class="bi bi-circle-fill text-success"></i>
+                <span>Sistema Operativo</span>
+              </div>
+              <div class="footer-dropdown-link footer-status-item">
+                <i class="bi bi-shield-check text-success"></i>
+                <span>Open Source</span>
+              </div>
+              <div class="footer-dropdown-link footer-status-item">
+                <i class="bi bi-globe text-info"></i>
+                <span>Acceso Libre</span>
+              </div>
+              <div class="footer-dropdown-link footer-status-item">
+                <i class="bi bi-heart-fill text-danger"></i>
+                <span>Made with Love</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    
-    <!-- Información de contacto -->
-    <div class="row mt-3">
-      <div class="col-md-4">
-        <small class="text-muted">
-          <i class="bi bi-mortarboard me-1"></i>
-          Proyecto Educativo
-        </small>
-      </div>
-      <div class="col-md-4">
-        <small class="text-muted">
-          <i class="bi bi-github me-1"></i>
-          <a href="https://github.com/Jefferson-MejiaTorres/SecotoGpt" class="text-decoration-none text-muted">
-            GitHub
-          </a>
-        </small>
-      </div>
-      <div class="col-md-4">
-        <small class="text-muted">
-          <i class="bi bi-envelope me-1"></i>
-          secotogpt@universidad.edu
-        </small>
+      <!-- Información técnica en la parte inferior más compacta -->
+      <div class="footer-bottom">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <div class="footer-info d-flex flex-wrap gap-3">
+              <div class="info-item">
+                <i class="bi bi-tag info-icon"></i>
+                <span>v2.0.0</span>
+              </div>
+              <div class="info-item">
+                <i class="bi bi-speedometer2 info-icon"></i>
+                <span>Carga: 1147ms</span>
+              </div>
+              <div class="info-item">
+                <i class="bi bi-clock info-icon"></i>
+                <span>Actualizado: Junio 2025</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 text-md-end">
+            <div class="footer-badges d-flex flex-wrap justify-content-md-end gap-2">
+              <span class="badge bg-success">
+                <i class="bi bi-check-circle"></i> Estable
+              </span>
+              <span class="badge bg-info">
+                <i class="bi bi-book"></i> Educativo
+              </span>
+              <span class="badge bg-primary">
+                <i class="bi bi-code-slash"></i> Open Source
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
