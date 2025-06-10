@@ -3,26 +3,22 @@
   "outputDirectory": "./",
   "installCommand": "npm install",
   "framework": null,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/",
-      "dest": "/index.html"
+      "source": "/gestion-procesos",
+      "destination": "/src/paginas/gestion_procesos.html"
     },
     {
-      "src": "/gestion-procesos",
-      "dest": "/src/paginas/gestion_procesos.html"
+      "source": "/sistemas-operativos", 
+      "destination": "/src/paginas/sistemas_operativos.html"
     },
     {
-      "src": "/sistemas-operativos", 
-      "dest": "/src/paginas/sistemas_operativos.html"
+      "source": "/gestion-memoria",
+      "destination": "/src/paginas/gestion_memoria.html"
     },
     {
-      "src": "/gestion-memoria",
-      "dest": "/src/paginas/gestion_memoria.html"
-    },
-    {
-      "src": "/gestion-almacenamiento",
-      "dest": "/src/paginas/gestion_almacenamiento.html"
+      "source": "/gestion-almacenamiento",
+      "destination": "/src/paginas/gestion_almacenamiento.html"
     }
   ],
   "headers": [
