@@ -169,21 +169,38 @@ function initializeHeader() {
     });
   });
 
-  // Efectos hover para el logo
+  // Efectos especiales para el logo SeCoToGpt
   const logoContainer = document.querySelector('.logo-container');
-  if (logoContainer) {
+  const logoNombre = document.querySelector('.secotogpt-logo-nombre');
+  
+  if (logoContainer && logoNombre) {
+    // Efecto de aparición letter por letter
     logoContainer.addEventListener('mouseenter', function() {
-      const logoGlow = this.querySelector('.logo-glow');
-      if (logoGlow) {
-        logoGlow.style.opacity = '1';
-      }
+      const letters = logoNombre.querySelectorAll('span');
+      letters.forEach((letter, index) => {
+        setTimeout(() => {
+          letter.style.transform = 'translateY(-2px) scale(1.05)';
+          letter.style.filter = 'drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2))';
+        }, index * 100);
+      });
     });
     
     logoContainer.addEventListener('mouseleave', function() {
-      const logoGlow = this.querySelector('.logo-glow');
-      if (logoGlow) {
-        logoGlow.style.opacity = '0';
-      }
+      const letters = logoNombre.querySelectorAll('span');
+      letters.forEach((letter, index) => {
+        setTimeout(() => {
+          letter.style.transform = 'translateY(0) scale(1)';
+          letter.style.filter = 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))';
+        }, index * 50);
+      });
+    });
+    
+    // Efecto de click en el logo
+    logoContainer.addEventListener('click', function() {
+      logoNombre.classList.add('logo-typing');
+      setTimeout(() => {
+        logoNombre.classList.remove('logo-typing');
+      }, 2000);
     });
   }
 

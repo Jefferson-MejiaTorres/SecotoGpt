@@ -676,3 +676,248 @@ header * {
     animation: none !important;
   }
 }
+
+/* Estilos específicos para el logo SeCoToGpt con colores pasteles */
+.secotogpt-logo-nombre {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.1em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Se - Azul pastel */
+.secotogpt-nombre-se {
+  background: linear-gradient(135deg, #4A90E2 0%, #6BB6FF 50%, #87CEEB 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  position: relative;
+  transition: all 0.3s ease;
+  font-weight: 700;
+}
+
+.secotogpt-nombre-se::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #4A90E2, #6BB6FF);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  border-radius: 1px;
+}
+
+/* Co - Verde pastel */
+.secotogpt-nombre-co {
+  background: linear-gradient(135deg, #52C79A 0%, #7ED321 50%, #98FB98 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  position: relative;
+  transition: all 0.3s ease;
+  font-weight: 700;
+}
+
+.secotogpt-nombre-co::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #52C79A, #7ED321);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  border-radius: 1px;
+}
+
+/* To - Morado pastel */
+.secotogpt-nombre-to {
+  background: linear-gradient(135deg, #9B59B6 0%, #C39BD3 50%, #DDA0DD 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  position: relative;
+  transition: all 0.3s ease;
+  font-weight: 700;
+}
+
+.secotogpt-nombre-to::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #9B59B6, #C39BD3);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  border-radius: 1px;
+}
+
+/* Gpt - Rojo pastel */
+.secotogpt-nombre-gpt {
+  background: linear-gradient(135deg, #E74C3C 0%, #F1948A 50%, #FFB6C1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  position: relative;
+  transition: all 0.3s ease;
+  font-weight: 700;
+}
+
+.secotogpt-nombre-gpt::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #E74C3C, #F1948A);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+  border-radius: 1px;
+}
+
+/* Efectos hover para cada letra */
+.logo-container:hover .secotogpt-nombre-se::after,
+.logo-container:hover .secotogpt-nombre-co::after,
+.logo-container:hover .secotogpt-nombre-to::after,
+.logo-container:hover .secotogpt-nombre-gpt::after {
+  transform: scaleX(1);
+}
+
+.logo-container:hover .secotogpt-nombre-se,
+.logo-container:hover .secotogpt-nombre-co,
+.logo-container:hover .secotogpt-nombre-to,
+.logo-container:hover .secotogpt-nombre-gpt {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+/* Animación de aparición secuencial */
+.secotogpt-nombre-se {
+  animation: slideInLeft 0.8s ease-out 0.1s both;
+}
+
+.secotogpt-nombre-co {
+  animation: slideInLeft 0.8s ease-out 0.2s both;
+}
+
+.secotogpt-nombre-to {
+  animation: slideInLeft 0.8s ease-out 0.3s both;
+}
+
+.secotogpt-nombre-gpt {
+  animation: slideInLeft 0.8s ease-out 0.4s both;
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Efecto de pulso suave en hover */
+.logo-container:hover .secotogpt-logo-nombre {
+  animation: gentlePulse 2s ease-in-out infinite;
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Modo oscuro para el logo */
+.dark .secotogpt-nombre-se {
+  background: linear-gradient(135deg, #5DADE2 0%, #85C1E9 50%, #AED6F1 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: brightness(1.2) saturate(1.3);
+}
+
+.dark .secotogpt-nombre-co {
+  background: linear-gradient(135deg, #58D68D 0%, #85C1E9 50%, #ABEBC6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: brightness(1.2) saturate(1.3);
+}
+
+.dark .secotogpt-nombre-to {
+  background: linear-gradient(135deg, #BB8FCE 0%, #D2B4DE 50%, #E8DAEF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: brightness(1.2) saturate(1.3);
+}
+
+.dark .secotogpt-nombre-gpt {
+  background: linear-gradient(135deg, #EC7063 0%, #F1948A 50%, #F8C471 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: brightness(1.2) saturate(1.3);
+}
+
+/* Resplandor sutil alrededor del texto en modo oscuro */
+.dark .secotogpt-logo-nombre {
+  filter: drop-shadow(0 0 10px rgba(135, 206, 235, 0.3));
+}
+
+/* Efecto de typing animation opcional */
+.logo-typing .secotogpt-nombre-se,
+.logo-typing .secotogpt-nombre-co,
+.logo-typing .secotogpt-nombre-to,
+.logo-typing .secotogpt-nombre-gpt {
+  opacity: 0;
+  animation: typeIn 0.5s ease-out forwards;
+}
+
+.logo-typing .secotogpt-nombre-se { animation-delay: 0.1s; }
+.logo-typing .secotogpt-nombre-co { animation-delay: 0.3s; }
+.logo-typing .secotogpt-nombre-to { animation-delay: 0.5s; }
+.logo-typing .secotogpt-nombre-gpt { animation-delay: 0.7s; }
+
+@keyframes typeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive design para el logo */
+@media (max-width: 768px) {
+  .secotogpt-logo-nombre {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .secotogpt-logo-nombre {
+    font-size: 1.3rem;
+  }
+}
