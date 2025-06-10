@@ -1,0 +1,29 @@
+/*
+  Archivo: animaciones.css
+  Descripción: Animaciones y transiciones personalizadas para el sitio SeCoToGpt
+  Puedes agregar aquí animaciones CSS que se reutilicen en varias partes del sitio.
+*/
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInUp {
+  animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* Transición suave para tarjetas */
+.card {
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.card:hover {
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  transform: translateY(-6px) scale(1.03);
+}

@@ -1,0 +1,26 @@
+{
+  "name": "secotogpt",
+  "version": "1.0.0",
+  "description": "El mejor Proyecto de Plataformas Att: ChatGpt",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jefferson-MejiaTorres/SecotoGpt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jefferson-MejiaTorres/SecotoGpt/issues"
+  },
+  "homepage": "https://github.com/Jefferson-MejiaTorres/SecotoGpt#readme",
+  "dependencies": {
+    "autoprefixer": "^10.4.21",
+    "bootstrap": "^5.3.6",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8"
+  }
+}

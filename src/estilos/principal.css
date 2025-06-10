@@ -1,0 +1,117 @@
+/* Archivo principal de Tailwind para importar estilos y personalizaciones */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Importar Bootstrap desde CDN en el HTML, pero aquí puedes agregar utilidades personalizadas si lo deseas */
+
+/* Paleta de colores pasteles y modo oscuro */
+:root {
+  --color-se: #a8edea;
+  --color-co: #fed6e3;
+  --color-to: #fcb69f;
+  --color-gpt: #cfd9df;
+  --color-bg: #f8fafc;
+  --color-text: #22223b;
+}
+.dark {
+  --color-bg: #22223b;
+  --color-text: #f8fafc;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: background 0.4s, color 0.4s;
+}
+
+@import url('./animaciones.css');
+
+/* Logo SeCoToGpt degradado y estilizado */
+.secotogpt-logo {
+  font-size: 1.7rem;
+  display: flex;
+  gap: 0.1em;
+}
+.secotogpt-se {
+  background: linear-gradient(90deg, #a8edea, #fed6e3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.secotogpt-co {
+  background: linear-gradient(90deg, #fed6e3, #fcb69f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.secotogpt-to {
+  background: linear-gradient(90deg, #fcb69f, #cfd9df);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.secotogpt-gpt {
+  background: linear-gradient(90deg, #cfd9df, #a8edea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Nombre al lado del logo SeCoToGpt */
+.secotogpt-logo-nombre {
+  font-size: 2rem;
+  font-family: 'Poppins', Arial, sans-serif;
+  font-weight: 700;
+  display: flex;
+  gap: 0;
+  letter-spacing: 0.01em;
+  align-items: center;
+  margin-left: 0.2em;
+}
+.secotogpt-nombre-se {
+  background: linear-gradient(90deg, #4f8edc, #a8edea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+.secotogpt-nombre-co {
+  background: linear-gradient(90deg, #34a853, #6ee7b7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+.secotogpt-nombre-to {
+  background: linear-gradient(90deg, #a084e8, #b39ddb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+.secotogpt-nombre-gpt {
+  background: linear-gradient(90deg, #e63946, #fca5a5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+}
+
+/* Fondos degradados para las tarjetas */
+.card-bg-se {
+  background: linear-gradient(135deg,#a8edea 60%,#fed6e3 100%);
+}
+.card-bg-co {
+  background: linear-gradient(135deg,#fed6e3 60%,#fcb69f 100%);
+}
+.card-bg-to {
+  background: linear-gradient(135deg,#fcb69f 60%,#cfd9df 100%);
+}
+.card-bg-gpt {
+  background: linear-gradient(135deg,#cfd9df 60%,#a8edea 100%);
+}

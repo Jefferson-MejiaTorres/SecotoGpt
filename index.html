@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SeCoToGpt - Plataformas Tecnológicas</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tailwind CSS compilado -->
+  <link href="./public/tailwind.css" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" href="./public/logo_secotogpt.svg">
+  <!-- Animaciones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <!-- Google Fonts: Poppins para el logo -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+  <!-- Comentario: Aquí se pueden agregar más meta tags SEO -->
+</head>
+<body class="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-500">
+  <!-- Header -->
+  <header class="shadow-sm sticky-top bg-white dark:bg-[var(--color-bg)] transition-colors duration-500">
+    <nav class="container d-flex align-items-center justify-content-between py-3">
+      <div class="d-flex align-items-center gap-2">
+        <img src="./public/logo_secotogpt.svg" alt="Logo SeCoToGpt" height="40"/>
+        <h1 class="mb-0 secotogpt-logo-nombre" style="gap:0;">
+          <span class="secotogpt-nombre-se">Se</span><span class="secotogpt-nombre-co">Co</span><span class="secotogpt-nombre-to">To</span><span class="secotogpt-nombre-gpt">Gpt</span>
+        </h1>
+      </div>
+      <form class="d-none d-md-flex align-items-center" role="search">
+        <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
+      </form>
+      <ul class="nav gap-3">
+        <li class="nav-item"><a class="nav-link active" href="#inicio">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#historia">Historia</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contacto">Contáctanos</a></li>
+        <li class="nav-item">
+          <button id="modoOscuroBtn" class="btn btn-outline-secondary btn-sm" title="Modo oscuro/claro">
+            <span class="bi bi-moon"></span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Contenido principal -->
+  <main class="container py-5 animate__animated animate__fadeIn">
+    <!-- Sección de bienvenida -->
+    <section id="inicio" class="text-center mb-5">
+      <h2 class="display-5 fw-bold mb-3">Plataformas Tecnológicas</h2>
+      <p class="lead">Explora los principales conceptos estudiados durante el semestre en el área de plataformas tecnológicas.</p>
+    </section>
+    <!-- Temas principales -->
+    <section class="row g-4 justify-content-center">
+      <!-- Tarjeta: Sistemas Operativos -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm border-0 animate__animated animate__zoomIn card-bg-se">
+          <div class="card-body">
+            <h5 class="card-title">Introducción a los Sistemas Operativos</h5>
+            <p class="card-text">¿Qué es un sistema operativo, historia, tipos y funciones principales en la administración del sistema?</p>
+            <a href="./src/paginas/sistemas_operativos.html" class="btn btn-outline-dark">Leer más →</a>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta: Gestión de Procesos -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm border-0 animate__animated animate__zoomIn card-bg-co">
+          <div class="card-body">
+            <h5 class="card-title">Gestión de Procesos</h5>
+            <p class="card-text">Cómo el sistema operativo controla y organiza los procesos, su planificación y estados.</p>
+            <a href="./src/paginas/gestion_procesos.html" class="btn btn-outline-dark">Leer más →</a>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta: Gestión de Memoria -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm border-0 animate__animated animate__zoomIn card-bg-to">
+          <div class="card-body">
+            <h5 class="card-title">Gestión de Memoria</h5>
+            <p class="card-text">Cómo se asigna, organiza y optimiza el uso de la memoria RAM entre procesos y servicios.</p>
+            <a href="./src/paginas/gestion_memoria.html" class="btn btn-outline-dark">Leer más →</a>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta: Gestión de Almacenamiento -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100 shadow-sm border-0 animate__animated animate__zoomIn card-bg-gpt">
+          <div class="card-body">
+            <h5 class="card-title">Gestión de Almacenamiento</h5>
+            <p class="card-text">Cómo se gestionan los discos y sistemas de archivos para guardar y recuperar datos eficientemente.</p>
+            <a href="./src/paginas/gestion_almacenamiento.html" class="btn btn-outline-dark">Leer más →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-auto bg-light dark:bg-[var(--color-bg)] transition-colors">
+    <small>&copy; 2025 SeCoToGpt. Proyecto académico para Plataformas Tecnológicas.</small>
+  </footer>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Iconos Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <!-- JS principal -->
+  <script src="./src/componentes/header.js"></script>
+  <script src="./src/componentes/modoOscuro.js"></script>
+</body>
+</html>

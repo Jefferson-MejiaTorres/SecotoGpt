@@ -1,0 +1,26 @@
+<!-- SVG LOGO minimalista, estiloso, con degradados pastel para Se-Co-To-Gpt, solo bolas sin letras -->
+<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="se" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#a8c8ed"/>
+      <stop offset="100%" stop-color="#a8edea"/>
+    </radialGradient>
+    <radialGradient id="co" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#b7e7c2"/>
+      <stop offset="100%" stop-color="#6ee7b7"/>
+    </radialGradient>
+    <radialGradient id="to" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#d1c4e9"/>
+      <stop offset="100%" stop-color="#b39ddb"/>
+    </radialGradient>
+    <radialGradient id="gpt" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#fca5a5"/>
+      <stop offset="100%" stop-color="#f87171"/>
+    </radialGradient>
+  </defs>
+  <!-- Bolas con degradados -->
+  <circle cx="18" cy="18" r="13" fill="url(#se)"/>
+  <circle cx="42" cy="18" r="13" fill="url(#co)"/>
+  <circle cx="18" cy="42" r="13" fill="url(#to)"/>
+  <circle cx="42" cy="42" r="13" fill="url(#gpt)"/>
+</svg>
