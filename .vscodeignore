@@ -1,0 +1,10 @@
+# CSS que queremos ignorar - Solo archivos de dependencias
+**/node_modules/**/*.css
+**/node_modules/**/*.min.css
+**/bootstrap/**/*.css
+**/dist/**/*.css
+**/build/**/*.css
+
+# Archivos generados
+public/tailwind.css
+**/*.css.map
