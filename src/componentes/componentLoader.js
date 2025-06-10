@@ -10,11 +10,27 @@ async function loadComponent(selector, filePath) {
     if (!response.ok) {
       throw new Error(`Error al cargar ${filePath}: ${response.status}`);
     }
-    const html = await response.text();
-    const element = document.querySelector(selector);
+    const html = await response.text();    const element = document.querySelector(selector);
     if (element) {
       element.innerHTML = html;
       console.log(`✓ Componente cargado: ${filePath}`);
+      
+      // Debug específico para el header
+      if (selector === '#header-placeholder') {
+        setTimeout(() => {
+          const logoImg = document.querySelector('.logo-img');
+          if (logoImg) {
+            console.log('✓ Logo encontrado en DOM:', logoImg.src);
+            logoImg.addEventListener('load', () => console.log('✓ Logo cargado exitosamente'));
+            logoImg.addEventListener('error', (e) => {
+              console.error('✗ Error cargando logo:', e);
+              console.log('Ruta intentada:', logoImg.src);
+            });
+          } else {
+            console.error('✗ Logo no encontrado en DOM');
+          }
+        }, 100);
+      }
     } else {
       console.error(`✗ Selector no encontrado: ${selector}`);
     }
@@ -53,7 +69,12 @@ function initializeComponents() {
     initializeModoOscuro();
   }
   
-  if (typeof initializeHeader === 'function') {
+  // Inicializar el nuevo header manager
+  if (typeof HeaderManager !== 'undefined') {
+    if (!window.headerManager) {
+      window.headerManager = new HeaderManager();
+    }
+  } else if (typeof initializeHeader === 'function') {
     initializeHeader();
   }
   

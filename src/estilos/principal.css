@@ -3,8 +3,8 @@
 /* Importar correcciones de compatibilidad para Bootstrap */
 @import './bootstrap-fixes.css';
 
-/* Importar estilos del header */
-@import './header.css';
+/* Importar estilos del header moderno */
+@import './header-modern.css';
 
 @tailwind base;
 @tailwind components;

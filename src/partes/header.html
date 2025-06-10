@@ -1,111 +1,212 @@
-<!-- Header Component -->
-<header class="shadow-lg sticky-top bg-white/95 dark:bg-[var(--color-bg)]/95 backdrop-blur-md transition-all duration-500 border-b border-gray-200/50 dark:border-gray-700/50">
-  <nav class="container d-flex align-items-center justify-content-between py-4">
-    <!-- Logo y Nombre -->
-    <div class="d-flex align-items-center gap-3 logo-container">
-      <div class="logo-wrapper position-relative">
-        <img src="./imagenes/logo_secotogpt.svg" alt="Logo SeCoToGpt" height="45" class="logo-img transition-transform duration-300 hover:scale-110"/>
-        <div class="logo-glow"></div>
+<!-- Header Component Mejorado - SeCoToGpt -->
+<header class="modern-header shadow-lg sticky-top backdrop-blur-md transition-all duration-500 border-b" id="mainHeader">
+  <!-- Navegación principal -->
+  <nav class="container-fluid px-3 px-lg-4" role="navigation" aria-label="Navegación principal">
+    <div class="row align-items-center py-3">      <!-- Logo y Nombre -->
+      <div class="col-6 col-md-3 col-lg-3">
+        <div class="d-flex align-items-center gap-2 logo-container animate__animated animate__fadeInLeft" role="banner">
+          <div class="logo-wrapper position-relative">
+            <img src="./imagenes/logo_secotogpt.svg" 
+                 alt="Logo SeCoToGpt" 
+                 height="40" 
+                 width="40"
+                 class="logo-img transition-transform duration-300"
+                 loading="eager"/>
+            <div class="logo-fallback d-none align-items-center justify-content-center">S</div>
+            <div class="logo-glow"></div>
+          </div>
+          <h1 class="mb-0 secotogpt-logo-nombre d-flex animate__animated animate__fadeInLeft animate__delay-0.5s">
+            <span class="secotogpt-nombre-se animate__animated animate__bounceInDown animate__delay-1s">Se</span>
+            <span class="secotogpt-nombre-co animate__animated animate__bounceInDown animate__delay-1.2s">Co</span>
+            <span class="secotogpt-nombre-to animate__animated animate__bounceInDown animate__delay-1.4s">To</span>
+            <span class="secotogpt-nombre-gpt animate__animated animate__bounceInDown animate__delay-1.6s">Gpt</span>
+          </h1>
+        </div>
       </div>
-      <h1 class="mb-0 secotogpt-logo-nombre animate__animated animate__fadeInLeft">
-        <span class="secotogpt-nombre-se">Se</span>
-        <span class="secotogpt-nombre-co">Co</span>
-        <span class="secotogpt-nombre-to">To</span>
-        <span class="secotogpt-nombre-gpt">Gpt</span>
-      </h1>
-    </div>    <!-- Barra de búsqueda mejorada -->
-    <form class="d-none d-lg-flex align-items-center search-container" role="search">
-      <div class="position-relative">
-        <label for="mainSearchInput" class="visually-hidden">Buscar contenido</label>
-        <i class="bi bi-search search-icon position-absolute"></i>
-        <input 
-          id="mainSearchInput"
-          class="form-control search-input" 
-          type="search" 
-          placeholder="Buscar contenido..." 
-          aria-label="Buscar contenido"
-          title="Campo de búsqueda principal"
-        >
-        <div class="search-suggestions d-none position-absolute"></div>
-      </div>
-    </form>
 
-    <!-- Navegación y controles -->
-    <div class="d-flex align-items-center gap-4">
-      <!-- Enlaces de navegación -->
-      <ul class="nav gap-1 d-none d-md-flex">
-        <li class="nav-item">
-          <a class="nav-link nav-link-modern active" href="#inicio">
-            <i class="bi bi-house me-1"></i>Inicio
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-modern" href="#historia">
-            <i class="bi bi-clock-history me-1"></i>Historia
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link nav-link-modern" href="#contacto">
-            <i class="bi bi-envelope me-1"></i>Contacto
-          </a>
-        </li>
-      </ul>      <!-- Toggle de modo oscuro/claro -->
-      <div class="theme-toggle-container">
-        <input type="checkbox" id="themeToggle" class="theme-toggle-input" aria-label="Alternar modo oscuro/claro">
-        <label for="themeToggle" class="theme-toggle-label" title="Cambiar tema">
-          <div class="theme-toggle-slider">
-            <div class="theme-toggle-button">
-              <i class="bi bi-sun-fill sun-icon"></i>
-              <i class="bi bi-moon-stars-fill moon-icon"></i>
+      <!-- Barra de búsqueda principal - Reducida y desplazada -->
+      <div class="col-12 col-md-6 col-lg-4 order-3 order-md-2 mt-3 mt-md-0 px-2 px-lg-3">
+        <form class="search-container-main w-100" role="search" id="mainSearchForm">
+          <div class="position-relative search-wrapper animate__animated animate__fadeIn animate__delay-1s">
+            <label for="mainSearchInput" class="visually-hidden">Buscar contenido en SecotoGpt</label>
+            <div class="search-input-group">
+              <i class="bi bi-search search-icon position-absolute" aria-hidden="true"></i>
+              <input 
+                id="mainSearchInput"
+                class="form-control search-input-modern" 
+                type="search" 
+                placeholder="Buscar sistemas operativos, procesos, memoria..." 
+                aria-label="Buscar contenido en el sitio"
+                aria-describedby="search-help"
+                autocomplete="off"
+                spellcheck="false"
+              >
+              <button type="button" class="search-clear-btn position-absolute d-none" aria-label="Limpiar búsqueda">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+              </button>
+              <div class="search-loading position-absolute d-none">
+                <div class="spinner-border spinner-border-sm" role="status">
+                  <span class="visually-hidden">Buscando...</span>
+                </div>
+              </div>
+            </div>
+            <!-- Sugerencias de búsqueda -->
+            <div class="search-suggestions position-absolute w-100 d-none" id="searchSuggestions" role="listbox" aria-label="Sugerencias de búsqueda">
+              <div class="search-suggestions-content shadow-lg rounded-3"></div>
+            </div>
+            <!-- Ayuda contextual -->
+            <div id="search-help" class="visually-hidden">
+              Busca información sobre sistemas operativos, gestión de procesos, memoria y almacenamiento
             </div>
           </div>
-        </label>
-      </div>
+        </form>
+      </div>      <!-- Controles de navegación y tema -->
+      <div class="col-6 col-md-3 col-lg-5 order-2 order-md-3">
+        <div class="d-flex align-items-center justify-content-end gap-2 gap-lg-3 animate__animated animate__fadeInRight">            <!-- Enlaces de navegación - Desktop -->
+          <nav class="nav-links-desktop d-none d-lg-flex animate__animated animate__fadeInDown animate__delay-0.8s" role="navigation" aria-label="Navegación de secciones">
+            <ul class="nav-modern-list" role="menubar">
+              <li class="nav-modern-item animate__animated animate__slideInDown animate__delay-1s" role="none">
+                <a class="nav-modern-link active" href="#inicio" role="menuitem" data-section="inicio">
+                  <div class="nav-icon-container">
+                    <i class="bi bi-house-fill nav-icon" aria-hidden="true"></i>
+                  </div>
+                  <span class="nav-text">Inicio</span>
+                  <div class="nav-indicator"></div>
+                </a>
+              </li>
+              <li class="nav-modern-item animate__animated animate__slideInDown animate__delay-1.2s" role="none">
+                <a class="nav-modern-link" href="#historia" role="menuitem" data-section="historia">
+                  <div class="nav-icon-container">
+                    <i class="bi bi-clock-history nav-icon" aria-hidden="true"></i>
+                  </div>
+                  <span class="nav-text">Historia</span>
+                  <div class="nav-indicator"></div>
+                </a>
+              </li>
+              <li class="nav-modern-item animate__animated animate__slideInDown animate__delay-1.4s" role="none">
+                <a class="nav-modern-link" href="#contacto" role="menuitem" data-section="contacto">
+                  <div class="nav-icon-container">
+                    <i class="bi bi-envelope nav-icon" aria-hidden="true"></i>
+                  </div>
+                  <span class="nav-text">Contacto</span>
+                  <div class="nav-indicator"></div>
+                </a>
+              </li>
+            </ul>
+          </nav>
 
-      <!-- Menú móvil -->
-      <button class="btn btn-outline-secondary d-md-none mobile-menu-btn" 
-              type="button" 
-              id="mobileMenuBtn"
-              aria-label="Abrir menú de navegación"
-              aria-expanded="false"
-              aria-controls="mobileMenu"
-              title="Menú de navegación">
-        <i class="bi bi-list"></i>
-        <span class="visually-hidden">Menú</span>
-      </button>
+          <!-- Toggle de modo oscuro/claro -->
+          <div class="theme-toggle-container animate__animated animate__fadeInUp animate__delay-1.6s">
+            <input type="checkbox" id="themeToggle" class="theme-toggle-input" aria-label="Alternar modo oscuro/claro">
+            <label for="themeToggle" class="theme-toggle-label" title="Cambiar tema">
+              <div class="theme-toggle-slider">
+                <div class="theme-toggle-button">
+                  <i class="bi bi-sun-fill sun-icon"></i>
+                  <i class="bi bi-moon-stars-fill moon-icon"></i>
+                </div>
+              </div>
+            </label>
+          </div>
+
+          <!-- Botón menú móvil -->
+          <button class="btn mobile-menu-btn d-lg-none animate__animated animate__fadeInRight animate__delay-1.8s" 
+                  type="button" 
+                  id="mobileMenuBtn"
+                  aria-label="Abrir menú de navegación"
+                  aria-expanded="false"
+                  aria-controls="mobileMenu"
+                  title="Menú de navegación">
+            <div class="hamburger-lines">
+              <span class="line line1"></span>
+              <span class="line line2"></span>
+              <span class="line line3"></span>
+            </div>
+            <span class="visually-hidden">Menú</span>
+          </button>
+        </div>
+      </div>
     </div>
   </nav>
-
-  <!-- Menú móvil desplegable -->
-  <div class="mobile-menu d-md-none" id="mobileMenu">
-    <div class="container py-3">
-      <div class="row">
-        <div class="col-12">          <!-- Búsqueda móvil -->
-          <form class="mb-3" role="search">
+  <!-- Menú móvil desplegable mejorado -->
+  <div class="mobile-menu d-lg-none" id="mobileMenu" aria-hidden="true">
+    <div class="mobile-menu-overlay"></div>
+    <div class="mobile-menu-content">
+      <div class="container-fluid px-4 py-4">
+        
+        <!-- Búsqueda móvil -->
+        <div class="mobile-search-section mb-4">
+          <form role="search" id="mobileSearchForm">
             <div class="position-relative">
               <label for="mobileSearchInput" class="visually-hidden">Buscar contenido</label>
-              <i class="bi bi-search search-icon position-absolute"></i>
+              <i class="bi bi-search search-icon position-absolute" aria-hidden="true"></i>
               <input 
                 id="mobileSearchInput"
-                class="form-control search-input" 
+                class="form-control search-input-mobile" 
                 type="search" 
-                placeholder="Buscar..." 
+                placeholder="Buscar contenido..." 
                 aria-label="Buscar contenido"
-                title="Campo de búsqueda">
+                autocomplete="off">
             </div>
           </form>
-          
-          <!-- Enlaces móviles -->
-          <div class="d-flex flex-column gap-2">
-            <a class="nav-link nav-link-mobile active" href="#inicio">
-              <i class="bi bi-house me-2"></i>Inicio
-            </a>
-            <a class="nav-link nav-link-mobile" href="#historia">
-              <i class="bi bi-clock-history me-2"></i>Historia
-            </a>
-            <a class="nav-link nav-link-mobile" href="#contacto">
-              <i class="bi bi-envelope me-2"></i>Contacto
-            </a>
+        </div>
+        
+        <!-- Enlaces de navegación móvil -->
+        <nav class="mobile-nav-section" role="navigation" aria-label="Navegación móvil">
+          <ul class="mobile-nav-list list-unstyled mb-0" role="menu">
+            <li class="mobile-nav-item" role="none">
+              <a class="mobile-nav-link active" href="#inicio" role="menuitem" data-section="inicio">
+                <div class="nav-icon-wrapper">
+                  <i class="bi bi-house-fill" aria-hidden="true"></i>
+                </div>
+                <div class="nav-content">
+                  <span class="nav-title">Inicio</span>
+                  <span class="nav-description">Página principal</span>
+                </div>
+                <i class="bi bi-chevron-right nav-arrow" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="mobile-nav-item" role="none">
+              <a class="mobile-nav-link" href="#historia" role="menuitem" data-section="historia">
+                <div class="nav-icon-wrapper">
+                  <i class="bi bi-clock-history" aria-hidden="true"></i>
+                </div>
+                <div class="nav-content">
+                  <span class="nav-title">Historia</span>
+                  <span class="nav-description">Historia de los SO</span>
+                </div>
+                <i class="bi bi-chevron-right nav-arrow" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li class="mobile-nav-item" role="none">
+              <a class="mobile-nav-link" href="#contacto" role="menuitem" data-section="contacto">
+                <div class="nav-icon-wrapper">
+                  <i class="bi bi-envelope" aria-hidden="true"></i>
+                </div>
+                <div class="nav-content">
+                  <span class="nav-title">Contacto</span>
+                  <span class="nav-description">Información de contacto</span>
+                </div>
+                <i class="bi bi-chevron-right nav-arrow" aria-hidden="true"></i>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <!-- Sección de información adicional en móvil -->
+        <div class="mobile-info-section mt-4 pt-4 border-top">
+          <div class="d-flex align-items-center justify-content-between">
+            <small class="text-muted">
+              <i class="bi bi-info-circle me-1"></i>
+              SeCoToGpt - Sistemas Operativos
+            </small>
+            <div class="social-links-mobile">
+              <a href="#" class="text-muted me-2" aria-label="GitHub">
+                <i class="bi bi-github"></i>
+              </a>
+              <a href="#" class="text-muted" aria-label="Email">
+                <i class="bi bi-envelope"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
