@@ -17,30 +17,13 @@ build/
 .env.test.local
 .env.production.local
 
-# Cache
+# Cache and temporary files
 .cache/
 .parcel-cache/
-
-# Logs
-logs
+.stylelintcache
 *.log
 
-# Runtime data
-pids
-*.pid
-*.seed
-*.pid.lock
-
-# Coverage directory used by tools like istanbul
-coverage/
-
-# IDE (excepto settings.json específicos del proyecto)
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
+# OS generated files
 .DS_Store
 .DS_Store?
 ._*
@@ -53,5 +36,6 @@ Thumbs.db
 tmp/
 temp/
 
-# Stylelint cache
-.stylelintcache
+# Editor configs (keep only essential)
+.vscode/launch.json
+.vscode/*.code-workspace

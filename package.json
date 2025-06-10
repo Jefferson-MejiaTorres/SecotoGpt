@@ -1,39 +1,38 @@
 {
   "name": "secotogpt",
   "version": "1.0.0",
-  "description": "El mejor Proyecto de Plataformas Att: ChatGpt",
-  "main": "index.js",
+  "description": "Una plataforma educativa interactiva para el aprendizaje de Sistemas Operativos y Plataformas Tecnológicas",
+  "main": "index.html",
   "scripts": {
-    "build-css": "postcss ./src/estilos/principal.css -o ./public/tailwind.css --watch",
     "build": "postcss ./src/estilos/principal.css -o ./public/tailwind.css",
     "dev": "npm run build && npx live-server --port=3000 --open=/index.html",
-    "start": "npm run dev",
-    "lint-css": "stylelint \"src/**/*.css\" --fix --allow-empty-input",
-    "lint-css-check": "stylelint \"src/**/*.css\" --allow-empty-input",
-    "clean": "rm -rf public/tailwind.css .stylelintcache",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-css": "postcss ./src/estilos/principal.css -o ./public/tailwind.css --watch",
+    "start": "npm run dev"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Jefferson-MejiaTorres/SecotoGpt.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "education",
+    "operating-systems",
+    "university",
+    "web-platform",
+    "interactive-learning"
+  ],
+  "author": "Jefferson Mejía Torres",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Jefferson-MejiaTorres/SecotoGpt/issues"
   },
-  "homepage": "https://github.com/Jefferson-MejiaTorres/SecotoGpt#readme",
+  "homepage": "https://secoto-gpt.vercel.app",
   "dependencies": {
     "autoprefixer": "^10.4.21",
-    "bootstrap": "^5.3.6",
-    "live-server": "^1.2.2",
     "postcss": "^8.5.4",
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "postcss-cli": "^11.0.1",
-    "stylelint": "^16.20.0",
-    "stylelint-config-standard": "^38.0.0"
+    "live-server": "^1.2.2",
+    "postcss-cli": "^11.0.1"
   }
 }

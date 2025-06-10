@@ -11,7 +11,8 @@
 [![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)](https://developer.mozilla.org/es/docs/Web/CSS)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/es/docs/Web/JavaScript)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![PostCSS](https://img.shields.io/badge/PostCSS-DD3A0A?style=for-the-badge&logo=postcss&logoColor=white)](https://postcss.org/)
+[![MIT License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](https://choosealicense.com/licenses/mit/)
 
 </div>
 
@@ -34,8 +35,8 @@ SecotoGPT es una plataforma web educativa diseñada para estudiantes universitar
 
 ### 🔧 **Tecnologías Avanzadas**
 - **Frontend**: HTML5, CSS3, JavaScript ES6+
-- **Frameworks CSS**: TailwindCSS + Bootstrap 5
-- **Herramientas**: PostCSS, Autoprefixer, Stylelint
+- **Frameworks CSS**: TailwindCSS + Bootstrap 5 (CDN)
+- **Herramientas**: PostCSS, Autoprefixer
 - **Despliegue**: Vercel con CI/CD automático
 
 ### 📱 **Experiencia de Usuario**
@@ -47,21 +48,6 @@ SecotoGPT es una plataforma web educativa diseñada para estudiantes universitar
 ## 🚀 Demo en Vivo
 
 🔗 **[Ver SecotoGPT en Vercel](https://secoto-gpt.vercel.app)**
-
-## 📸 Capturas de Pantalla
-
-<div align="center">
-
-### 🌅 Modo Claro
-![Modo Claro](./docs/screenshots/light-mode.png)
-
-### 🌙 Modo Oscuro
-![Modo Oscuro](./docs/screenshots/dark-mode.png)
-
-### 📱 Versión Móvil
-![Versión Móvil](./docs/screenshots/mobile-view.png)
-
-</div>
 
 ## 🛠️ Instalación y Configuración
 
@@ -102,7 +88,6 @@ http://localhost:3000
 | `npm run dev` | 🔧 Inicia servidor de desarrollo |
 | `npm run build` | 🏗️ Construye CSS para producción |
 | `npm run build-css` | 👀 Modo watch para desarrollo CSS |
-| `npm run lint-css` | 🧹 Limpia y corrige CSS |
 | `npm start` | 🚀 Alias para `npm run dev` |
 
 ## 📁 Estructura del Proyecto
@@ -114,6 +99,8 @@ SecotoGpt/
 ├── ⚙️ postcss.config.js       # Configuración PostCSS
 ├── 🎨 tailwind.config.js      # Configuración TailwindCSS
 ├── 🚀 vercel.json             # Configuración de despliegue
+├── 📜 README.md               # Documentación
+├── ⚖️ LICENSE                 # Licencia MIT
 ├── 📁 public/                 # Recursos estáticos
 │   ├── 🖼️ logo_secotogpt.svg  # Logo del proyecto
 │   └── 🎨 tailwind.css        # CSS compilado
@@ -133,8 +120,7 @@ SecotoGpt/
 │   └── 📁 utils/              # Utilidades
 │       └── 🛠️ utilidades.js   # Funciones helper
 └── 📁 .vscode/                # Configuración VS Code
-    ├── ⚙️ settings.json       # Configuración del editor
-    └── 🚀 launch.json         # Configuración de depuración
+    └── ⚙️ settings.json       # Configuración del editor
 ```
 
 ## 🎯 Módulos Educativos
@@ -209,10 +195,27 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 ## 🙏 Agradecimientos
 
 - 🎨 **TailwindCSS** por el framework CSS utility-first
-- 🅱️ **Bootstrap** por los componentes base
-- ⚡ **Vercel** por el hosting gratuito
-- 🎭 **Animate.css** por las animaciones
-- 🔧 **PostCSS** por las herramientas de procesamiento
+- 🅱️ **Bootstrap** por los componentes base vía CDN
+- ⚡ **Vercel** por el hosting gratuito y CI/CD
+- 🎭 **Animate.css** por las animaciones suaves
+- 🔧 **PostCSS** por las herramientas de procesamiento CSS
+
+## 🔧 Tecnologías Utilizadas
+
+### Frontend
+- **HTML5**: Estructura semántica y accesible
+- **CSS3**: Estilos modernos con variables CSS y flexbox/grid
+- **JavaScript ES6+**: Lógica interactiva y componentes modulares
+
+### Frameworks y Herramientas
+- **TailwindCSS**: Framework CSS utility-first para diseño rápido
+- **Bootstrap 5**: Componentes UI via CDN
+- **PostCSS**: Procesamiento y optimización de CSS
+- **Autoprefixer**: Prefijos automáticos para compatibilidad de navegadores
+
+### Despliegue y Hosting
+- **Vercel**: Plataforma de despliegue con CI/CD automático
+- **GitHub**: Control de versiones y colaboración
 
 ## 📈 Estadísticas del Proyecto
 
@@ -222,18 +225,30 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 ![GitHub Forks](https://img.shields.io/github/forks/Jefferson-MejiaTorres/SecotoGpt?style=social)
 ![GitHub Issues](https://img.shields.io/github/issues/Jefferson-MejiaTorres/SecotoGpt)
 ![GitHub Last Commit](https://img.shields.io/github/last-commit/Jefferson-MejiaTorres/SecotoGpt)
+![GitHub License](https://img.shields.io/github/license/Jefferson-MejiaTorres/SecotoGpt)
+![Website Status](https://img.shields.io/website?url=https%3A%2F%2Fsecoto-gpt.vercel.app)
 
 </div>
 
 ## 🔮 Roadmap
 
+### 🎯 Próximas Características
 - [ ] 🌐 Soporte multiidioma (Inglés/Español)
-- [ ] 📊 Integración de gráficos interactivos
-- [ ] 🧪 Tests automatizados
-- [ ] 📱 PWA (Progressive Web App)
-- [ ] 🔍 Búsqueda avanzada con filtros
-- [ ] 📚 Sistema de evaluaciones online
-- [ ] 🎮 Simuladores interactivos de SO
+- [ ] 📊 Gráficos interactivos para visualizar conceptos de SO
+- [ ] 🔍 Búsqueda avanzada con filtros por tema
+- [ ] 📱 PWA (Progressive Web App) para uso offline
+
+### 🚀 Mejoras Futuras
+- [ ] 🧪 Tests automatizados con Jest
+- [ ] 📚 Sistema de evaluaciones y quizzes online
+- [ ] 🎮 Simuladores interactivos de algoritmos de SO
+- [ ] 📈 Analytics y métricas de uso educativo
+
+### 🎨 Mejoras de UX/UI
+- [ ] 🌟 Animaciones más avanzadas
+- [ ] 🎯 Modo de lectura optimizado
+- [ ] 📖 Modo de presentación para clases
+- [ ] 🔖 Sistema de marcadores y favoritos
 
 ---
 
@@ -241,8 +256,13 @@ Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE)
 
 **⭐ Si este proyecto te ayudó, considera darle una estrella ⭐**
 
+[![GitHub Stars](https://img.shields.io/github/stars/Jefferson-MejiaTorres/SecotoGpt?style=social)](https://github.com/Jefferson-MejiaTorres/SecotoGpt)
+[![GitHub Forks](https://img.shields.io/github/forks/Jefferson-MejiaTorres/SecotoGpt?style=social)](https://github.com/Jefferson-MejiaTorres/SecotoGpt)
+
 ![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=Jefferson-MejiaTorres.SecotoGpt)
 
 **Hecho con ❤️ por estudiantes, para estudiantes**
+
+*Proyecto académico desarrollado para la materia de Plataformas Tecnológicas*
 
 </div>

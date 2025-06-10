@@ -1,0 +1,17 @@
+# Archivos que no necesita Vercel
+README.md
+estructura_proyecto.md
+.vscode/
+.stylelintrc.json
+.stylelintignore
+.vscodeignore
+postcss.config.js
+tailwind.config.js
+
+# Código fuente CSS (Vercel usa el compilado)
+src/estilos/
+
+# Archivos de desarrollo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
