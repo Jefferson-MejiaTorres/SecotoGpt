@@ -1,0 +1,196 @@
+/* ===== ESTILOS ESPECÍFICOS PÁGINA CONTACTANOS ===== */
+/* Asegurar que todos los componentes se vean exactamente igual que en la página principal */
+
+/* Importar todos los estilos base */
+@import url('../../../estilos/bootstrap-fixes.css');
+@import url('../../../estilos/header-modern.css');
+@import url('../../../estilos/footer-modern.css');
+@import url('../../estilos/pagina-principal.css');
+@import url('../../estilos/efectos-especiales.css');
+
+/* ===== VARIABLES ESPECÍFICAS ===== */
+:root {
+  /* Colores principales coherentes con la página principal */
+  --color-se: #a8edea;
+  --color-co: #fed6e3;
+  --color-to: #fcb69f;
+  --color-gpt: #cfd9df;
+  
+  /* Variables de tema */
+  --color-bg: #ffffff;
+  --color-text: #000000;
+  --color-primary: #007bff;
+  
+  /* Gradientes */
+  --gradient-se-co: linear-gradient(135deg, #a8edea, #fed6e3);
+  --gradient-main: linear-gradient(135deg, var(--color-se), var(--color-co), var(--color-to), var(--color-gpt));
+}
+
+/* Modo oscuro */
+.dark {
+  --color-bg: #22223b;
+  --color-text: #ffffff;
+  --color-primary: #a8edea;
+}
+
+/* ===== ASEGURAR COMPATIBILIDAD FOOTER ===== */
+.footer-modern {
+  margin-top: auto;
+  background: linear-gradient(135deg, 
+    rgba(168, 237, 234, 0.05) 0%, 
+    rgba(254, 214, 227, 0.05) 25%, 
+    rgba(252, 182, 159, 0.05) 50%, 
+    rgba(207, 217, 223, 0.05) 100%
+  );
+  border-top: 1px solid rgba(168, 237, 234, 0.2);
+  position: relative;
+  z-index: 10;
+}
+
+/* Asegurar que todas las secciones del footer sean visibles EXCEPTO los dropdowns */
+.footer-content,
+.footer-copyright-top,
+.footer-sections,
+.footer-bottom {
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Asegurar que los iconos y la fila de iconos sean visibles */
+.footer-icon-item,
+.footer-icons-row {
+  display: flex !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Asegurar que el contenedor de dropdowns esté visible, pero NO los dropdowns individuales */
+.footer-collapsible-content {
+  display: block !important;
+}
+
+/* IMPORTANTE: Los dropdowns deben estar ocultos por defecto */
+.footer-dropdown-section {
+  display: none !important;
+  opacity: 0 !important;
+  transform: translateY(-10px) !important;
+  transition: all 0.3s ease !important;
+}
+
+/* Solo mostrar cuando estén activos */
+.footer-dropdown-section.active {
+  display: block !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.dark .footer-modern {
+  background: linear-gradient(135deg, 
+    rgba(30, 41, 59, 0.9) 0%, 
+    rgba(45, 55, 72, 0.9) 50%, 
+    rgba(26, 32, 44, 0.9) 100%
+  );
+  border-top: 1px solid rgba(168, 237, 234, 0.3);
+}
+
+/* ===== ASEGURAR COMPATIBILIDAD HEADER ===== */
+.modern-header {
+  background: rgba(255, 255, 255, 0.95);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(168, 237, 234, 0.2);
+  z-index: 1000;
+}
+
+.dark .modern-header {
+  background: rgba(34, 34, 59, 0.95);
+  border-bottom: 1px solid rgba(168, 237, 234, 0.3);
+}
+
+/* ===== LAYOUT ESPECÍFICO CONTACTANOS ===== */
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: all 0.3s ease;
+}
+
+.main-content {
+  flex: 1;
+  min-height: 60vh;
+  padding: 2rem 0;
+}
+
+/* ===== INDICADOR DE PROGRESO ===== */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 1001;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: var(--gradient-main);
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+.dark .scroll-progress {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== ANIMACIONES ESPECÍFICAS ===== */
+.header-placeholder,
+.footer-placeholder {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ===== RESPONSIVIDAD ===== */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem 0;
+    min-height: 50vh;
+  }
+}
+
+/* ===== COMPATIBILIDAD BOOTSTRAP ICONS ===== */
+.bi {
+  font-family: "bootstrap-icons" !important;
+}
+
+/* ===== MEJORAS VISUALES ESPECÍFICAS ===== */
+.footer-logo-image,
+.logo-img {
+  filter: drop-shadow(0 2px 8px rgba(168, 237, 234, 0.3));
+}
+
+.dark .footer-logo-image,
+.dark .logo-img {
+  filter: drop-shadow(0 2px 8px rgba(168, 237, 234, 0.5));
+}
+
+/* ===== ASEGURAR CARGA COMPLETA ===== */
+.component-loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.component-loaded {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.3s ease;
+}

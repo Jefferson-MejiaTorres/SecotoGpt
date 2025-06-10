@@ -7,38 +7,29 @@ class FooterManager {
     constructor() {
         this.isInitialized = false;
         this.init();
+    }    init() {
+        // No cargar HTML - ComponentLoader ya lo hace
+        // Solo esperar y inicializar funcionalidades
+        this.waitForFooterLoad();
     }
 
-    init() {
-        this.loadFooterComponent();
-    }
-
-    // Función para cargar el componente footer moderno
-    loadFooterComponent() {
-        const footerPlaceholder = document.getElementById('footer-placeholder');
-        if (!footerPlaceholder) return;
-
-        fetch('./src/partes/footer.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(footerHTML => {
-                footerPlaceholder.innerHTML = footerHTML;
-                
-                // Después de cargar el HTML, inicializar todas las funcionalidades
+    // Esperar a que ComponentLoader cargue el footer
+    waitForFooterLoad() {
+        const checkFooter = () => {
+            const footerContent = document.querySelector('#footer-placeholder .footer-modern');
+            if (footerContent) {
+                console.log('✅ Footer detectado, inicializando funcionalidades...');
                 setTimeout(() => {
                     this.initializeAllFeatures();
                     this.addDynamicStyles();
                 }, 100);
-            })
-            .catch(error => {
-                console.error('Error al cargar el footer:', error);
-                this.showFallbackFooter(footerPlaceholder);
-            });
-    }    // Inicializar todas las funcionalidades del footer
+            } else {
+                // Reintentar después de un delay
+                setTimeout(checkFooter, 50);
+            }
+        };
+        checkFooter();
+    }// Inicializar todas las funcionalidades del footer
     initializeAllFeatures() {
         if (this.isInitialized) return;
         
