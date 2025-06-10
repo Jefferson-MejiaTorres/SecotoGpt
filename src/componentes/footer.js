@@ -251,10 +251,8 @@ class FooterManager {
         this.updateLoadTime();
         this.updateVersion();
         this.addPerformanceInfo();
-    }
-
-    updateLoadTime() {
-        const loadTimeElement = document.querySelector('.footer-info .info-item:nth-child(2) span');
+    }    updateLoadTime() {
+        const loadTimeElement = document.querySelector('.info-item:nth-child(2) span');
         if (loadTimeElement && window.performance) {
             const loadTime = Math.round(window.performance.now());
             loadTimeElement.textContent = `Carga: ${loadTime}ms`;
@@ -262,7 +260,7 @@ class FooterManager {
     }
 
     updateVersion() {
-        const versionElement = document.querySelector('.footer-info .info-item:first-child span');
+        const versionElement = document.querySelector('.info-item:first-child span');
         if (versionElement) {
             versionElement.textContent = 'v2.0.0';
         }
@@ -274,13 +272,13 @@ class FooterManager {
         const loadTime = Math.round(performance.now());
         
         // Actualizar el elemento de tiempo de carga
-        const loadTimeElement = document.querySelector('.footer-info .info-item:nth-child(2) span');
+        const loadTimeElement = document.querySelector('.info-item:nth-child(2) span');
         if (loadTimeElement && loadTime > 0) {
             loadTimeElement.textContent = `Carga: ${loadTime}ms`;
         }
         
         // Actualizar fecha actual
-        const updateElement = document.querySelector('.footer-info .info-item:nth-child(3) span');
+        const updateElement = document.querySelector('.info-item:nth-child(3) span');
         if (updateElement) {
             const now = new Date();
             const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -345,28 +343,32 @@ class FooterManager {
             }
         });
     }
-    
-    // Agregar contador de visitas
+      // Agregar contador de visitas
     addVisitCounter() {
         const existingCounter = localStorage.getItem('secotogpt-visits');
         const visits = existingCounter ? parseInt(existingCounter) + 1 : 1;
         localStorage.setItem('secotogpt-visits', visits.toString());
         
-        const counterElement = document.querySelector('.footer-info .info-item:nth-child(3) span');
-        if (counterElement && visits > 1) {
+        // No agregar elemento adicional, solo actualizar si existe un placeholder
+        const counterElement = document.querySelector('.info-item:nth-child(3) span');
+        if (counterElement && visits > 5) { // Solo mostrar si hay más de 5 visitas
             counterElement.textContent = `Visitas: ${visits}`;
         }
     }
     
-    // Detectar estado de la página
+    // Detectar estado de la página (evitar duplicados)
     addPageStatus() {
-        const statusElement = document.querySelector('.footer-badges');
+        const statusElement = document.querySelector('.badges-group');
         if (!statusElement) return;
+        
+        // Verificar si ya existe badge de conexión
+        const existingConnectionBadge = statusElement.querySelector('.connection-status');
+        if (existingConnectionBadge) return;
         
         // Detectar conexión
         const isOnline = navigator.onLine;
         const connectionBadge = document.createElement('span');
-        connectionBadge.className = `badge ${isOnline ? 'bg-success' : 'bg-warning'}`;
+        connectionBadge.className = `badge ${isOnline ? 'bg-success' : 'bg-warning'} connection-status`;
         connectionBadge.innerHTML = `
             <i class="bi bi-${isOnline ? 'wifi' : 'wifi-off'}"></i> 
             ${isOnline ? 'En Línea' : 'Sin Conexión'}
@@ -375,24 +377,28 @@ class FooterManager {
         
         // Escuchar cambios de conexión
         window.addEventListener('online', () => {
-            connectionBadge.className = 'badge bg-success';
+            connectionBadge.className = 'badge bg-success connection-status';
             connectionBadge.innerHTML = '<i class="bi bi-wifi"></i> En Línea';
         });
         
         window.addEventListener('offline', () => {
-            connectionBadge.className = 'badge bg-warning';
+            connectionBadge.className = 'badge bg-warning connection-status';
             connectionBadge.innerHTML = '<i class="bi bi-wifi-off"></i> Sin Conexión';
         });
     }
     
-    // Agregar información del navegador
+    // Agregar información del navegador (evitar duplicados)
     addBrowserInfo() {
-        const infoContainer = document.querySelector('.footer-info');
+        const infoContainer = document.querySelector('.info-group');
         if (!infoContainer) return;
+        
+        // Verificar si ya existe info del navegador
+        const existingBrowserInfo = infoContainer.querySelector('.browser-info');
+        if (existingBrowserInfo) return;
         
         const browserInfo = this.getBrowserInfo();
         const browserItem = document.createElement('div');
-        browserItem.className = 'info-item';
+        browserItem.className = 'info-item browser-info';
         browserItem.innerHTML = `
             <i class="bi bi-browser-chrome info-icon"></i>
             <span>${browserInfo}</span>
