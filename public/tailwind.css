@@ -569,9 +569,6 @@ video {
 .mt-3{
   margin-top: 0.75rem;
 }
-.mt-4{
-  margin-top: 1rem;
-}
 .mt-5{
   margin-top: 1.25rem;
 }
@@ -580,9 +577,6 @@ video {
 }
 .block{
   display: block;
-}
-.min-h-screen{
-  min-height: 100vh;
 }
 .transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -862,9 +856,4 @@ html {
 
 .dark\:bg-\[var\(--color-bg\)\]:is(.dark *){
   background-color: var(--color-bg);
-}
-
-.dark\:bg-gray-800:is(.dark *){
-  --tw-bg-opacity: 1;
-  background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
 }

@@ -2,10 +2,10 @@
   "name": "secotogpt",
   "version": "1.0.0",
   "description": "Una plataforma educativa interactiva para el aprendizaje de Sistemas Operativos y Plataformas Tecnológicas",
-  "main": "index.html",
+  "main": "secotogpt.html",
   "scripts": {
     "build": "postcss ./src/estilos/principal.css -o ./public/tailwind.css",
-    "dev": "npm run build && npx live-server --port=3000 --open=/index.html",
+    "dev": "npm run build && npx live-server --port=3000 --open=/secotogpt.html",
     "build-css": "postcss ./src/estilos/principal.css -o ./public/tailwind.css --watch",
     "start": "npm run dev"
   },
