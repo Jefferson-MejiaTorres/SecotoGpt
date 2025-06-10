@@ -15,15 +15,117 @@
   }
 }
 
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
 .fadeInUp {
   animation: fadeInUp 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
+.slideInLeft {
+  animation: slideInFromLeft 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.slideInRight {
+  animation: slideInFromRight 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
 /* Transición suave para tarjetas */
 .card {
-  transition: box-shadow 0.3s, transform 0.3s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
 }
 .card:hover {
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
-  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 20px 40px 0 rgba(31, 38, 135, 0.2);
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Animaciones para el header */
+.nav-link {
+  position: relative;
+  overflow: hidden;
+}
+.nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -100%;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--color-se), var(--color-co));
+  transition: left 0.3s ease;
+}
+.nav-link:hover::before {
+  left: 0;
+}
+
+/* Floating effect for logo */
+.secotogpt-logo-nombre:hover {
+  animation: floating 1s ease-in-out infinite;
+}
+
+/* Delay animations for cards */
+.animate__zoomIn:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.animate__zoomIn:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.animate__zoomIn:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.animate__zoomIn:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+/* Loading spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading {
+  animation: spin 1s linear infinite;
+}
+
+/* Smooth transitions for dark mode */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }

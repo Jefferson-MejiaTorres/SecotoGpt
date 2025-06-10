@@ -1,19 +1,213 @@
-<!-- Página: Introducción a los Sistemas Operativos -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Introducción a los Sistemas Operativos | SeCoToGpt</title>
-  <link href="../../src/estilos/principal.css" rel="stylesheet">
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <link href="../../public/tailwind.css" rel="stylesheet">
+  <!-- Estilos principales -->
+  <link href="../estilos/principal.css" rel="stylesheet">
+  <!-- Iconos Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-[var(--color-bg)] text-[var(--color-text)]">
+<body class="bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-500">
+  <!-- Header -->
+  <header class="shadow-sm sticky-top bg-white dark:bg-[var(--color-bg)] transition-colors duration-500">
+    <nav class="container d-flex align-items-center justify-content-between py-3">
+      <div class="d-flex align-items-center gap-2">
+        <img src="../../public/logo_secotogpt.svg" alt="Logo SeCoToGpt" height="40"/>
+        <h1 class="mb-0 secotogpt-logo-nombre">
+          <span class="secotogpt-nombre-se">Se</span><span class="secotogpt-nombre-co">Co</span><span class="secotogpt-nombre-to">To</span><span class="secotogpt-nombre-gpt">Gpt</span>
+        </h1>
+      </div>
+      <ul class="nav gap-3">
+        <li class="nav-item"><a class="nav-link" href="../../index.html">Inicio</a></li>
+        <li class="nav-item">
+          <button id="modoOscuroBtn" class="btn btn-outline-secondary btn-sm" title="Modo oscuro/claro">
+            <span class="bi bi-moon"></span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
   <main class="container py-5">
-    <h2 class="mb-4">Introducción a los Sistemas Operativos</h2>
-    <p>¿Qué es un sistema operativo, historia, tipos y funciones principales en la administración del sistema?</p>
-    <!-- Aquí puedes ampliar el contenido -->
-    <a href="../../index.html" class="btn btn-outline-primary mt-3">Volver al inicio</a>
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../../index.html" class="text-decoration-none">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Sistemas Operativos</li>
+      </ol>
+    </nav>
+
+    <!-- Título principal -->
+    <div class="row mb-5">
+      <div class="col-lg-8 mx-auto text-center">
+        <div class="card border-0 card-bg-se mb-4">
+          <div class="card-body p-5">
+            <i class="bi bi-cpu fs-1 text-primary mb-4"></i>
+            <h1 class="display-5 fw-bold mb-3">Introducción a los Sistemas Operativos</h1>
+            <p class="lead">Descubre qué es un sistema operativo, su historia, tipos y funciones principales en la administración del sistema.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="row g-4">
+      <!-- ¿Qué es un Sistema Operativo? -->
+      <div class="col-lg-6">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h3 class="card-title">
+              <i class="bi bi-question-circle text-primary me-2"></i>
+              ¿Qué es un Sistema Operativo?
+            </h3>
+            <p class="card-text">Un sistema operativo (SO) es el software fundamental que gestiona los recursos del hardware y proporciona servicios para programas de aplicación. Actúa como intermediario entre el usuario y el hardware del computador.</p>
+            <ul class="list-unstyled">
+              <li><i class="bi bi-check-circle text-success me-2"></i>Gestiona la memoria</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Controla los procesos</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Administra archivos</li>
+              <li><i class="bi bi-check-circle text-success me-2"></i>Maneja dispositivos</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Historia -->
+      <div class="col-lg-6">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <h3 class="card-title">
+              <i class="bi bi-clock-history text-warning me-2"></i>
+              Historia
+            </h3>
+            <div class="timeline">
+              <div class="mb-3">
+                <strong>1950s:</strong> Sistemas por lotes (batch systems)
+              </div>
+              <div class="mb-3">
+                <strong>1960s:</strong> Multiprogramación y tiempo compartido
+              </div>
+              <div class="mb-3">
+                <strong>1970s:</strong> UNIX, el primer SO portable
+              </div>
+              <div class="mb-3">
+                <strong>1980s:</strong> Computadoras personales (MS-DOS)
+              </div>
+              <div class="mb-3">
+                <strong>1990s:</strong> Interfaces gráficas (Windows, macOS)
+              </div>
+              <div class="mb-3">
+                <strong>2000s+:</strong> Sistemas móviles y en la nube
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tipos de Sistemas Operativos -->
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h3 class="card-title">
+              <i class="bi bi-diagram-3 text-info me-2"></i>
+              Tipos de Sistemas Operativos
+            </h3>
+            <div class="row g-3">
+              <div class="col-md-3">
+                <div class="card border-0 card-bg-se h-100">
+                  <div class="card-body text-center">
+                    <i class="bi bi-pc-display fs-2 mb-3"></i>
+                    <h5>Monousuario</h5>
+                    <p class="small">Un usuario a la vez (MS-DOS)</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card border-0 card-bg-co h-100">
+                  <div class="card-body text-center">
+                    <i class="bi bi-people fs-2 mb-3"></i>
+                    <h5>Multiusuario</h5>
+                    <p class="small">Varios usuarios simultáneos (UNIX)</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card border-0 card-bg-to h-100">
+                  <div class="card-body text-center">
+                    <i class="bi bi-phone fs-2 mb-3"></i>
+                    <h5>Móviles</h5>
+                    <p class="small">Dispositivos móviles (Android, iOS)</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card border-0 card-bg-gpt h-100">
+                  <div class="card-body text-center">
+                    <i class="bi bi-server fs-2 mb-3"></i>
+                    <h5>Servidor</h5>
+                    <p class="small">Servicios de red (Windows Server)</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Funciones Principales -->
+      <div class="col-12">
+        <div class="card border-0 shadow-sm">
+          <div class="card-body">
+            <h3 class="card-title">
+              <i class="bi bi-gear text-danger me-2"></i>
+              Funciones Principales
+            </h3>
+            <div class="row g-4">
+              <div class="col-md-6">
+                <h5><i class="bi bi-memory text-primary me-2"></i>Gestión de Memoria</h5>
+                <p>Administra la memoria RAM, asignando espacio a los procesos y optimizando su uso.</p>
+              </div>
+              <div class="col-md-6">
+                <h5><i class="bi bi-cpu text-success me-2"></i>Gestión de Procesos</h5>
+                <p>Controla la ejecución de programas, la planificación de tareas y la sincronización.</p>
+              </div>
+              <div class="col-md-6">
+                <h5><i class="bi bi-folder text-warning me-2"></i>Sistema de Archivos</h5>
+                <p>Organiza y gestiona el almacenamiento de datos en dispositivos de almacenamiento.</p>
+              </div>
+              <div class="col-md-6">
+                <h5><i class="bi bi-device-hdd text-info me-2"></i>Control de Dispositivos</h5>
+                <p>Maneja la comunicación con dispositivos de entrada y salida (I/O).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón de retorno -->
+    <div class="text-center mt-5">
+      <a href="../../index.html" class="btn btn-primary btn-lg">
+        <i class="bi bi-arrow-left me-2"></i>Volver al inicio
+      </a>
+    </div>
   </main>
+
+  <!-- Footer -->
+  <footer class="text-center py-4 mt-auto bg-light dark:bg-[var(--color-bg)] transition-colors">
+    <small>&copy; 2025 SeCoToGpt. Proyecto académico para Plataformas Tecnológicas.</small>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- JS principal -->
+  <script src="../componentes/modoOscuro.js"></script>
 </body>
 </html>
