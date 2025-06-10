@@ -13,12 +13,14 @@ module.exports = {
       ],
       // Agregar propiedades estándar junto con prefijos
       add: true,
-      // Remover prefijos obsoletos
-      remove: false,
+      // Remover prefijos obsoletos para limpiar el CSS
+      remove: true,
       // Soportar flexbox
       flexbox: 'no-2009',
       // Soportar grid
-      grid: 'autoplace'
+      grid: 'autoplace',
+      // Ignorar archivos de node_modules
+      ignoreUnknownVersions: true
     }
   }
 }

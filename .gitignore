@@ -34,8 +34,7 @@ pids
 # Coverage directory used by tools like istanbul
 coverage/
 
-# IDE
-.vscode/
+# IDE (excepto settings.json específicos del proyecto)
 .idea/
 *.swp
 *.swo
@@ -53,3 +52,6 @@ Thumbs.db
 # Temporary folders
 tmp/
 temp/
+
+# Stylelint cache
+.stylelintcache

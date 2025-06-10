@@ -10,23 +10,15 @@
   "emmet.includeLanguages": {
     "postcss": "css"
   },
-  "css.customData": [
-    {
-      "version": 1.1,
-      "atDirectives": [
-        {
-          "name": "@tailwind",
-          "description": "Use the @tailwind directive to insert Tailwind's base, components, and utilities styles into your CSS."
-        },
-        {
-          "name": "@apply",
-          "description": "Use @apply to inline any existing utility classes into your own custom CSS."
-        },
-        {
-          "name": "@supports",
-          "description": "CSS feature queries to apply styles based on browser support."
-        }
-      ]
-    }
-  ]
+  "files.exclude": {
+    "**/node_modules/**": true,
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true
+  },
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/*.code-search": true
+  }
 }

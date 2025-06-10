@@ -1,0 +1,23 @@
+# Ignorar dependencias
+node_modules/
+**/node_modules/**
+
+# Ignorar archivos generados
+public/
+dist/
+build/
+**/*.min.css
+**/*.min.js
+
+# Ignorar archivos de configuración
+.vercel/
+.next/
+.cache/
+
+# Ignorar archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar archivos de Bootstrap en node_modules específicamente
+**/bootstrap/**/*.css
+**/bootstrap/**/*.min.css
