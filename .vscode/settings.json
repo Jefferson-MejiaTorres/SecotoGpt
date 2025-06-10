@@ -13,15 +13,14 @@
   "css.lint.universalSelector": "ignore",
   "stylelint.enable": true,
   "stylelint.validate": ["css", "scss", "postcss"],
-  "stylelint.snippet": ["css", "scss", "postcss"],
-  "files.associations": {
-    "*.css": "postcss"
+  "stylelint.snippet": ["css", "scss", "postcss"],  "files.associations": {
+    "*.css": "postcss",
+    "*.yml": "yaml",
+    "*.yaml": "yaml"
   },
   "emmet.includeLanguages": {
     "postcss": "css"
-  },
-  "files.exclude": {
-    "**/node_modules/**": true,
+  },  "files.exclude": {
     "**/.git": true,
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
@@ -31,11 +30,14 @@
     "**/node_modules": true,
     "**/bower_components": true,
     "**/*.code-search": true
-  },
-  "files.watcherExclude": {
+  },  "files.watcherExclude": {
     "**/node_modules/**": true,
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/node_modules/*/**": true
+  },
+  "yaml.validate": true,
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "/.github/workflows/*"
   }
 }
