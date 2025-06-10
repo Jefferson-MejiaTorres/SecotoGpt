@@ -4,9 +4,11 @@
   "description": "El mejor Proyecto de Plataformas Att: ChatGpt",
   "main": "index.js",
   "scripts": {
-    "build-css": "tailwindcss -i ./src/estilos/principal.css -o ./public/tailwind.css --watch",
-    "build": "tailwindcss -i ./src/estilos/principal.css -o ./public/tailwind.css",
-    "dev": "npx live-server --port=3000",
+    "build-css": "postcss ./src/estilos/principal.css -o ./public/tailwind.css --watch",
+    "build": "postcss ./src/estilos/principal.css -o ./public/tailwind.css",
+    "dev": "npm run build && npx live-server --port=3000 --open=/index.html",
+    "start": "npm run dev",
+    "lint-css": "stylelint \"src/**/*.css\" --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,5 +28,8 @@
     "live-server": "^1.2.2",
     "postcss": "^8.5.4",
     "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "postcss-cli": "^11.0.1"
   }
 }

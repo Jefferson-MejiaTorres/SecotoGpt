@@ -1,0 +1,56 @@
+/* Correcciones de compatibilidad para Bootstrap */
+
+/* Fix básico para botones - Compatible con todos los navegadores */
+button,
+[type="button"],
+[type="reset"], 
+[type="submit"] {
+  -webkit-appearance: button;
+  appearance: button;
+}
+
+/* Fix para inputs de búsqueda */
+[type="search"] {
+  -webkit-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Fix para elementos específicos de WebKit */
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  appearance: button;
+  font: inherit;
+}
+
+::file-selector-button {
+  -webkit-appearance: button;
+  appearance: button;
+  font: inherit;
+}
+
+/* Mejoras generales de compatibilidad */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Fix para tablas - Fallback seguro */
+th {
+  text-align: inherit;
+}
+
+/* Mejoras para formularios */
+input,
+button,
+select,
+textarea {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}

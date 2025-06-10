@@ -1,4 +1,8 @@
 /* Archivo principal de Tailwind para importar estilos y personalizaciones */
+
+/* Importar correcciones de compatibilidad para Bootstrap */
+@import './bootstrap-fixes.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

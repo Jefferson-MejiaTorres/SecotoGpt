@@ -1,6 +1,9 @@
 /* Archivo principal de Tailwind para importar estilos y personalizaciones */
 
-*, ::before, ::after {
+/* Importar correcciones de compatibilidad para Bootstrap */
+@import './bootstrap-fixes.css';
+
+*, ::before, ::after{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -54,7 +57,7 @@
   --tw-contain-style:  ;
 }
 
-::backdrop {
+::backdrop{
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
   --tw-translate-x: 0;
@@ -118,14 +121,10 @@
 *,
 ::before,
 ::after {
-  box-sizing: border-box;
-  /* 1 */
-  border-width: 0;
-  /* 2 */
-  border-style: solid;
-  /* 2 */
-  border-color: #e5e7eb;
-  /* 2 */
+  box-sizing: border-box; /* 1 */
+  border-width: 0; /* 2 */
+  border-style: solid; /* 2 */
+  border-color: #e5e7eb; /* 2 */
 }
 
 ::before,
@@ -145,23 +144,14 @@
 
 html,
 :host {
-  line-height: 1.5;
-  /* 1 */
-  -webkit-text-size-adjust: 100%;
-  /* 2 */
-  -moz-tab-size: 4;
-  /* 3 */
-  -o-tab-size: 4;
-     tab-size: 4;
-  /* 3 */
-  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  /* 4 */
-  font-feature-settings: normal;
-  /* 5 */
-  font-variation-settings: normal;
-  /* 6 */
-  -webkit-tap-highlight-color: transparent;
-  /* 7 */
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+  -webkit-tap-highlight-color: transparent; /* 7 */
 }
 
 /*
@@ -170,10 +160,8 @@ html,
 */
 
 body {
-  margin: 0;
-  /* 1 */
-  line-height: inherit;
-  /* 2 */
+  margin: 0; /* 1 */
+  line-height: inherit; /* 2 */
 }
 
 /*
@@ -183,12 +171,9 @@ body {
 */
 
 hr {
-  height: 0;
-  /* 1 */
-  color: inherit;
-  /* 2 */
-  border-top-width: 1px;
-  /* 3 */
+  height: 0; /* 1 */
+  color: inherit; /* 2 */
+  border-top-width: 1px; /* 3 */
 }
 
 /*
@@ -243,14 +228,10 @@ code,
 kbd,
 samp,
 pre {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  /* 1 */
-  font-feature-settings: normal;
-  /* 2 */
-  font-variation-settings: normal;
-  /* 3 */
-  font-size: 1em;
-  /* 4 */
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace; /* 1 */
+  font-feature-settings: normal; /* 2 */
+  font-variation-settings: normal; /* 3 */
+  font-size: 1em; /* 4 */
 }
 
 /*
@@ -288,12 +269,9 @@ sup {
 */
 
 table {
-  text-indent: 0;
-  /* 1 */
-  border-color: inherit;
-  /* 2 */
-  border-collapse: collapse;
-  /* 3 */
+  text-indent: 0; /* 1 */
+  border-color: inherit; /* 2 */
+  border-collapse: collapse; /* 3 */
 }
 
 /*
@@ -307,26 +285,16 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: inherit;
-  /* 1 */
-  font-feature-settings: inherit;
-  /* 1 */
-  font-variation-settings: inherit;
-  /* 1 */
-  font-size: 100%;
-  /* 1 */
-  font-weight: inherit;
-  /* 1 */
-  line-height: inherit;
-  /* 1 */
-  letter-spacing: inherit;
-  /* 1 */
-  color: inherit;
-  /* 1 */
-  margin: 0;
-  /* 2 */
-  padding: 0;
-  /* 3 */
+  font-family: inherit; /* 1 */
+  font-feature-settings: inherit; /* 1 */
+  font-variation-settings: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  font-weight: inherit; /* 1 */
+  line-height: inherit; /* 1 */
+  letter-spacing: inherit; /* 1 */
+  color: inherit; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 3 */
 }
 
 /*
@@ -347,12 +315,9 @@ button,
 input:where([type='button']),
 input:where([type='reset']),
 input:where([type='submit']) {
-  -webkit-appearance: button;
-  /* 1 */
-  background-color: transparent;
-  /* 2 */
-  background-image: none;
-  /* 2 */
+  -webkit-appearance: button; /* 1 */
+  background-color: transparent; /* 2 */
+  background-image: none; /* 2 */
 }
 
 /*
@@ -394,10 +359,8 @@ Correct the cursor style of increment and decrement buttons in Safari.
 */
 
 [type='search'] {
-  -webkit-appearance: textfield;
-  /* 1 */
-  outline-offset: -2px;
-  /* 2 */
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
 }
 
 /*
@@ -414,10 +377,8 @@ Remove the inner padding in Chrome and Safari on macOS.
 */
 
 ::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  /* 1 */
-  font: inherit;
-  /* 2 */
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
 }
 
 /*
@@ -486,19 +447,20 @@ textarea {
 2. Set the default placeholder color to the user's configured gray 400 color.
 */
 
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
+}
+
 input::-moz-placeholder, textarea::-moz-placeholder {
-  opacity: 1;
-  /* 1 */
-  color: #9ca3af;
-  /* 2 */
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
 }
 
 input::placeholder,
 textarea::placeholder {
-  opacity: 1;
-  /* 1 */
-  color: #9ca3af;
-  /* 2 */
+  opacity: 1; /* 1 */
+  color: #9ca3af; /* 2 */
 }
 
 /*
@@ -532,10 +494,8 @@ audio,
 iframe,
 embed,
 object {
-  display: block;
-  /* 1 */
-  vertical-align: middle;
-  /* 2 */
+  display: block; /* 1 */
+  vertical-align: middle; /* 2 */
 }
 
 /*
@@ -553,158 +513,138 @@ video {
 [hidden]:where(:not([hidden="until-found"])) {
   display: none;
 }
-
-.container {
+.container{
   width: 100%;
 }
+@media (min-width: 640px){
 
-@media (min-width: 640px) {
-  .container {
+  .container{
     max-width: 640px;
   }
 }
+@media (min-width: 768px){
 
-@media (min-width: 768px) {
-  .container {
+  .container{
     max-width: 768px;
   }
 }
+@media (min-width: 1024px){
 
-@media (min-width: 1024px) {
-  .container {
+  .container{
     max-width: 1024px;
   }
 }
+@media (min-width: 1280px){
 
-@media (min-width: 1280px) {
-  .container {
+  .container{
     max-width: 1280px;
   }
 }
+@media (min-width: 1536px){
 
-@media (min-width: 1536px) {
-  .container {
+  .container{
     max-width: 1536px;
   }
 }
-
-.mx-auto {
+.mx-auto{
   margin-left: auto;
   margin-right: auto;
 }
-
-.mb-0 {
+.mb-0{
   margin-bottom: 0px;
 }
-
-.mb-3 {
+.mb-3{
   margin-bottom: 0.75rem;
 }
-
-.mb-4 {
+.mb-4{
   margin-bottom: 1rem;
 }
-
-.mb-5 {
+.mb-5{
   margin-bottom: 1.25rem;
 }
-
-.me-2 {
-  margin-inline-end: 0.5rem;
+.me-2{
+  -webkit-margin-end: 0.5rem;
+          margin-inline-end: 0.5rem;
 }
-
-.mt-3 {
+.mt-3{
   margin-top: 0.75rem;
 }
-
-.mt-4 {
+.mt-4{
   margin-top: 1rem;
 }
-
-.mt-auto {
+.mt-5{
+  margin-top: 1.25rem;
+}
+.mt-auto{
   margin-top: auto;
 }
-
-.block {
+.block{
   display: block;
 }
-
-.min-h-screen {
+.min-h-screen{
   min-height: 100vh;
 }
-
-.transform {
+.transform{
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
-
-.gap-2 {
+.gap-2{
   gap: 0.5rem;
 }
-
-.gap-3 {
+.gap-3{
   gap: 0.75rem;
 }
-
-.border-0 {
+.border-0{
   border-width: 0px;
 }
-
-.bg-\[var\(--color-bg\)\] {
+.bg-\[var\(--color-bg\)\]{
   background-color: var(--color-bg);
 }
-
-.bg-white {
+.bg-white{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
-
-.py-3 {
+.p-5{
+  padding: 1.25rem;
+}
+.py-3{
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
 }
-
-.py-4 {
+.py-4{
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
-
-.py-5 {
+.py-5{
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
 }
-
-.text-center {
+.text-center{
   text-align: center;
 }
-
-.text-\[var\(--color-text\)\] {
+.text-\[var\(--color-text\)\]{
   color: var(--color-text);
 }
-
-.shadow-sm {
+.shadow-sm{
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
-
-.filter {
-  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+.filter{
+  -webkit-filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+          filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
-
-.transition-colors {
+.transition-colors{
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
-
-.duration-500 {
+.duration-500{
   transition-duration: 500ms;
 }
 
 /* Importar Bootstrap desde CDN en el HTML, pero aquí puedes agregar utilidades personalizadas si lo deseas */
 
 /* Paleta de colores pasteles y modo oscuro */
-
 :root {
   --color-se: #a8edea;
   --color-co: #fed6e3;
@@ -713,7 +653,6 @@ video {
   --color-bg: #f8fafc;
   --color-text: #22223b;
 }
-
 .dark {
   --color-bg: #22223b;
   --color-text: #f8fafc;
@@ -725,14 +664,14 @@ body {
   transition: background 0.4s, color 0.4s;
 }
 
-/* Logo SeCoToGpt degradado y estilizado */
+@import url('./animaciones.css');
 
+/* Logo SeCoToGpt degradado y estilizado */
 .secotogpt-logo {
   font-size: 1.7rem;
   display: flex;
   gap: 0.1em;
 }
-
 .secotogpt-se {
   background: linear-gradient(90deg, #a8edea, #fed6e3);
   -webkit-background-clip: text;
@@ -740,7 +679,6 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-
 .secotogpt-co {
   background: linear-gradient(90deg, #fed6e3, #fcb69f);
   -webkit-background-clip: text;
@@ -748,7 +686,6 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-
 .secotogpt-to {
   background: linear-gradient(90deg, #fcb69f, #cfd9df);
   -webkit-background-clip: text;
@@ -756,7 +693,6 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent;
 }
-
 .secotogpt-gpt {
   background: linear-gradient(90deg, #cfd9df, #a8edea);
   -webkit-background-clip: text;
@@ -766,7 +702,6 @@ body {
 }
 
 /* Nombre al lado del logo SeCoToGpt */
-
 .secotogpt-logo-nombre {
   font-size: 2rem;
   font-family: 'Poppins', Arial, sans-serif;
@@ -777,7 +712,6 @@ body {
   align-items: center;
   margin-left: 0.2em;
 }
-
 .secotogpt-nombre-se {
   background: linear-gradient(135deg, #a8edea, #fed6e3);
   -webkit-background-clip: text;
@@ -785,7 +719,6 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent !important;
 }
-
 .secotogpt-nombre-co {
   background: linear-gradient(135deg, #fed6e3, #fcb69f);
   -webkit-background-clip: text;
@@ -793,7 +726,6 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent !important;
 }
-
 .secotogpt-nombre-to {
   background: linear-gradient(135deg, #fcb69f, #cfd9df);
   -webkit-background-clip: text;
@@ -801,7 +733,6 @@ body {
   -webkit-text-fill-color: transparent;
   color: transparent !important;
 }
-
 .secotogpt-nombre-gpt {
   background: linear-gradient(135deg, #cfd9df, #a8edea);
   -webkit-background-clip: text;
@@ -811,28 +742,24 @@ body {
 }
 
 /* Fondos degradados para las tarjetas */
-
 .card-bg-se {
   background: linear-gradient(135deg, rgba(168, 237, 234, 0.08), rgba(254, 214, 227, 0.08));
   border-left: 4px solid #a8edea;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
-
 .card-bg-co {
   background: linear-gradient(135deg, rgba(254, 214, 227, 0.08), rgba(252, 182, 159, 0.08));
   border-left: 4px solid #fed6e3;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
-
 .card-bg-to {
   background: linear-gradient(135deg, rgba(252, 182, 159, 0.08), rgba(207, 217, 223, 0.08));
   border-left: 4px solid #fcb69f;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
-
 .card-bg-gpt {
   background: linear-gradient(135deg, rgba(207, 217, 223, 0.08), rgba(168, 237, 234, 0.08));
   border-left: 4px solid #cfd9df;
@@ -841,20 +768,19 @@ body {
 }
 
 /* Estilos responsivos */
-
 @media (max-width: 768px) {
   .secotogpt-logo-nombre {
     font-size: 1.5rem;
   }
-
+  
   .secotogpt-logo {
     font-size: 1.4rem;
   }
-
+  
   .card {
     margin-bottom: 1rem;
   }
-
+  
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -862,20 +788,17 @@ body {
 }
 
 /* Estilos para buscador */
-
 .form-control:focus {
   border-color: var(--color-se);
   box-shadow: 0 0 0 0.2rem rgba(168, 237, 234, 0.25);
 }
 
 /* Botones personalizados */
-
 .btn-outline-dark {
   border-color: var(--color-text);
   color: var(--color-text);
   transition: all 0.3s ease;
 }
-
 .btn-outline-dark:hover {
   background-color: var(--color-text);
   border-color: var(--color-text);
@@ -884,18 +807,15 @@ body {
 }
 
 /* Navegación */
-
 .nav-link {
   color: var(--color-text) !important;
   font-weight: 500;
   transition: all 0.3s ease;
   position: relative;
 }
-
 .nav-link:hover {
   color: var(--color-se) !important;
 }
-
 .nav-link.active::after {
   content: '';
   position: absolute;
@@ -909,36 +829,29 @@ body {
 }
 
 /* Modo oscuro mejorado */
-
 .dark .card {
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .dark .card-bg-se {
   background: linear-gradient(135deg, rgba(168, 237, 234, 0.15), rgba(254, 214, 227, 0.15));
 }
-
 .dark .card-bg-co {
   background: linear-gradient(135deg, rgba(254, 214, 227, 0.15), rgba(252, 182, 159, 0.15));
 }
-
 .dark .card-bg-to {
   background: linear-gradient(135deg, rgba(252, 182, 159, 0.15), rgba(207, 217, 223, 0.15));
 }
-
 .dark .card-bg-gpt {
   background: linear-gradient(135deg, rgba(207, 217, 223, 0.15), rgba(168, 237, 234, 0.15));
 }
 
 /* Efectos de scroll suave */
-
 html {
   scroll-behavior: smooth;
 }
 
 /* Mejoras visuales */
-
 .shadow-sm {
   box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
 }
@@ -947,11 +860,11 @@ html {
   box-shadow: 0 .125rem .25rem rgba(255,255,255,.075)!important;
 }
 
-.dark\:bg-\[var\(--color-bg\)\]:is(.dark *) {
+.dark\:bg-\[var\(--color-bg\)\]:is(.dark *){
   background-color: var(--color-bg);
 }
 
-.dark\:bg-gray-800:is(.dark *) {
+.dark\:bg-gray-800:is(.dark *){
   --tw-bg-opacity: 1;
   background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
 }

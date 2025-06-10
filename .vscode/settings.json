@@ -1,0 +1,32 @@
+{
+  "css.validate": false,
+  "scss.validate": false,
+  "less.validate": false,
+  "stylelint.enable": true,
+  "stylelint.validate": ["css", "scss", "postcss"],
+  "files.associations": {
+    "*.css": "postcss"
+  },
+  "emmet.includeLanguages": {
+    "postcss": "css"
+  },
+  "css.customData": [
+    {
+      "version": 1.1,
+      "atDirectives": [
+        {
+          "name": "@tailwind",
+          "description": "Use the @tailwind directive to insert Tailwind's base, components, and utilities styles into your CSS."
+        },
+        {
+          "name": "@apply",
+          "description": "Use @apply to inline any existing utility classes into your own custom CSS."
+        },
+        {
+          "name": "@supports",
+          "description": "CSS feature queries to apply styles based on browser support."
+        }
+      ]
+    }
+  ]
+}
