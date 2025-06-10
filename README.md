@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![SecotoGPT Logo](./public/logo_secotogpt.svg)
+![SecotoGPT Logo](./imagenes/logo_secotogpt.svg)
 
 **Una plataforma educativa interactiva para el aprendizaje de Sistemas Operativos y Plataformas Tecnológicas**
 
@@ -101,8 +101,9 @@ SecotoGpt/
 ├── 🚀 vercel.json             # Configuración de despliegue
 ├── 📜 README.md               # Documentación
 ├── ⚖️ LICENSE                 # Licencia MIT
-├── 📁 public/                 # Recursos estáticos
-│   ├── 🖼️ logo_secotogpt.svg  # Logo del proyecto
+├── 📁 imagenes/               # Recursos de imagen
+│   └── 🖼️ logo_secotogpt.svg  # Logo del proyecto
+├── 📁 public/                 # Recursos estáticos compilados
 │   └── 🎨 tailwind.css        # CSS compilado
 ├── 📁 src/                    # Código fuente
 │   ├── 📁 componentes/        # Componentes JavaScript

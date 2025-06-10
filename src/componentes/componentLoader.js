@@ -56,6 +56,10 @@ function initializeComponents() {
   if (typeof initializeHeader === 'function') {
     initializeHeader();
   }
+  
+  if (typeof initializeFooter === 'function') {
+    initializeFooter();
+  }
 }
 
 // Cargar componentes cuando el DOM esté listo

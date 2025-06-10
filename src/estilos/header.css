@@ -1,0 +1,678 @@
+/* Estilos mejorados para el Header */
+
+/* Header principal */
+header {
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+header.dark {
+  background: rgba(34, 34, 59, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Efectos de scroll en el header */
+header.scrolled {
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+}
+
+header.scrolled.dark {
+  background: rgba(34, 34, 59, 0.98);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* Contenedor del logo */
+.logo-container {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+  transform: translateY(-2px);
+}
+
+.logo-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-img {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  transition: all 0.3s ease;
+}
+
+.logo-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(168, 237, 234, 0.3), transparent);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.logo-wrapper:hover .logo-glow {
+  opacity: 1;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Búsqueda mejorada */
+.search-container {
+  max-width: 400px;
+  width: 100%;
+}
+
+.search-icon {
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  z-index: 10;
+  transition: color 0.3s ease;
+}
+
+.search-input {
+  padding-left: 40px;
+  padding-right: 16px;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  background: rgba(248, 249, 250, 0.8);
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.search-input:focus {
+  border-color: #a8edea;
+  background: white;
+  box-shadow: 0 4px 20px rgba(168, 237, 234, 0.3);
+  outline: none;
+}
+
+.search-input:focus + .search-icon {
+  color: #a8edea;
+}
+
+/* Sugerencias de búsqueda */
+.search-suggestions {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.search-suggestions.dark {
+  background: rgba(34, 34, 59, 0.95);
+  border-color: #444;
+  color: white;
+}
+
+.suggestion-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
+  color: white;
+  transform: translateX(4px);
+}
+
+.suggestion-item.dark:hover {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* Navegación moderna */
+.nav-link-modern {
+  position: relative;
+  padding: 8px 16px;
+  border-radius: 20px;
+  color: #6c757d;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.nav-link-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
+  border-radius: 20px;
+  transition: width 0.3s ease;
+  z-index: -1;
+}
+
+.nav-link-modern:hover::before,
+.nav-link-modern.active::before {
+  width: 100%;
+}
+
+.nav-link-modern:hover,
+.nav-link-modern.active {
+  color: white;
+  transform: translateY(-2px);
+}
+
+.nav-link-modern i {
+  transition: transform 0.3s ease;
+}
+
+.nav-link-modern:hover i {
+  transform: scale(1.1);
+}
+
+/* Toggle de tema hermoso */
+.theme-toggle-container {
+  position: relative;
+}
+
+.theme-toggle-input {
+  display: none;
+}
+
+.theme-toggle-label {
+  display: block;
+  width: 70px;
+  height: 35px;
+  background: linear-gradient(135deg, #87CEEB, #FFD700);
+  border-radius: 35px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle-label::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border-radius: 35px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.theme-toggle-input:checked + .theme-toggle-label::before {
+  opacity: 1;
+}
+
+.theme-toggle-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.theme-toggle-button {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 29px;
+  height: 29px;
+  background: white;
+  border-radius: 50%;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.theme-toggle-input:checked + .theme-toggle-label .theme-toggle-button {
+  transform: translateX(35px);
+  background: #2c3e50;
+}
+
+/* Iconos del toggle */
+.sun-icon, .moon-icon {
+  position: absolute;
+  font-size: 14px;
+  transition: all 0.4s ease;
+}
+
+.sun-icon {
+  color: #FFD700;
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+.moon-icon {
+  color: #f39c12;
+  opacity: 0;
+  transform: rotate(180deg) scale(0);
+}
+
+.theme-toggle-input:checked + .theme-toggle-label .sun-icon {
+  opacity: 0;
+  transform: rotate(-180deg) scale(0);
+}
+
+.theme-toggle-input:checked + .theme-toggle-label .moon-icon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Efectos de brillo del toggle */
+.theme-toggle-label::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.6), transparent);
+  border-radius: 50%;
+  transform: translateY(-50%);
+  opacity: 1;
+  transition: all 0.4s ease;
+  pointer-events: none;
+}
+
+.theme-toggle-input:checked + .theme-toggle-label::after {
+  left: 42px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+  opacity: 0.5;
+}
+
+/* Botón móvil */
+.mobile-menu-btn {
+  border-radius: 12px;
+  border: 2px solid rgba(168, 237, 234, 0.3);
+  color: #6c757d;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mobile-menu-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.mobile-menu-btn:hover::before {
+  left: 100%;
+}
+
+.mobile-menu-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Menú móvil */
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.show {
+  max-height: 400px;
+  transition: max-height 0.4s ease-in;
+}
+
+.mobile-menu.dark {
+  background: rgba(34, 34, 59, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nav-link-mobile {
+  display: block;
+  padding: 12px 16px;
+  color: #6c757d;
+  text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.nav-link-mobile:hover,
+.nav-link-mobile.active {
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
+  color: white;
+  transform: translateX(8px);
+}
+
+/* Animaciones de entrada */
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slideInDown 0.5s ease-out;
+}
+
+/* Animaciones del menú móvil */
+.mobile-menu {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-out;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mobile-menu.show {
+  max-height: 400px;
+  transition: max-height 0.4s ease-in;
+}
+
+/* Animación de carga del header */
+.header-loaded {
+  animation: fadeInDown 0.6s ease-out;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animaciones de carga progresiva */
+.header-loaded .logo-container {
+  animation: bounceInLeft 0.8s ease-out;
+}
+
+.header-loaded .search-container {
+  animation: fadeInDown 0.8s ease-out 0.2s both;
+}
+
+.header-loaded .nav {
+  animation: fadeInDown 0.8s ease-out 0.4s both;
+}
+
+.header-loaded .theme-toggle-container {
+  animation: bounceInRight 0.8s ease-out 0.6s both;
+}
+
+@keyframes bounceInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounceInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  header nav {
+    padding: 12px 0;
+  }
+  
+  .search-container {
+    max-width: 250px;
+  }
+  
+  .theme-toggle-label {
+    width: 60px;
+    height: 30px;
+  }
+  
+  .theme-toggle-button {
+    width: 24px;
+    height: 24px;
+    top: 3px;
+  }
+  
+  .theme-toggle-input:checked + .theme-toggle-label .theme-toggle-button {
+    transform: translateX(30px);
+  }
+}
+
+/* Estados de hover del header completo */
+header:hover {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Efectos de glassmorphism */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Efectos de partículas para el logo */
+.logo-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(168, 237, 234, 0.1), transparent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.6s ease;
+  z-index: -1;
+}
+
+.logo-container:hover::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* Efectos de micro-interacciones */
+.nav-link-modern {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link-modern::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #a8edea, #fed6e3);
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link-modern:hover::after,
+.nav-link-modern.active::after {
+  width: 80%;
+}
+
+/* Optimizaciones de rendimiento */
+header * {
+  will-change: transform;
+}
+
+.theme-toggle-label,
+.nav-link-modern,
+.search-input,
+.mobile-menu-btn {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Modo oscuro adicional */
+.dark .search-input {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.dark .search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.dark .search-icon {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark .nav-link-modern {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.dark .nav-link-modern:hover,
+.dark .nav-link-modern.active {
+  color: white;
+}
+
+/* Mejoras de accesibilidad */
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* Focus states mejorados para accesibilidad */
+.nav-link-modern:focus,
+.search-input:focus,
+.theme-toggle-label:focus,
+.mobile-menu-btn:focus {
+  outline: 2px solid #a8edea;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(168, 237, 234, 0.3);
+}
+
+/* Estados de focus para modo oscuro */
+.dark .nav-link-modern:focus,
+.dark .search-input:focus,
+.dark .theme-toggle-label:focus,
+.dark .mobile-menu-btn:focus {
+  outline-color: #fed6e3;
+  box-shadow: 0 0 0 3px rgba(254, 214, 227, 0.3);
+}
+
+/* Mejora del contraste en modo oscuro */
+.dark .nav-link-modern {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark .nav-link-modern:hover {
+  color: white;
+}
+
+/* Indicador visual para usuarios de teclado */
+.theme-toggle-input:focus + .theme-toggle-label {
+  box-shadow: 0 0 0 3px rgba(168, 237, 234, 0.4);
+  outline: 2px solid transparent;
+}
+
+/* Asegurar que los iconos sean visibles para lectores de pantalla */
+.bi {
+  speak: none;
+}
+
+/* Mejorar la visibilidad del texto del menú móvil */
+.nav-link-mobile {
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-link-mobile:hover {
+  background: rgba(168, 237, 234, 0.1);
+  transform: translateX(4px);
+}
+
+.dark .nav-link-mobile:hover {
+  background: rgba(254, 214, 227, 0.1);
+}
+
+/* Estados de reducción de movimiento para usuarios sensibles */
+@media (prefers-reduced-motion: reduce) {
+  .logo-img,
+  .nav-link-modern,
+  .theme-toggle-button,
+  .mobile-menu-btn,
+  .search-input,
+  .nav-link-mobile {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .header-loaded .logo-container,
+  .header-loaded .search-container,
+  .header-loaded .nav,
+  .header-loaded .theme-toggle-container {
+    animation: none !important;
+  }
+}

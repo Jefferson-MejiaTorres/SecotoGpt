@@ -1,33 +1,114 @@
 <!-- Header Component -->
-<header class="shadow-sm sticky-top bg-white dark:bg-[var(--color-bg)] transition-colors duration-500">
-  <nav class="container d-flex align-items-center justify-content-between py-3">
-    <div class="d-flex align-items-center gap-2">
-      <img src="./public/logo_secotogpt.svg" alt="Logo SeCoToGpt" height="40"/>
-      <h1 class="mb-0 secotogpt-logo-nombre">
+<header class="shadow-lg sticky-top bg-white/95 dark:bg-[var(--color-bg)]/95 backdrop-blur-md transition-all duration-500 border-b border-gray-200/50 dark:border-gray-700/50">
+  <nav class="container d-flex align-items-center justify-content-between py-4">
+    <!-- Logo y Nombre -->
+    <div class="d-flex align-items-center gap-3 logo-container">
+      <div class="logo-wrapper position-relative">
+        <img src="./imagenes/logo_secotogpt.svg" alt="Logo SeCoToGpt" height="45" class="logo-img transition-transform duration-300 hover:scale-110"/>
+        <div class="logo-glow"></div>
+      </div>
+      <h1 class="mb-0 secotogpt-logo-nombre animate__animated animate__fadeInLeft">
         <span class="secotogpt-nombre-se">Se</span>
         <span class="secotogpt-nombre-co">Co</span>
         <span class="secotogpt-nombre-to">To</span>
         <span class="secotogpt-nombre-gpt">Gpt</span>
       </h1>
-    </div>
-    <form class="d-none d-md-flex align-items-center" role="search">
-      <input class="form-control me-2" type="search" placeholder="Buscar..." aria-label="Buscar">
+    </div>    <!-- Barra de búsqueda mejorada -->
+    <form class="d-none d-lg-flex align-items-center search-container" role="search">
+      <div class="position-relative">
+        <label for="mainSearchInput" class="visually-hidden">Buscar contenido</label>
+        <i class="bi bi-search search-icon position-absolute"></i>
+        <input 
+          id="mainSearchInput"
+          class="form-control search-input" 
+          type="search" 
+          placeholder="Buscar contenido..." 
+          aria-label="Buscar contenido"
+          title="Campo de búsqueda principal"
+        >
+        <div class="search-suggestions d-none position-absolute"></div>
+      </div>
     </form>
-    <ul class="nav gap-3">
-      <li class="nav-item">
-        <a class="nav-link active" href="#inicio">Inicio</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#historia">Historia</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#contacto">Contáctanos</a>
-      </li>
-      <li class="nav-item">
-        <button id="modoOscuroBtn" class="btn btn-outline-secondary btn-sm" title="Modo oscuro/claro">
-          <span class="bi bi-moon"></span>
-        </button>
-      </li>
-    </ul>
+
+    <!-- Navegación y controles -->
+    <div class="d-flex align-items-center gap-4">
+      <!-- Enlaces de navegación -->
+      <ul class="nav gap-1 d-none d-md-flex">
+        <li class="nav-item">
+          <a class="nav-link nav-link-modern active" href="#inicio">
+            <i class="bi bi-house me-1"></i>Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-modern" href="#historia">
+            <i class="bi bi-clock-history me-1"></i>Historia
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-modern" href="#contacto">
+            <i class="bi bi-envelope me-1"></i>Contacto
+          </a>
+        </li>
+      </ul>      <!-- Toggle de modo oscuro/claro -->
+      <div class="theme-toggle-container">
+        <input type="checkbox" id="themeToggle" class="theme-toggle-input" aria-label="Alternar modo oscuro/claro">
+        <label for="themeToggle" class="theme-toggle-label" title="Cambiar tema">
+          <div class="theme-toggle-slider">
+            <div class="theme-toggle-button">
+              <i class="bi bi-sun-fill sun-icon"></i>
+              <i class="bi bi-moon-stars-fill moon-icon"></i>
+            </div>
+          </div>
+        </label>
+      </div>
+
+      <!-- Menú móvil -->
+      <button class="btn btn-outline-secondary d-md-none mobile-menu-btn" 
+              type="button" 
+              id="mobileMenuBtn"
+              aria-label="Abrir menú de navegación"
+              aria-expanded="false"
+              aria-controls="mobileMenu"
+              title="Menú de navegación">
+        <i class="bi bi-list"></i>
+        <span class="visually-hidden">Menú</span>
+      </button>
+    </div>
   </nav>
+
+  <!-- Menú móvil desplegable -->
+  <div class="mobile-menu d-md-none" id="mobileMenu">
+    <div class="container py-3">
+      <div class="row">
+        <div class="col-12">          <!-- Búsqueda móvil -->
+          <form class="mb-3" role="search">
+            <div class="position-relative">
+              <label for="mobileSearchInput" class="visually-hidden">Buscar contenido</label>
+              <i class="bi bi-search search-icon position-absolute"></i>
+              <input 
+                id="mobileSearchInput"
+                class="form-control search-input" 
+                type="search" 
+                placeholder="Buscar..." 
+                aria-label="Buscar contenido"
+                title="Campo de búsqueda">
+            </div>
+          </form>
+          
+          <!-- Enlaces móviles -->
+          <div class="d-flex flex-column gap-2">
+            <a class="nav-link nav-link-mobile active" href="#inicio">
+              <i class="bi bi-house me-2"></i>Inicio
+            </a>
+            <a class="nav-link nav-link-mobile" href="#historia">
+              <i class="bi bi-clock-history me-2"></i>Historia
+            </a>
+            <a class="nav-link nav-link-mobile" href="#contacto">
+              <i class="bi bi-envelope me-2"></i>Contacto
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
