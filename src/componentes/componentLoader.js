@@ -10,7 +10,7 @@ class ComponentLoader {
     this.basePath = this.detectBasePath();
     console.log('📍 BasePath establecido:', this.basePath);
     this.init();
-  }// Detecta la ruta base según la ubicación actual
+  }  // Detecta la ruta base según la ubicación actual
   detectBasePath() {
     const currentPath = window.location.pathname;
     console.log('🔍 Detectando ruta base para:', currentPath);
@@ -19,6 +19,11 @@ class ComponentLoader {
     if (currentPath.includes('PaginaSecundarias')) {
       console.log('📂 Detectado: PaginaSecundarias - usando ruta ../../../../');
       return '../../../../'; // Desde PaginaPrincipal/PaginaSecundarias/[Area]/
+    }
+    // Si estamos en src/paginas/SistemasOperativos/ o similar (subcarpeta de paginas)
+    else if (currentPath.includes('src/paginas/') && currentPath.split('/').length > 4) {
+      console.log('📂 Detectado: src/paginas/[subcarpeta]/ - usando ruta ../../../');
+      return '../../../'; // Desde src/paginas/SistemasOperativos/
     }
     // Si estamos en src/paginas/
     else if (currentPath.includes('src/paginas/')) {
@@ -74,29 +79,50 @@ class ComponentLoader {
       this.setupFooterPaths(element);
     }
   }
-
   // Ajusta las rutas del header según la ubicación actual
-  setupHeaderPaths(headerElement) {    // Ajustar rutas de imágenes
-    const logoImg = headerElement.querySelector('.logo-img, img[src*="logo_secotogpt.svg"]');
+  setupHeaderPaths(headerElement) {
+    console.log('🔧 Configurando rutas del header con basePath:', this.basePath);
+    
+    // Ajustar rutas de imágenes - usar múltiples selectores para mayor compatibilidad
+    const logoImg = headerElement.querySelector('.logo-img') || 
+                   headerElement.querySelector('img[src*="logo_secotogpt.svg"]') ||
+                   headerElement.querySelector('img[alt*="SeCoToGpt"]');
+    
     if (logoImg) {
-      logoImg.src = this.basePath + 'imagenes/logo_secotogpt.svg';
+      const newSrc = this.basePath + 'imagenes/logo_secotogpt.svg';
+      console.log('🖼️ Actualizando logo header de', logoImg.src, 'a', newSrc);
+      logoImg.src = newSrc;
+    } else {
+      console.warn('⚠️ No se encontró el logo en el header');
     }
 
     // Ajustar enlaces de navegación
     const homeLink = headerElement.querySelector('a[href*="secotogpt.html"]');
     if (homeLink) {
       homeLink.href = this.basePath + 'secotogpt.html';
-    }    const systemsLink = headerElement.querySelector('a[href*="sistemas_operativos.html"]');
+    }
+    
+    const systemsLink = headerElement.querySelector('a[href*="sistemas_operativos.html"]');
     if (systemsLink) {
       systemsLink.href = this.basePath + 'src/paginas/sistemas_operativos.html';
     }
-  }
-  // Ajusta las rutas del footer según la ubicación actual
+    
+    console.log('✅ Rutas del header configuradas');
+  }  // Ajusta las rutas del footer según la ubicación actual
   setupFooterPaths(footerElement) {
-    // Ajustar rutas de imágenes del footer
-    const footerLogoImg = footerElement.querySelector('.footer-logo-image, img[src*="logo_secotogpt.svg"]');
+    console.log('🔧 Configurando rutas del footer con basePath:', this.basePath);
+    
+    // Ajustar rutas de imágenes del footer - usar múltiples selectores
+    const footerLogoImg = footerElement.querySelector('.footer-logo-image') || 
+                         footerElement.querySelector('img[src*="logo_secotogpt.svg"]') ||
+                         footerElement.querySelector('img[alt*="SeCoToGpt"]');
+    
     if (footerLogoImg) {
-      footerLogoImg.src = this.basePath + 'imagenes/logo_secotogpt.svg';
+      const newSrc = this.basePath + 'imagenes/logo_secotogpt.svg';
+      console.log('🖼️ Actualizando logo footer de', footerLogoImg.src, 'a', newSrc);
+      footerLogoImg.src = newSrc;
+    } else {
+      console.warn('⚠️ No se encontró el logo en el footer');
     }
 
     // Ajustar enlaces de navegación del footer
@@ -107,20 +133,36 @@ class ComponentLoader {
         link.href = this.basePath + href.substring(2);
       }
     });
-  }
-  // Función para cargar múltiples componentes
+    
+    console.log('✅ Rutas del footer configuradas');
+  }// Función para cargar múltiples componentes
   async loadAllComponents() {
     console.log('🚀 Iniciando carga de componentes con basePath:', this.basePath);
     
+    // Determinar ruta de componentes según ubicación
+    const currentPath = window.location.pathname;
+    const isPaginas = currentPath.includes('src/paginas/');
+    
+    // Para páginas en subcarpetas como SistemasOperativos, necesitamos ajustar más
+    let headerPath, footerPath;
+    
+    if (currentPath.includes('src/paginas/') && currentPath.split('/').length > 4) {
+      // Estamos en una subcarpeta de paginas (ej: src/paginas/SistemasOperativos/)
+      headerPath = '../../../src/partes/header.html';
+      footerPath = '../../../src/partes/footer.html';
+    } else if (isPaginas) {
+      // Estamos directamente en src/paginas/
+      headerPath = this.basePath + 'partes/header.html';
+      footerPath = this.basePath + 'partes/footer.html';
+    } else {
+      // Cualquier otra ubicación
+      headerPath = this.basePath + 'src/partes/header.html';
+      footerPath = this.basePath + 'src/partes/footer.html';
+    }
+    
     const components = [
-      { 
-        selector: '#header-placeholder', 
-        path: this.basePath + 'src/partes/header.html' 
-      },
-      { 
-        selector: '#footer-placeholder', 
-        path: this.basePath + 'src/partes/footer.html' 
-      }
+      { selector: '#header-placeholder', path: headerPath },
+      { selector: '#footer-placeholder', path: footerPath }
     ];
 
     console.log('📋 Componentes a cargar:', components);
