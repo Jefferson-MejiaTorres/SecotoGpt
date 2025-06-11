@@ -110,63 +110,6 @@ class HistoriaManager {
         }, stepTime);
     }
 
-    // Función para inicializar contador animado
-    initCounterAnimation() {
-        const counters = document.querySelectorAll('[data-count]');
-        const options = {
-            threshold: 0.7,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target;
-                    const target = parseInt(counter.getAttribute('data-count'));
-                    this.animateNumber(counter, 0, target, 2000);
-                    observer.unobserve(counter);
-                }
-            });
-        }, options);
-
-        counters.forEach(counter => observer.observe(counter));
-    }
-
-    animateNumber(element, start, end, duration) {
-        const startTime = performance.now();
-        const range = end - start;
-
-        function updateNumber(currentTime) {
-            const elapsedTime = currentTime - startTime;
-            const progress = Math.min(elapsedTime / duration, 1);
-            
-            // Easing function para suavizar la animación
-            const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-            const current = Math.floor(start + range * easeOutQuart);
-            
-            element.textContent = current + (end >= 100 ? '+' : '');
-            
-            if (progress < 1) {
-                requestAnimationFrame(updateNumber);
-            }
-        }
-
-        requestAnimationFrame(updateNumber);
-    }
-
-    // Añadir clases de animación específicas basadas en la posición
-    addStaggeredAnimations() {
-        const cards = document.querySelectorAll('.historia-card');
-        cards.forEach((card, index) => {
-            card.style.setProperty('--delay', `${index * 0.1}s`);
-        });
-
-        const impactCards = document.querySelectorAll('.impact-card');
-        impactCards.forEach((card, index) => {
-            card.style.setProperty('--delay', `${index * 0.15}s`);
-        });
-    }
-
     /* ===== EFECTOS DE PARTÍCULAS ===== */
     initializeParticleEffects() {
         const heroParticles = document.querySelector('.hero-particles');
