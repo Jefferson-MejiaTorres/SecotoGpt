@@ -70,6 +70,9 @@ class ContactanosManager {
         // Configurar efectos especiales para el primer lugar
         this.setupFirstPlaceEffects();
         
+        // Configurar efectos especiales para el segundo lugar
+        this.setupSecondPlaceEffects();
+        
         // Configurar animaciones de hover para tarjetas
         this.setupCardHoverEffects();
         
@@ -377,6 +380,46 @@ class ContactanosManager {
         }, 1700);
     }
 
+    setupSecondPlaceEffects() {
+        // Efecto de explosión en la barra de progreso de Jefferson Torres
+        const bar = document.querySelector('.second-explosion-bar');
+        const fill = bar?.querySelector('.jt-explosion-fill');
+        const explosion = bar?.querySelector('.jt-explosion-effect');
+        if (!bar || !fill || !explosion) return;
+
+        // Animación: primero llena al 100%, luego retrocede a 0.7%
+        fill.style.width = '0%';
+        setTimeout(() => {
+            fill.style.width = '100%';
+        }, 200);
+        fill.addEventListener('transitionend', function handler() {
+            // Solo la primera vez, retrocede a 0.7% y explota
+            if (parseFloat(fill.style.width) === 100 || fill.style.width === '100%') {
+                setTimeout(() => {
+                    fill.style.width = '0.7%';
+                    // Efecto de explosión
+                    explosion.innerHTML = '';
+                    for (let i = 0; i < 10; i++) {
+                        const p = document.createElement('div');
+                        p.className = 'particle';
+                        const angle = (i / 10) * 2 * Math.PI;
+                        const radius = 30 + Math.random() * 10;
+                        const tx = Math.cos(angle) * radius;
+                        const ty = Math.sin(angle) * radius;
+                        p.style.setProperty('--tx', `${tx}px`);
+                        p.style.setProperty('--ty', `${ty}px`);
+                        explosion.appendChild(p);
+                    }
+                    explosion.classList.remove('active');
+                    void explosion.offsetWidth;
+                    explosion.classList.add('active');
+                    setTimeout(() => explosion.classList.remove('active'), 800);
+                }, 600);
+                fill.removeEventListener('transitionend', handler);
+            }
+        });
+    }
+
     setupCardHoverEffects() {
         const devCards = document.querySelectorAll('.dev-card');
         
@@ -495,49 +538,100 @@ class ContactanosManager {
         });
 
         console.log('🎭 Animaciones de scroll épicas configuradas');
-    }
-
-    /* ===== CONTADORES ANIMADOS ===== */
+    }    /* ===== CONTADORES ANIMADOS ===== */
     initializeCounterAnimations() {
         const counterElements = document.querySelectorAll('[data-count]');
+        console.log('🔍 Elementos con data-count encontrados:', counterElements.length);
         
         counterElements.forEach(element => {
             const targetCount = parseInt(element.getAttribute('data-count'));
+            console.log('📊 Configurando contador:', element, 'con valor:', targetCount);
             this.counters.set(element, targetCount);
+            // Establecer valor inicial
+            element.textContent = '0';
         });
-        
-        console.log('📊 Contadores de estadísticas inicializados:', this.counters.size);
-    }
-
-    animateCounters() {
+        // FORZAR la animación de los contadores siempre
+        this.animateCounters();
+        this.hasAnimatedCounters = true;
+    }    animateCounters() {
+        // Contador simple que llega al valor objetivo sin observer ni animación avanzada
         this.counters.forEach((targetCount, element) => {
-            this.animateCounter(element, targetCount);
+            let current = 0;
+            const interval = setInterval(() => {
+                current++;
+                element.textContent = current;
+                if (current >= targetCount) {
+                    clearInterval(interval);
+                    element.textContent = targetCount;
+                }
+            }, 30); // velocidad del conteo
         });
-    }
-
-    animateCounter(element, target) {
+        // Efectos visuales opcionales
+        this.addStatsEffects();
+    }    animateCounter(element, target) {
+        console.log('🔢 Animando contador individual:', element, 'hacia valor:', target);
         let current = 0;
-        const increment = target / 100;
         const duration = 2000;
-        const stepTime = duration / 100;
+        const startTime = performance.now();
 
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
+        const updateCounter = (currentTime) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            
+            // Usar easing function para un efecto más suave
+            const easedProgress = this.easeOutCubic(progress);
+            current = Math.floor(target * easedProgress);
+            
+            element.textContent = current;
+            
+            if (progress < 1) {
+                requestAnimationFrame(updateCounter);
+            } else {
+                // Valor final
                 element.textContent = target;
-                clearInterval(timer);
+                console.log('✅ Contador completado:', element, 'valor final:', target);
                 
-                // Efecto especial para el 99%
+                // Efectos especiales para valores específicos
                 if (target === 99) {
                     setTimeout(() => {
-                        element.textContent = '99.3';
+                        element.textContent = '99';
+                        const decimal = element.nextElementSibling;
+                        if (decimal && decimal.classList.contains('stat-decimal')) {
+                            decimal.style.animation = 'pulse-gold 1s ease-out';
+                        }
                         element.parentElement.style.animation = 'pulse-gold 1s ease-out';
-                    }, 500);
+                    }, 200);
                 }
-            } else {
-                element.textContent = Math.floor(current);
+                
+                // Agregar efecto de pulso al completar
+                element.style.animation = 'numberCount 0.5s ease-out';
             }
-        }, stepTime);
+        };
+
+        requestAnimationFrame(updateCounter);
+    }
+
+    // Función de easing para animación más suave
+    easeOutCubic(t) {
+        return 1 - Math.pow(1 - t, 3);
+    }
+
+    // Efectos especiales para las estadísticas
+    addStatsEffects() {
+        const statItems = document.querySelectorAll('.stat-item');
+        
+        statItems.forEach((item, index) => {
+            setTimeout(() => {
+                item.style.transform = 'translateY(-5px) scale(1.05)';
+                item.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.2)';
+                
+                // Restaurar después de la animación
+                setTimeout(() => {
+                    item.style.transform = '';
+                    item.style.boxShadow = '';
+                }, 600);
+            }, index * 200);
+        });
     }
 
     /* ===== BARRAS DE PROGRESO ÉPICAS ===== */
@@ -981,11 +1075,6 @@ document.body.style.opacity = '1';
 document.body.style.visibility = 'visible';
 
 // Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    new ContactanosManager();
-});
-
-// También inicializar si el DOM ya está cargado
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
         new ContactanosManager();

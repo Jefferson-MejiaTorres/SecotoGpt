@@ -715,34 +715,43 @@ class HeaderManager {
   }
   /* ===== NAVEGACIÓN Y SCROLL ===== */
   initializeNavigation() {
-    // Links de navegación con scroll suave (solo mantenemos efectos visuales)
-    const navLinks = document.querySelectorAll('a[href^="#"]');
-    
+    const navLinks = document.querySelectorAll('.nav-modern-link, .mobile-nav-link');
+    const currentPage = this.getCurrentPageName();
+
     navLinks.forEach(link => {
-      const targetId = link.getAttribute('href');
-      
-      // Solo aplicar funcionalidad de scroll a secciones que SÍ deben mantenerla
-      // Excluir: inicio, historia, contacto (para futuras páginas propias)
-      if (!['#inicio', '#historia', '#contacto'].includes(targetId)) {
-        link.addEventListener('click', (e) => {
+      const linkPage = link.dataset.page;
+
+      if (linkPage === currentPage) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+
+      link.addEventListener('click', (e) => {
+        // No prevenir el comportamiento por defecto para la navegación estándar
+        // Si el enlace es la página actual, y es un enlace de anclaje (#), entonces sí prevenir y scrollear
+        if (linkPage === currentPage && link.getAttribute('href').includes('#')) {
           e.preventDefault();
+          const targetId = link.getAttribute('href');
           const targetElement = document.querySelector(targetId);
-          
           if (targetElement) {
             this.smoothScrollTo(targetElement);
-            this.updateActiveNavLink(targetId);
-            this.addNavClickEffect(link);
           }
-        });
-      } else {
-        // Para los botones que van a páginas propias, solo prevenimos comportamiento por ahora
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          // TODO: Aquí se añadirá navegación a páginas propias en el futuro
-          console.log(`Navegación a ${targetId} deshabilitada temporalmente para futuras páginas propias`);
-        });
-      }
-      
+        } else if (link.getAttribute('href') === window.location.pathname + window.location.search + window.location.hash) {
+           // Si es exactamente el mismo enlace en el que ya estamos, recargamos la página.
+           // Esto soluciona el problema de no poder hacer clic de nuevo en el enlace de la página actual.
+           // e.preventDefault(); // No es necesario prevenir, el comportamiento por defecto es recargar o ir al ancla.
+           // window.location.reload(); // Forzar recarga puede ser muy agresivo, el comportamiento por defecto es mejor.
+        }
+        
+        this.addNavClickEffect(link);
+        if (link.classList.contains('mobile-nav-link')) {
+          setTimeout(() => {
+            this.closeMobileMenu();
+          }, 200);
+        }
+      });
+
       // Efectos de hover mejorados (mantener para todos)
       link.addEventListener('mouseenter', () => {
         this.addNavHoverEffect(link);
@@ -752,9 +761,27 @@ class HeaderManager {
         this.removeNavHoverEffect(link);
       });
     });
-    
-    // Navegación activa basada en scroll (mantener)
-    this.initializeScrollSpy();
+
+    // Navegación activa basada en scroll (mantener para secciones internas si aplica)
+    // Considera si esto sigue siendo necesario o si interfiere con la nueva lógica de páginas
+    // this.initializeScrollSpy(); 
+  }
+
+  getCurrentPageName() {
+    const path = window.location.pathname;
+    // Normalizar la ruta eliminando las barras iniciales/finales y dividiendo por '/'
+    const pathSegments = path.replace(/^\/|\/$/g, '').split('/');
+    const pageNameWithExtension = pathSegments.pop(); // Obtener el último segmento (nombre del archivo)
+    const pageName = pageNameWithExtension.split('.')[0]; // Quitar la extensión .html
+
+    if (pageName === 'PrincipalContactano') {
+      return 'contactanos';
+    } else if (pageName === 'PrincipalHistoria') {
+      return 'historia';
+    } else if (pageName === 'secotogpt' || pageName === '' || pageName === 'index') { // Asumir que '', 'secotogpt' o 'index' es la página de inicio
+      return 'inicio';
+    }
+    return pageName; // Devolver el nombre de la página si no coincide con los casos especiales
   }
 
   addNavClickEffect(link) {
@@ -820,60 +847,65 @@ class HeaderManager {
     });
   }
 
-  updateActiveNavLink(targetId) {
-    // Remover clase active de todos los links modernos
-    document.querySelectorAll('.nav-modern-link').forEach(link => {
+  updateActiveNavLink(targetIdOrPage) {
+    const isPageNavigation = !targetIdOrPage.startsWith('#');
+    const currentPage = this.getCurrentPageName();
+
+    document.querySelectorAll('.nav-modern-link, .mobile-nav-link').forEach(link => {
       link.classList.remove('active');
-      
-      // Animación de salida suave
       const indicator = link.querySelector('.nav-indicator');
       if (indicator) {
         indicator.style.transform = 'translateX(-50%) scaleX(0)';
       }
-    });
-    
-    // Agregar clase active al link correspondiente
-    const activeLink = document.querySelector(`a[href="${targetId}"].nav-modern-link`);
-    if (activeLink) {
-      activeLink.classList.add('active');
-      
-      // Animación de entrada para el indicador
-      const indicator = activeLink.querySelector('.nav-indicator');
-      if (indicator) {
-        setTimeout(() => {
-          indicator.style.transform = 'translateX(-50%) scaleX(1)';
-        }, 100);
+
+      const linkPage = link.dataset.page;
+      if (isPageNavigation) {
+        if (linkPage === targetIdOrPage) {
+          link.classList.add('active');
+          if (indicator) {
+            setTimeout(() => {
+              indicator.style.transform = 'translateX(-50%) scaleX(1)';
+            }, 100);
+          }
+          this.addActivePulseEffect(link);
+        }
+      } else { // Navegación por scroll (secciones internas)
+        if (link.getAttribute('href') === targetIdOrPage && linkPage === currentPage) {
+            link.classList.add('active');
+            if (indicator) {
+                setTimeout(() => {
+                    indicator.style.transform = 'translateX(-50%) scaleX(1)';
+                }, 100);
+            }
+            this.addActivePulseEffect(link);
+        }
       }
-      
-      // Efecto de pulso suave
-      this.addActivePulseEffect(activeLink);
-    }
+    });
   }
 
-  addActivePulseEffect(link) {
-    link.style.animation = 'none';
-    setTimeout(() => {
-      link.style.animation = 'activeGlow 3s ease-in-out infinite';
-    }, 10);
-  }
   initializeScrollSpy() {
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-modern-link[href^="#"]');
-    
+    // const navLinks = document.querySelectorAll('.nav-modern-link[href^="#"]'); // Comentado o ajustado
+    const currentPage = this.getCurrentPageName();
+
     if (sections.length === 0) return;
-    
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const targetId = `#${entry.target.id}`;
-          this.updateActiveNavLink(targetId);
+          // Solo actualizar el enlace activo si la sección pertenece a la página actual
+          const activeLinkForSection = document.querySelector(`.nav-modern-link[href="${targetId}"][data-page="${currentPage}"], .mobile-nav-link[href="${targetId}"][data-page="${currentPage}"]`);
+          if (activeLinkForSection) {
+             this.updateActiveNavLink(targetId);
+          }
         }
       });
     }, {
       threshold: 0.3,
       rootMargin: '-80px 0px -80px 0px'
     });
-    
+
     sections.forEach(section => observer.observe(section));
   }
 
