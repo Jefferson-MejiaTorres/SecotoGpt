@@ -1,0 +1,198 @@
+/* ===== ESTILOS ESPECÍFICOS PÁGINA GESTIÓN DE MEMORIA ===== */
+/* Diseño moderno con animaciones y efectos específicos para memoria */
+
+/* ===== VARIABLES CSS ===== */
+:root {
+  /* Colores específicos para memoria */
+  --memory-primary: #198754;
+  --memory-secondary: #20c997;
+  --memory-accent: #0dcaf0;
+  --memory-gradient: linear-gradient(135deg, #198754 0%, #20c997 100%);
+  
+  /* Efectos y sombras */
+  --memory-glow: 0 0 20px rgba(25, 135, 84, 0.3);
+  --memory-shadow: 0 4px 15px rgba(25, 135, 84, 0.2);
+}
+
+/* Modo oscuro */
+.dark {
+  --memory-primary: #25a167;
+  --memory-secondary: #26d0ce;
+  --memory-accent: #17e2f7;
+}
+
+/* ===== ESTILOS GLOBALES ===== */
+body.gestionmemoria-page {
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+}
+
+/* ===== HERO SECTION ===== */
+.hero-section {
+  background: var(--memory-gradient);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="10" y="10" width="20" height="20" fill="rgba(255,255,255,0.1)"/><rect x="40" y="40" width="20" height="20" fill="rgba(255,255,255,0.08)"/><rect x="70" y="10" width="20" height="20" fill="rgba(255,255,255,0.12)"/></svg>') repeat;
+  opacity: 0.3;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-section h1 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== SECCIÓN DE CONCEPTOS ===== */
+.concepts-section {
+  padding: 4rem 0;
+}
+
+.concepts-section .card {
+  transition: all 0.3s ease;
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+}
+
+.concepts-section .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--memory-gradient);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.concepts-section .card:hover::before {
+  transform: scaleX(1);
+}
+
+.concepts-section .card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--memory-shadow);
+}
+
+.concepts-section .card-body {
+  padding: 2rem;
+}
+
+.concepts-section .bi {
+  transition: all 0.3s ease;
+}
+
+.concepts-section .card:hover .bi {
+  transform: scale(1.1) rotateY(180deg);
+  filter: drop-shadow(var(--memory-glow));
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes memoryPulse {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes memorySlide {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.concepts-section .card:nth-child(1),
+.concepts-section .card:nth-child(4) {
+  animation: memoryPulse 4s ease-in-out infinite;
+}
+
+.concepts-section .card:nth-child(2),
+.concepts-section .card:nth-child(5) {
+  animation: memoryPulse 4s ease-in-out infinite 1s;
+}
+
+.concepts-section .card:nth-child(3),
+.concepts-section .card:nth-child(6) {
+  animation: memoryPulse 4s ease-in-out infinite 2s;
+}
+
+/* ===== EFECTOS ESPECÍFICOS DE MEMORIA ===== */
+.memory-highlight {
+  background: var(--memory-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+}
+
+.memory-bar {
+  height: 20px;
+  background: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+
+.memory-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 75%;
+  background: var(--memory-gradient);
+  border-radius: 10px;
+  animation: memorySlide 3s ease-in-out infinite;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+  
+  .concepts-section .card-body {
+    padding: 1.5rem;
+  }
+}
+
+/* ===== LOADING STATES ===== */
+.component-loading .hero-section {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.component-loading .concepts-section {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+/* Una vez cargado */
+body:not(.component-loading) .hero-section {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.8s ease;
+}
+
+body:not(.component-loading) .concepts-section {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 1s ease 0.3s;
+}

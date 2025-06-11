@@ -101,10 +101,9 @@ class ComponentLoader {
     if (homeLink) {
       homeLink.href = this.basePath + 'secotogpt.html';
     }
-    
-    const systemsLink = headerElement.querySelector('a[href*="sistemas_operativos.html"]');
+      const systemsLink = headerElement.querySelector('a[href*="SistemasOperativos"]');
     if (systemsLink) {
-      systemsLink.href = this.basePath + 'src/paginas/sistemas_operativos.html';
+      systemsLink.href = this.basePath + 'src/paginas/SistemasOperativos/PrincipalSistemasOperativos.html';
     }
     
     console.log('✅ Rutas del header configuradas');

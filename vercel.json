@@ -6,22 +6,21 @@
     {
       "source": "/",
       "destination": "/secotogpt.html"
-    },
-    {
+    },    {
       "source": "/gestion-procesos",
-      "destination": "/src/paginas/gestion_procesos.html"
+      "destination": "/src/paginas/GestionProcesos/PrincipalGestionProcesos.html"
     },
     {
       "source": "/sistemas-operativos", 
-      "destination": "/src/paginas/sistemas_operativos.html"
+      "destination": "/src/paginas/SistemasOperativos/PrincipalSistemasOperativos.html"
     },
     {
       "source": "/gestion-memoria",
-      "destination": "/src/paginas/gestion_memoria.html"
+      "destination": "/src/paginas/GestionMemoria/PrincipalGestionMemoria.html"
     },
     {
       "source": "/gestion-almacenamiento",
-      "destination": "/src/paginas/gestion_almacenamiento.html"
+      "destination": "/src/paginas/GestionAlmacenamiento/PrincipalGestionAlmacenamiento.html"
     }
   ],
   "headers": [

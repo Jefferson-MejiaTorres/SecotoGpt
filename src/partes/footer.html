@@ -1,7 +1,8 @@
 <!-- Footer Component Moderno Responsive -->
 <footer class="footer-modern">
   <div class="container-fluid px-lg-5">
-    <div class="footer-content">      <!-- Sección superior centrada verticalmente -->
+    <div class="footer-content">
+      <!-- Sección superior centrada verticalmente -->
       <div class="footer-copyright-top">
         <div class="copyright-container-vertical">
           <!-- Logo del Footer centrado -->
@@ -41,22 +42,30 @@
                class="social-link social-github" 
                target="_blank" 
                rel="noopener noreferrer"
+               title="Ver en GitHub"
                aria-label="GitHub Repository">
-              <i class="bi bi-github"></i>
+              <i class="bi bi-github" aria-hidden="true"></i>
+              <span class="visually-hidden">GitHub</span>
             </a>
             <a href="mailto:secotogpt@universidad.edu" 
                class="social-link social-email"
+               title="Enviar email"
                aria-label="Contacto por Email">
-              <i class="bi bi-envelope-fill"></i>
+              <i class="bi bi-envelope-fill" aria-hidden="true"></i>
+              <span class="visually-hidden">Email</span>
             </a>
-            <a href="#" 
-               class="social-link social-university"
-               aria-label="Portal Universitario">
-              <i class="bi bi-mortarboard-fill"></i>
+            <a href="https://secoto-gpt.vercel.app" 
+               class="social-link social-web" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               title="Sitio web"
+               aria-label="Sitio web">
+              <i class="bi bi-globe" aria-hidden="true"></i>
+              <span class="visually-hidden">Sitio web</span>
             </a>
           </div>
         </div>
-      </div><!-- Secciones del Footer con iconos centrados y contenido desplegable -->
+      </div>      <!-- Secciones del Footer con iconos centrados y contenido desplegable -->
       <div class="footer-sections">
         <!-- Iconos centrados y alineados horizontalmente -->
         <div class="footer-icons-row">
@@ -102,9 +111,13 @@
                 <i class="bi bi-house-fill"></i>
                 <span>Página Principal</span>
               </a>
-              <a href="#historia" class="footer-dropdown-link">
+              <a href="./src/PaginaPrincipal/PaginaSecundarias/Historia/PrincipalHistoria.html" class="footer-dropdown-link">
                 <i class="bi bi-clock-history"></i>
-                <span>Historia de Sistemas</span>
+                <span>Historia Tecnológica</span>
+              </a>
+              <a href="./src/PaginaPrincipal/PaginaSecundarias/Contactanos/PrincipalContactano.html" class="footer-dropdown-link">
+                <i class="bi bi-envelope-heart"></i>
+                <span>Contáctanos</span>
               </a>
               <div class="footer-dropdown-link footer-info-item">
                 <i class="bi bi-book"></i>
@@ -124,21 +137,21 @@
           <!-- Módulos de Estudio -->
           <div class="footer-dropdown-section" id="modulos-content" data-section="modulos">
             <div class="footer-dropdown-grid">
-              <a href="./src/paginas/sistemas_operativos.html" class="footer-dropdown-link">
+              <a href="./src/paginas/SistemasOperativos/PrincipalSistemasOperativos.html" class="footer-dropdown-link">
                 <i class="bi bi-cpu"></i>
                 <span>Sistemas Operativos</span>
               </a>
-              <a href="./src/paginas/gestion_procesos.html" class="footer-dropdown-link">
+              <a href="./src/paginas/GestionProcesos/PrincipalGestionProcesos.html" class="footer-dropdown-link">
                 <i class="bi bi-diagram-3"></i>
                 <span>Gestión de Procesos</span>
               </a>
-              <a href="./src/paginas/gestion_memoria.html" class="footer-dropdown-link">
+              <a href="./src/paginas/GestionMemoria/PrincipalGestionMemoria.html" class="footer-dropdown-link">
                 <i class="bi bi-memory"></i>
                 <span>Gestión de Memoria</span>
               </a>
-              <a href="./src/paginas/gestion_almacenamiento.html" class="footer-dropdown-link">
+              <a href="./src/paginas/GestionAlmacenamiento/PrincipalGestionAlmacenamiento.html" class="footer-dropdown-link">
                 <i class="bi bi-hdd-stack"></i>
-                <span>Sistemas de Archivos</span>
+                <span>Gestión de Almacenamiento</span>
               </a>
             </div>
           </div>
@@ -158,9 +171,9 @@
                 <i class="bi bi-github"></i>
                 <span>Repositorio GitHub</span>
               </a>
-              <a href="https://github.com/Jefferson-MejiaTorres/SecotoGpt/blob/main/LICENSE" class="footer-dropdown-link" target="_blank" rel="noopener noreferrer">
-                <i class="bi bi-code-square"></i>
-                <span>Licencia Open Source</span>
+              <a href="https://secoto-gpt.vercel.app" class="footer-dropdown-link" target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-globe"></i>
+                <span>Sitio Web</span>
               </a>
             </div>
           </div>
@@ -199,7 +212,7 @@
               </div>
               <div class="info-item">
                 <i class="bi bi-speedometer2 info-icon"></i>
-                <span>Carga: 1147ms</span>
+                <span>Optimizado</span>
               </div>
               <div class="info-item">
                 <i class="bi bi-clock info-icon"></i>

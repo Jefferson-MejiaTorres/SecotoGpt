@@ -92,12 +92,12 @@ class UtilsPaginaPrincipal {
         
         // Reducir repaints
         this.optimizeScrollHandlers();
-    }
-
-    preloadCriticalPages() {
+    }    preloadCriticalPages() {
         const criticalPages = [
-            './src/paginas/sistemas_operativos.html',
-            './src/paginas/gestion_procesos.html'
+            './src/paginas/SistemasOperativos/PrincipalSistemasOperativos.html',
+            './src/paginas/GestionProcesos/PrincipalGestionProcesos.html',
+            './src/paginas/GestionMemoria/PrincipalGestionMemoria.html',
+            './src/paginas/GestionAlmacenamiento/PrincipalGestionAlmacenamiento.html'
         ];
 
         criticalPages.forEach(page => {

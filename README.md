@@ -114,10 +114,22 @@ SecotoGpt/
 │   │   ├── 🔧 bootstrap-fixes.css # Correcciones Bootstrap
 │   │   └── 🎨 principal.css   # Estilos principales
 │   ├── 📁 paginas/            # Páginas del sitio
-│   │   ├── 🖥️ sistemas_operativos.html
-│   │   ├── ⚙️ gestion_procesos.html
-│   │   ├── 🧠 gestion_memoria.html
-│   │   └── 💾 gestion_almacenamiento.html
+│   │   ├── 🖥️ SistemasOperativos/
+│   │   │   ├── PrincipalSistemasOperativos.html
+│   │   │   ├── estilos/PrincipalSistemasOperativos.css
+│   │   │   └── js/PrincipalSistemasOperativos.js
+│   │   ├── ⚙️ GestionProcesos/
+│   │   │   ├── PrincipalGestionProcesos.html
+│   │   │   ├── estilos/PrincipalGestionProcesos.css
+│   │   │   └── js/PrincipalGestionProcesos.js
+│   │   ├── 🧠 GestionMemoria/
+│   │   │   ├── PrincipalGestionMemoria.html
+│   │   │   ├── estilos/PrincipalGestionMemoria.css
+│   │   │   └── js/PrincipalGestionMemoria.js
+│   │   └── 💾 GestionAlmacenamiento/
+│   │       ├── PrincipalGestionAlmacenamiento.html
+│   │       ├── estilos/PrincipalGestionAlmacenamiento.css
+│   │       └── js/PrincipalGestionAlmacenamiento.js
 │   └── 📁 utils/              # Utilidades
 │       └── 🛠️ utilidades.js   # Funciones helper
 └── 📁 .vscode/                # Configuración VS Code

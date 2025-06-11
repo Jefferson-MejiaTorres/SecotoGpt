@@ -187,28 +187,27 @@ class HeaderManager {
       {
         title: "Sistemas Operativos",
         description: "Descubre los fundamentos de los sistemas operativos modernos, desde kernels hasta interfaces de usuario.",
-        url: "/src/paginas/sistemas_operativos.html",
+        url: "/src/paginas/SistemasOperativos/PrincipalSistemasOperativos.html",
         type: "page",
         tags: "os kernel windows linux unix macos sistema operativo"
-      },
-      {
+      },      {
         title: "Gestión de Procesos",
         description: "Aprende sobre planificación, sincronización y comunicación entre procesos en sistemas operativos.",
-        url: "/src/paginas/gestion_procesos.html",
+        url: "/src/paginas/GestionProcesos/PrincipalGestionProcesos.html",
         type: "page",
         tags: "procesos threads scheduling planificador sincronizacion"
       },
       {
         title: "Gestión de Memoria",
         description: "Explora las técnicas de administración de memoria virtual, paginación y segmentación.",
-        url: "/src/paginas/gestion_memoria.html",
+        url: "/src/paginas/GestionMemoria/PrincipalGestionMemoria.html",
         type: "page",
         tags: "memoria ram virtual paginacion segmentacion heap stack"
       },
       {
         title: "Gestión de Almacenamiento",
         description: "Comprende los sistemas de archivos, dispositivos de almacenamiento y técnicas de gestión de datos.",
-        url: "/src/paginas/gestion_almacenamiento.html",
+        url: "/src/paginas/GestionAlmacenamiento/PrincipalGestionAlmacenamiento.html",
         type: "page",
         tags: "archivos storage filesystem disco ssd hdd"
       },
@@ -231,28 +230,28 @@ class HeaderManager {
       {
         title: "Kernel del Sistema Operativo",
         description: "El núcleo que gestiona recursos del hardware y provee servicios a las aplicaciones",
-        url: "/src/paginas/sistemas_operativos.html#kernel",
+        url: "/src/paginas/SistemasOperativos\PrincipalSistemasOperativos.html",
         type: "content",
         tags: "kernel nucleo hardware drivers"
       },
       {
         title: "Algoritmos de Planificación",
         description: "Técnicas para asignar tiempo de CPU a diferentes procesos de manera eficiente",
-        url: "/src/paginas/gestion_procesos.html#planificacion",
+        url: "/src/paginas/GestionProcesos/PrincipalGestionProcesos.html#planificacion",
         type: "content",
         tags: "algoritmos scheduling fifo sjf round robin"
       },
       {
         title: "Memoria Virtual",
         description: "Sistema que permite que los programas utilicen más memoria de la físicamente disponible",
-        url: "/src/paginas/gestion_memoria.html#virtual",
+        url: "/src/paginas/GestionMemoria/PrincipalGestionMemoria.html#virtual",
         type: "content",
         tags: "virtual memory swap paging"
       },
       {
         title: "Sistemas de Archivos",
         description: "Estructuras para organizar y almacenar archivos en dispositivos de almacenamiento",
-        url: "/src/paginas/gestion_almacenamiento.html#filesystem",
+        url: "/src/paginas/GestionAlmacenamiento/PrincipalGestionAlmacenamiento.html#filesystem",
         type: "content",
         tags: "filesystem fat ntfs ext4 archivos"
       }
@@ -485,10 +484,9 @@ class HeaderManager {
         <div class="search-suggestions-quick">
           <p class="quick-suggestions-title">Te sugerimos explorar:</p>
           <div class="quick-suggestions-list">
-            <button class="quick-suggestion-btn" data-query="sistemas operativos" data-url="./src/paginas/sistemas_operativos.html">📱 Sistemas Operativos</button>
-            <button class="quick-suggestion-btn" data-query="procesos" data-url="./src/paginas/gestion_procesos.html">⚙️ Gestión de Procesos</button>
-            <button class="quick-suggestion-btn" data-query="memoria" data-url="./src/paginas/gestion_memoria.html">💾 Gestión de Memoria</button>
-            <button class="quick-suggestion-btn" data-query="almacenamiento" data-url="./src/paginas/gestion_almacenamiento.html">💿 Gestión de Almacenamiento</button>
+            <button class="quick-suggestion-btn" data-query="sistemas operativos" data-url="./src/paginas/SistemasOperativos/PrincipalSistemasOperativos.html">📱 Sistemas Operativos</button>            <button class="quick-suggestion-btn" data-query="procesos" data-url="./src/paginas/GestionProcesos/PrincipalGestionProcesos.html">⚙️ Gestión de Procesos</button>
+            <button class="quick-suggestion-btn" data-query="memoria" data-url="./src/paginas/GestionMemoria/PrincipalGestionMemoria.html">💾 Gestión de Memoria</button>
+            <button class="quick-suggestion-btn" data-query="almacenamiento" data-url="./src/paginas/GestionAlmacenamiento/PrincipalGestionAlmacenamiento.html">💿 Gestión de Almacenamiento</button>
           </div>
         </div>
       </div>
