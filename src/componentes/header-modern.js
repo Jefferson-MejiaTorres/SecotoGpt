@@ -12,6 +12,7 @@ class HeaderManager {
     this.searchCache = new Map();
     this.debounceTimer = null;
     this.mobileMenuOpen = false;
+    this.activeSearchInput = null; // Nuevo: para trackear cuál input está activo
     
     // Configuración
     this.config = {
@@ -31,7 +32,8 @@ class HeaderManager {
       this.initializeElements();
       this.initializeSearch();
       this.initializeMobileMenu();
-      this.initializeNavigation();      this.initializeScrollEffects();
+      this.initializeNavigation();
+      this.initializeScrollEffects();
       this.initializeAccessibility();
       this.loadSearchData();
       
@@ -64,12 +66,19 @@ class HeaderManager {
     this.mobileSearchInput = document.getElementById('mobileSearchInput');
     this.searchSuggestions = document.getElementById('searchSuggestions');
     
+    // Crear sugerencias móviles si no existe
+    this.mobileSearchSuggestions = document.getElementById('mobileSearchSuggestions');
+    if (!this.mobileSearchSuggestions && this.mobileSearchInput) {
+      this.createMobileSearchSuggestions();
+    }
+    
     // Validar elementos críticos
     if (!this.header || !this.mainSearchInput) {
       throw new Error('Elementos críticos del header no encontrados');
     }
   }
-  /* ===== FUNCIONALIDAD DE BÚSQUEDA AVANZADA ===== */
+
+  /* ===== FUNCIONALIDAD DE BÚSQUEDA UNIFICADA ===== */
 
   initializeSearch() {
     if (!this.mainSearchInput) return;
@@ -83,21 +92,131 @@ class HeaderManager {
     }
     
     // Configurar sugerencias
-    this.setupSearchSuggestions();    // Cerrar sugerencias al hacer click fuera (con mejor control)
+    this.setupSearchSuggestions();
+    
+    // Cerrar sugerencias al hacer click fuera (con mejor control)
     document.addEventListener('click', (e) => {
-      // Solo ocultar si no está haciendo clic en elementos relacionados con la búsqueda
       const isSearchElement = e.target.closest('.search-wrapper') || 
                              e.target.closest('.search-suggestions') ||
+                             e.target.closest('.mobile-search-suggestions') ||
                              e.target.closest('.suggestion-item') ||
                              e.target.closest('.quick-suggestion-btn') ||
                              e.target.closest('.default-suggestions');
       
       if (!isSearchElement) {
         setTimeout(() => {
-          this.hideSearchSuggestions();
+          this.hideAllSearchSuggestions();
         }, 100);
       }
     });
+  }
+
+  createMobileSearchSuggestions() {
+    // Crear contenedor de sugerencias para móvil
+    const mobileSearchWrapper = this.mobileSearchInput.closest('.search-wrapper') || this.mobileSearchInput.parentElement;
+    
+    const mobileSuggestions = document.createElement('div');
+    mobileSuggestions.id = 'mobileSearchSuggestions';
+    mobileSuggestions.className = 'search-suggestions mobile-search-suggestions d-none';
+    mobileSuggestions.innerHTML = `
+      <div class="search-suggestions-content"></div>
+    `;
+    
+    // Insertar después del wrapper de búsqueda móvil
+    mobileSearchWrapper.parentNode.insertBefore(mobileSuggestions, mobileSearchWrapper.nextSibling);
+    this.mobileSearchSuggestions = mobileSuggestions;
+  }
+
+  setupSearchInput(input, type) {
+    const wrapper = input.closest('.search-wrapper') || input.parentElement;
+    const clearBtn = wrapper.querySelector('.search-clear-btn');
+    const loadingIndicator = wrapper.querySelector('.search-loading');
+
+    // Evento de entrada con debounce
+    input.addEventListener('input', (e) => {
+      const query = e.target.value.trim();
+      
+      // Establecer el input activo
+      this.activeSearchInput = input;
+      
+      // Mostrar/ocultar botón de limpiar
+      if (clearBtn) {
+        clearBtn.classList.toggle('d-none', !query);
+      }
+
+      // Sincronizar con el otro input
+      this.syncSearchInputs(input, query);
+
+      // Búsqueda con debounce
+      clearTimeout(this.debounceTimer);
+      this.debounceTimer = setTimeout(() => {
+        this.performSearch(query, type);
+      }, this.config.searchDebounceTime);
+    });
+
+    // Eventos de focus/blur
+    input.addEventListener('focus', () => {
+      this.activeSearchInput = input;
+      wrapper.classList.add('search-focused');
+      
+      if (input.value.trim()) {
+        this.showSearchSuggestions(type);
+      } else {
+        this.showDefaultSuggestions(type);
+      }
+    });
+
+    input.addEventListener('blur', () => {
+      setTimeout(() => {
+        wrapper.classList.remove('search-focused');
+      }, 500);
+    });
+
+    // Navegación por teclado
+    input.addEventListener('keydown', (e) => {
+      this.handleSearchKeyNavigation(e, type);
+    });
+
+    // Botón de limpiar
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        this.clearSearch(input, type);
+      });
+    }
+
+    // Efectos visuales
+    input.addEventListener('focus', () => {
+      input.parentElement.style.transform = 'translateY(-1px)';
+    });
+
+    input.addEventListener('blur', () => {
+      input.parentElement.style.transform = 'translateY(0)';
+    });
+  }
+
+  syncSearchInputs(sourceInput, query) {
+    // Sincronizar el valor entre los inputs de búsqueda
+    if (sourceInput === this.mainSearchInput && this.mobileSearchInput) {
+      this.mobileSearchInput.value = query;
+    } else if (sourceInput === this.mobileSearchInput && this.mainSearchInput) {
+      this.mainSearchInput.value = query;
+    }
+  }
+
+  clearSearch(input, type) {
+    // Limpiar ambos inputs
+    if (this.mainSearchInput) this.mainSearchInput.value = '';
+    if (this.mobileSearchInput) this.mobileSearchInput.value = '';
+    
+    // Enfocar el input actual
+    input.focus();
+    
+    // Ocultar botones de limpiar
+    const clearBtns = document.querySelectorAll('.search-clear-btn');
+    clearBtns.forEach(btn => btn.classList.add('d-none'));
+    
+    this.hideAllSearchSuggestions();
+    this.clearSearchResults();
   }
 
   loadSearchData() {
@@ -107,28 +226,28 @@ class HeaderManager {
       {
         title: "Sistemas Operativos",
         description: "Descubre los fundamentos de los sistemas operativos modernos, desde kernels hasta interfaces de usuario.",
-        url: "./src/paginas/sistemas_operativos.html",
+        url: "/src/paginas/sistemas_operativos.html",
         type: "page",
         tags: "os kernel windows linux unix macos sistema operativo"
       },
       {
         title: "Gestión de Procesos",
         description: "Aprende sobre planificación, sincronización y comunicación entre procesos en sistemas operativos.",
-        url: "./src/paginas/gestion_procesos.html",
+        url: "/src/paginas/gestion_procesos.html",
         type: "page",
         tags: "procesos threads scheduling planificador sincronizacion"
       },
       {
         title: "Gestión de Memoria",
         description: "Explora las técnicas de administración de memoria virtual, paginación y segmentación.",
-        url: "./src/paginas/gestion_memoria.html",
+        url: "/src/paginas/gestion_memoria.html",
         type: "page",
         tags: "memoria ram virtual paginacion segmentacion heap stack"
       },
       {
         title: "Gestión de Almacenamiento",
         description: "Comprende los sistemas de archivos, dispositivos de almacenamiento y técnicas de gestión de datos.",
-        url: "./src/paginas/gestion_almacenamiento.html",
+        url: "/src/paginas/gestion_almacenamiento.html",
         type: "page",
         tags: "archivos storage filesystem disco ssd hdd"
       },
@@ -136,14 +255,14 @@ class HeaderManager {
       {
         title: "Historia de la Tecnología",
         description: "Un recorrido por los hitos más importantes que han transformado la computación moderna",
-        url: "#historia",
+        url: "/src/PaginaPrincipal/PaginaSecundarias/Historia/PrincipalHistoria.html",
         type: "section",
         tags: "historia evolucion mainframe pc"
       },
       {
-        title: "Contacto",
+        title: "Contáctanos",
         description: "¿Preguntas sobre plataformas tecnológicas? Nuestro equipo está aquí para ayudarte",
-        url: "#contacto",
+        url: "/src/PaginaPrincipal/PaginaSecundarias/Contactanos/PrincipalContactano.html",
         type: "section",
         tags: "contacto email universidad ayuda"
       },
@@ -151,40 +270,40 @@ class HeaderManager {
       {
         title: "Kernel del Sistema Operativo",
         description: "El núcleo que gestiona recursos del hardware y provee servicios a las aplicaciones",
-        url: "./src/paginas/sistemas_operativos.html#kernel",
+        url: "/src/paginas/sistemas_operativos.html#kernel",
         type: "content",
         tags: "kernel nucleo hardware drivers"
       },
       {
         title: "Algoritmos de Planificación",
         description: "Técnicas para asignar tiempo de CPU a diferentes procesos de manera eficiente",
-        url: "./src/paginas/gestion_procesos.html#planificacion",
+        url: "/src/paginas/gestion_procesos.html#planificacion",
         type: "content",
         tags: "algoritmos scheduling fifo sjf round robin"
       },
       {
         title: "Memoria Virtual",
         description: "Sistema que permite que los programas utilicen más memoria de la físicamente disponible",
-        url: "./src/paginas/gestion_memoria.html#virtual",
+        url: "/src/paginas/gestion_memoria.html#virtual",
         type: "content",
         tags: "virtual memory swap paging"
       },
       {
         title: "Sistemas de Archivos",
         description: "Estructuras para organizar y almacenar archivos en dispositivos de almacenamiento",
-        url: "./src/paginas/gestion_almacenamiento.html#filesystem",
+        url: "/src/paginas/gestion_almacenamiento.html#filesystem",
         type: "content",
         tags: "filesystem fat ntfs ext4 archivos"
-      }    ];
+      }
+    ];
   }
 
-  showDefaultSuggestions() {
-    if (!this.searchSuggestions) return;
+  showDefaultSuggestions(type = 'desktop') {
+    const suggestionsContainer = this.getSuggestionsContainer(type);
+    if (!suggestionsContainer) return;
 
-    // Mostrar solo las 4 páginas principales
     const mainPages = this.searchData.filter(item => item.type === 'page');
-    
-    const suggestionsContent = this.searchSuggestions.querySelector('.search-suggestions-content');
+    const suggestionsContent = suggestionsContainer.querySelector('.search-suggestions-content');
     if (!suggestionsContent) return;
 
     if (mainPages.length === 0) {
@@ -211,128 +330,72 @@ class HeaderManager {
       `;
     }
 
-    this.showSearchSuggestions();
-    this.attachSuggestionEvents();
+    this.showSearchSuggestions(type);
+    this.attachSuggestionEvents(type);
+  }
+
+  getSuggestionsContainer(type) {
+    return type === 'mobile' ? this.mobileSearchSuggestions : this.searchSuggestions;
   }
 
   setupSearchSuggestions() {
-    if (!this.searchSuggestions) return;
+    // Configurar sugerencias para desktop
+    if (this.searchSuggestions) {
+      this.configureSearchSuggestionsContainer(this.searchSuggestions);
+    }
     
-    // Configurar atributos de accesibilidad
-    this.searchSuggestions.setAttribute('role', 'listbox');
-    this.searchSuggestions.setAttribute('aria-hidden', 'true');
+    // Configurar sugerencias para móvil
+    if (this.mobileSearchSuggestions) {
+      this.configureSearchSuggestionsContainer(this.mobileSearchSuggestions);
+    }
+  }
+
+  configureSearchSuggestionsContainer(container) {
+    container.setAttribute('role', 'listbox');
+    container.setAttribute('aria-hidden', 'true');
     
-    // Configurar contenedor de sugerencias
-    const suggestionsContent = this.searchSuggestions.querySelector('.search-suggestions-content');
+    const suggestionsContent = container.querySelector('.search-suggestions-content');
     if (suggestionsContent) {
       suggestionsContent.setAttribute('role', 'list');
     }
     
     // Inicializar como oculto
-    this.hideSearchSuggestions();
+    container.classList.add('d-none');
   }
 
-  setupSearchInput(input, type) {
-    const wrapper = input.closest('.search-wrapper') || input.parentElement;
-    const clearBtn = wrapper.querySelector('.search-clear-btn');
-    const loadingIndicator = wrapper.querySelector('.search-loading');
-
-    // Evento de entrada con debounce
-    input.addEventListener('input', (e) => {
-      const query = e.target.value.trim();
-      
-      // Mostrar/ocultar botón de limpiar
-      if (clearBtn) {
-        clearBtn.classList.toggle('d-none', !query);
-      }
-
-      // Búsqueda con debounce
-      clearTimeout(this.debounceTimer);
-      this.debounceTimer = setTimeout(() => {
-        this.performSearch(query, type);
-      }, this.config.searchDebounceTime);
-    });    // Eventos de focus/blur
-    input.addEventListener('focus', () => {
-      wrapper.classList.add('search-focused');
-      if (input.value.trim()) {
-        this.showSearchSuggestions();
-      } else {
-        // Mostrar páginas principales cuando no hay texto
-        this.showDefaultSuggestions();
-      }
-    });    input.addEventListener('blur', () => {
-      // NO ocultar inmediatamente, solo remover el estilo de focused
-      setTimeout(() => {
-        wrapper.classList.remove('search-focused');
-      }, 500); // Mayor delay para permitir clicks en sugerencias
-    });
-
-    // Navegación por teclado
-    input.addEventListener('keydown', (e) => {
-      this.handleSearchKeyNavigation(e);
-    });
-
-    // Botón de limpiar
-    if (clearBtn) {
-      clearBtn.addEventListener('click', () => {
-        input.value = '';
-        input.focus();
-        clearBtn.classList.add('d-none');
-        this.hideSearchSuggestions();
-        this.clearSearchResults();
-      });
-    }    // Efectos visuales
-    input.addEventListener('focus', () => {
-      input.parentElement.style.transform = 'translateY(-1px)';
-    });
-
-    input.addEventListener('blur', () => {
-      input.parentElement.style.transform = 'translateY(0)';
-    });
-  }
   async performSearch(query, type = 'desktop') {
     if (!query) {
-      this.showDefaultSuggestions(); // Mostrar páginas principales cuando no hay búsqueda
+      this.showDefaultSuggestions(type);
       return;
     }
 
-    // Mostrar indicador de carga
-    this.showLoadingIndicator(true);
+    this.showLoadingIndicator(true, type);
 
     try {
-      // Buscar en caché primero
       const cacheKey = query.toLowerCase();
       if (this.searchCache.has(cacheKey)) {
         const results = this.searchCache.get(cacheKey);
-        this.displaySearchResults(results, query);
+        this.displaySearchResults(results, query, type);
         return;
       }
 
-      // Realizar búsqueda
       const results = await this.searchContent(query);
-      
-      // Guardar en caché
       this.searchCache.set(cacheKey, results);
-        // Mostrar resultados
-      this.displaySearchResults(results, query);
-      
-      // Filtrar contenido visible
+      this.displaySearchResults(results, query, type);
       this.filterContent(query);
       
     } catch (error) {
       console.error('Error en búsqueda:', error);
-      this.showSearchError();
+      this.showSearchError(type);
     } finally {
-      this.showLoadingIndicator(false);
+      this.showLoadingIndicator(false, type);
     }
   }
 
   async searchContent(query) {
-    // Simular búsqueda en contenido real
     const searchTerms = query.toLowerCase().split(' ');
     const results = [];
 
-    // Buscar en datos predefinidos
     this.searchData.forEach(item => {
       const score = this.calculateSearchScore(item, searchTerms);
       if (score > 0) {
@@ -340,11 +403,9 @@ class HeaderManager {
       }
     });
 
-    // Buscar en el DOM (contenido visible)
     const domResults = this.searchInDOM(searchTerms);
     results.push(...domResults);
 
-    // Ordenar por relevancia y limitar resultados
     return results
       .sort((a, b) => b.score - a.score)
       .slice(0, this.config.maxSuggestions);
@@ -393,10 +454,11 @@ class HeaderManager {
     return results;
   }
 
-  displaySearchResults(results, query) {
-    if (!this.searchSuggestions) return;
+  displaySearchResults(results, query, type = 'desktop') {
+    const suggestionsContainer = this.getSuggestionsContainer(type);
+    if (!suggestionsContainer) return;
 
-    const suggestionsContent = this.searchSuggestions.querySelector('.search-suggestions-content');
+    const suggestionsContent = suggestionsContainer.querySelector('.search-suggestions-content');
     if (!suggestionsContent) return;
 
     if (results.length === 0) {
@@ -405,12 +467,13 @@ class HeaderManager {
       suggestionsContent.innerHTML = results.map(result => 
         this.createSuggestionHTML(result, query)
       ).join('');
-    }    this.showSearchSuggestions();
-    this.attachSuggestionEvents();
+    }
+
+    this.showSearchSuggestions(type);
+    this.attachSuggestionEvents(type);
   }
 
   filterContent(query) {
-    // Filtrar contenido visible en la página actual (opcional)
     if (!query) return;
     
     const cards = document.querySelectorAll('.card');
@@ -451,7 +514,9 @@ class HeaderManager {
         </div>
       </div>
     `;
-  }  createNoResultsHTML(query) {
+  }
+
+  createNoResultsHTML(query) {
     return `
       <div class="no-results-container">
         <div class="no-results-content">
@@ -489,6 +554,7 @@ class HeaderManager {
     
     return highlightedText;
   }
+
   getSuggestionIcon(type) {
     const icons = {
       'page': 'file-earmark-text',
@@ -507,86 +573,106 @@ class HeaderManager {
     };
     return labels[type] || 'Resultado';
   }
-  attachSuggestionEvents() {
-    const suggestions = this.searchSuggestions.querySelectorAll('.suggestion-item');
-      suggestions.forEach((suggestion, index) => {
+
+  attachSuggestionEvents(type = 'desktop') {
+    const suggestionsContainer = this.getSuggestionsContainer(type);
+    if (!suggestionsContainer) return;
+
+    const suggestions = suggestionsContainer.querySelectorAll('.suggestion-item');
+    
+    suggestions.forEach((suggestion, index) => {
       suggestion.addEventListener('click', (e) => {
         e.preventDefault();
-        e.stopPropagation(); // Prevenir que se propague el evento
-        this.handleSuggestionClick(suggestion);
+        e.stopPropagation();
+        this.handleSuggestionClick(suggestion, type);
       });
 
       suggestion.addEventListener('mouseenter', () => {
-        this.highlightSuggestion(index);
+        this.highlightSuggestion(index, type);
       });
 
-      // Prevenir que las sugerencias se oculten al hacer hover
       suggestion.addEventListener('mousedown', (e) => {
-        e.preventDefault(); // Prevenir que el input pierda el focus
+        e.preventDefault();
       });
-    });    // Manejar sugerencias rápidas
-    const quickSuggestions = this.searchSuggestions.querySelectorAll('.quick-suggestion-btn');
+    });
+
+    const quickSuggestions = suggestionsContainer.querySelectorAll('.quick-suggestion-btn');
     quickSuggestions.forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.preventDefault();
-        e.stopPropagation(); // Prevenir propagación del evento
-        const query = btn.dataset.query;
-        const url = btn.dataset.url;
-        
-        if (url) {
-          // Navegar directamente a la página
-          window.location.href = url;
-        } else {
-          // Buscar el término si no hay URL
-          if (this.mainSearchInput) {
-            this.mainSearchInput.value = query;
-            this.performSearch(query, 'desktop');
-          }
-          if (this.mobileSearchInput) {
-            this.mobileSearchInput.value = query;
-          }
-        }
-        
-        this.hideSearchSuggestions();
+        e.stopPropagation();
+        this.handleQuickSuggestionClick(btn, type);
       });
 
-      // Prevenir que los botones hagan que se pierda el focus
       btn.addEventListener('mousedown', (e) => {
         e.preventDefault();
       });
     });
   }
-  handleSuggestionClick(suggestion) {
-    const type = suggestion.dataset.type;
+
+  handleQuickSuggestionClick(btn, type) {
+    const query = btn.dataset.query;
+    const url = btn.dataset.url;
+    
+    if (url) {
+      window.location.href = url;
+    } else {
+      // Actualizar ambos inputs
+      if (this.mainSearchInput) {
+        this.mainSearchInput.value = query;
+        this.performSearch(query, 'desktop');
+      }
+      if (this.mobileSearchInput) {
+        this.mobileSearchInput.value = query;
+      }
+    }
+    
+    this.hideAllSearchSuggestions();
+    
+    // Si es búsqueda móvil, cerrar el menú
+    if (type === 'mobile') {
+      setTimeout(() => {
+        this.closeMobileMenu();
+      }, 300);
+    }
+  }
+
+  handleSuggestionClick(suggestion, type) {
+    const suggestionType = suggestion.dataset.type;
     const url = suggestion.dataset.url;
     const title = suggestion.querySelector('.suggestion-title').textContent;
     
-    // Realizar acción según el tipo
     if (url) {
       if (url.startsWith('#')) {
-        // Navegación a sección de la misma página
         this.navigateToSection(url);
-      } else if (url.startsWith('./')) {
-        // Navegación a otra página
+      } else if (url.startsWith('./') || url.startsWith('/')) {
         window.location.href = url;
       } else {
-        // URL externa
         window.open(url, '_blank');
       }
-    } else if (type === 'content') {
+    } else if (suggestionType === 'content') {
       this.scrollToContent(title);
-    } else if (type === 'section') {
+    } else if (suggestionType === 'section') {
       this.navigateToSection(title);
     }
     
-    this.hideSearchSuggestions();
+    this.hideAllSearchSuggestions();
     
-    // Actualizar input con el término seleccionado
+    // Actualizar ambos inputs con el término seleccionado
     if (this.mainSearchInput) {
       this.mainSearchInput.value = title;
     }
+    if (this.mobileSearchInput) {
+      this.mobileSearchInput.value = title;
+    }
     
-    // Anuncio para lectores de pantalla
+    // Si es búsqueda móvil, cerrar el menú
+    if (type === 'mobile') {
+      setTimeout(() => {
+        this.closeMobileMenu();
+      }, 300);
+    }
+    
     this.announceToScreenReader(`Navegando a: ${title}`);
   }
 
@@ -600,7 +686,6 @@ class HeaderManager {
       this.toggleMobileMenu();
     });
 
-    // Cerrar menú al hacer click en overlay
     const overlay = this.mobileMenu.querySelector('.mobile-menu-overlay');
     if (overlay) {
       overlay.addEventListener('click', () => {
@@ -608,18 +693,18 @@ class HeaderManager {
       });
     }
 
-    // Cerrar menú con tecla Escape
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && this.mobileMenuOpen) {
         this.closeMobileMenu();
       }
     });
 
-    // Animaciones en links del menú móvil
     this.initializeMobileMenuLinks();
   }
 
   toggleMobileMenu() {
+    console.log('Intentando abrir/cerrar menú móvil. Estado actual:', this.mobileMenuOpen);
+    
     if (this.mobileMenuOpen) {
       this.closeMobileMenu();
     } else {
@@ -630,63 +715,96 @@ class HeaderManager {
   openMobileMenu() {
     this.mobileMenuOpen = true;
     
-    // Actualizar atributos de accesibilidad
     this.mobileMenuBtn.setAttribute('aria-expanded', 'true');
     this.mobileMenuBtn.setAttribute('aria-label', 'Cerrar menú de navegación');
     this.mobileMenu.setAttribute('aria-hidden', 'false');
     
-    // Agregar clases de animación
-    this.mobileMenu.classList.add('show');
-    document.body.style.overflow = 'hidden'; // Prevenir scroll
+    this.mobileMenu.style.display = 'block';
+    this.mobileMenu.style.visibility = 'visible';
     
-    // Animar elementos del menú con delay
     setTimeout(() => {
-      this.animateMobileMenuItems('in');
-    }, 100);
-    
-    // Focus en primer elemento navegable
-    setTimeout(() => {
-      const firstLink = this.mobileMenu.querySelector('.mobile-nav-link');
-      if (firstLink) firstLink.focus();
-    }, this.config.animationDuration);
+      this.mobileMenu.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      
+      setTimeout(() => {
+        this.animateMobileMenuItems('in');
+      }, 100);
+      
+      console.log('Menú móvil abierto');
+    }, 10);
   }
 
   closeMobileMenu() {
+    if (!this.mobileMenuOpen) return;
+    
     this.mobileMenuOpen = false;
     
-    // Actualizar atributos de accesibilidad
     this.mobileMenuBtn.setAttribute('aria-expanded', 'false');
     this.mobileMenuBtn.setAttribute('aria-label', 'Abrir menú de navegación');
     this.mobileMenu.setAttribute('aria-hidden', 'true');
     
-    // Animar salida
+    // Ocultar sugerencias móviles al cerrar el menú
+    this.hideSearchSuggestions('mobile');
+    
     this.animateMobileMenuItems('out');
     
     setTimeout(() => {
       this.mobileMenu.classList.remove('show');
-      document.body.style.overflow = '';
-    }, this.config.animationDuration);
+      
+      setTimeout(() => {
+        if (!this.mobileMenuOpen) {
+          this.mobileMenu.style.display = 'none';
+          this.mobileMenu.style.visibility = 'hidden';
+          document.body.style.overflow = '';
+          
+          console.log('Menú móvil cerrado');
+        }
+      }, 300);
+    }, 150);
     
-    // Retornar focus al botón
-    this.mobileMenuBtn.focus();
+    if (this.mobileMenuBtn) {
+      this.mobileMenuBtn.focus();
+    }
   }
 
   animateMobileMenuItems(direction) {
     const items = this.mobileMenu.querySelectorAll('.mobile-nav-item');
     
-    items.forEach((item, index) => {
-      const delay = direction === 'in' ? index * 50 : (items.length - index) * 30;
+    items.forEach(item => {
+      item.classList.remove('animated');
+      item.style.display = 'block';
+    });
+    
+    if (direction === 'in') {
+      items.forEach(item => {
+        item.style.transform = 'translateX(50px)';
+        item.style.opacity = '0';
+      });
       
-      setTimeout(() => {
-        if (direction === 'in') {
+      items.forEach((item, index) => {
+        const delay = index * 100;
+        
+        setTimeout(() => {
+          item.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
           item.style.transform = 'translateX(0)';
           item.style.opacity = '1';
-        } else {
-          item.style.transform = 'translateX(100px)';
+          
+          console.log(`Animando item ${index} hacia adentro`);
+        }, delay);
+      });
+    } else {
+      [...items].reverse().forEach((item, index) => {
+        const delay = index * 50;
+        
+        setTimeout(() => {
+          item.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+          item.style.transform = 'translateX(50px)';
           item.style.opacity = '0';
-        }
-      }, delay);
-    });
+          
+          console.log(`Animando item ${items.length - 1 - index} hacia afuera`);
+        }, delay);
+      });
+    }
   }
 
   initializeMobileMenuLinks() {
@@ -694,16 +812,16 @@ class HeaderManager {
     
     mobileLinks.forEach(link => {
       link.addEventListener('click', (e) => {
-        // Agregar efecto de ripple
-        this.createRippleEffect(e.currentTarget, e);
-        
-        // Cerrar menú después de la navegación
-        setTimeout(() => {
+        const href = link.getAttribute('href');
+        if (href && !href.startsWith('#')) {
+          setTimeout(() => {
+            this.closeMobileMenu();
+          }, 200);
+        } else if (href && href.startsWith('#')) {
           this.closeMobileMenu();
-        }, 200);
+        }
       });
       
-      // Efecto hover mejorado
       link.addEventListener('mouseenter', function() {
         this.style.transform = 'translateX(8px) scale(1.02)';
       });
@@ -713,6 +831,7 @@ class HeaderManager {
       });
     });
   }
+
   /* ===== NAVEGACIÓN Y SCROLL ===== */
   initializeNavigation() {
     const navLinks = document.querySelectorAll('.nav-modern-link, .mobile-nav-link');
@@ -728,8 +847,6 @@ class HeaderManager {
       }
 
       link.addEventListener('click', (e) => {
-        // No prevenir el comportamiento por defecto para la navegación estándar
-        // Si el enlace es la página actual, y es un enlace de anclaje (#), entonces sí prevenir y scrollear
         if (linkPage === currentPage && link.getAttribute('href').includes('#')) {
           e.preventDefault();
           const targetId = link.getAttribute('href');
@@ -737,11 +854,6 @@ class HeaderManager {
           if (targetElement) {
             this.smoothScrollTo(targetElement);
           }
-        } else if (link.getAttribute('href') === window.location.pathname + window.location.search + window.location.hash) {
-           // Si es exactamente el mismo enlace en el que ya estamos, recargamos la página.
-           // Esto soluciona el problema de no poder hacer clic de nuevo en el enlace de la página actual.
-           // e.preventDefault(); // No es necesario prevenir, el comportamiento por defecto es recargar o ir al ancla.
-           // window.location.reload(); // Forzar recarga puede ser muy agresivo, el comportamiento por defecto es mejor.
         }
         
         this.addNavClickEffect(link);
@@ -752,7 +864,6 @@ class HeaderManager {
         }
       });
 
-      // Efectos de hover mejorados (mantener para todos)
       link.addEventListener('mouseenter', () => {
         this.addNavHoverEffect(link);
       });
@@ -761,31 +872,25 @@ class HeaderManager {
         this.removeNavHoverEffect(link);
       });
     });
-
-    // Navegación activa basada en scroll (mantener para secciones internas si aplica)
-    // Considera si esto sigue siendo necesario o si interfiere con la nueva lógica de páginas
-    // this.initializeScrollSpy(); 
   }
 
   getCurrentPageName() {
     const path = window.location.pathname;
-    // Normalizar la ruta eliminando las barras iniciales/finales y dividiendo por '/'
     const pathSegments = path.replace(/^\/|\/$/g, '').split('/');
-    const pageNameWithExtension = pathSegments.pop(); // Obtener el último segmento (nombre del archivo)
-    const pageName = pageNameWithExtension.split('.')[0]; // Quitar la extensión .html
+    const pageNameWithExtension = pathSegments.pop();
+    const pageName = pageNameWithExtension.split('.')[0];
 
     if (pageName === 'PrincipalContactano') {
       return 'contactanos';
     } else if (pageName === 'PrincipalHistoria') {
       return 'historia';
-    } else if (pageName === 'secotogpt' || pageName === '' || pageName === 'index') { // Asumir que '', 'secotogpt' o 'index' es la página de inicio
+    } else if (pageName === 'secotogpt' || pageName === '' || pageName === 'index') {
       return 'inicio';
     }
-    return pageName; // Devolver el nombre de la página si no coincide con los casos especiales
+    return pageName;
   }
 
   addNavClickEffect(link) {
-    // Efecto de clic con ondas
     const ripple = document.createElement('div');
     ripple.className = 'nav-ripple-effect';
     ripple.style.cssText = `
@@ -869,7 +974,7 @@ class HeaderManager {
           }
           this.addActivePulseEffect(link);
         }
-      } else { // Navegación por scroll (secciones internas)
+      } else {
         if (link.getAttribute('href') === targetIdOrPage && linkPage === currentPage) {
             link.classList.add('active');
             if (indicator) {
@@ -885,7 +990,6 @@ class HeaderManager {
 
   initializeScrollSpy() {
     const sections = document.querySelectorAll('section[id]');
-    // const navLinks = document.querySelectorAll('.nav-modern-link[href^="#"]'); // Comentado o ajustado
     const currentPage = this.getCurrentPageName();
 
     if (sections.length === 0) return;
@@ -894,7 +998,6 @@ class HeaderManager {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const targetId = `#${entry.target.id}`;
-          // Solo actualizar el enlace activo si la sección pertenece a la página actual
           const activeLinkForSection = document.querySelector(`.nav-modern-link[href="${targetId}"][data-page="${currentPage}"], .mobile-nav-link[href="${targetId}"][data-page="${currentPage}"]`);
           if (activeLinkForSection) {
              this.updateActiveNavLink(targetId);
@@ -916,14 +1019,12 @@ class HeaderManager {
     const updateHeader = () => {
       const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
       
-      // Efecto de backdrop blur en scroll
       if (currentScroll > 50) {
         this.header.classList.add('scrolled');
       } else {
         this.header.classList.remove('scrolled');
       }
       
-      // Auto-hide header en scroll rápido hacia abajo (opcional)
       if (currentScroll > lastScrollTop && currentScroll > 200) {
         this.header.style.transform = 'translateY(-100%)';
       } else {
@@ -940,13 +1041,13 @@ class HeaderManager {
         ticking = true;
       }
     };
-      window.addEventListener('scroll', requestTick, { passive: true });
+    
+    window.addEventListener('scroll', requestTick, { passive: true });
   }
 
   /* ===== ACCESIBILIDAD ===== */
   
   initializeAccessibility() {
-    // Configurar anuncios para lectores de pantalla
     if (!document.getElementById('sr-announcer')) {
       const announcer = document.createElement('div');
       announcer.id = 'sr-announcer';
@@ -965,11 +1066,9 @@ class HeaderManager {
   }
 
   /* ===== FUNCIONES DE NAVEGACIÓN MEJORADAS ===== */
-    navigateToSection(sectionId) {
-    // Limpiar el símbolo # si existe
+  navigateToSection(sectionId) {
     const cleanId = sectionId.replace('#', '');
     
-    // Deshabilitar navegación interna para secciones que tendrán páginas propias
     if (['inicio', 'historia', 'contacto'].includes(cleanId)) {
       console.log(`Navegación a ${cleanId} deshabilitada para futuras páginas propias`);
       return;
@@ -978,16 +1077,13 @@ class HeaderManager {
     const targetElement = document.getElementById(cleanId) || document.querySelector(`[data-section="${cleanId}"]`);
     
     if (targetElement) {
-      // Scroll suave al elemento
       targetElement.scrollIntoView({
         behavior: 'smooth',
         block: 'start'
       });
       
-      // Agregar efecto de highlight temporal
       this.highlightElement(targetElement);
       
-      // Actualizar URL sin recargar la página
       if (history.pushState) {
         history.pushState(null, null, `#${cleanId}`);
       }
@@ -995,7 +1091,6 @@ class HeaderManager {
   }
   
   scrollToContent(searchTerm) {
-    // Buscar contenido que coincida en la página actual
     const searchableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, .card-title, .section-title');
     let bestMatch = null;
     let bestScore = 0;
@@ -1014,32 +1109,26 @@ class HeaderManager {
     });
     
     if (bestMatch) {
-      // Scroll al elemento encontrado
       bestMatch.scrollIntoView({
         behavior: 'smooth',
         block: 'center'
       });
       
-      // Highlight del elemento
       this.highlightElement(bestMatch);
     } else {
-      // Si no se encuentra, mostrar mensaje
       this.showSearchNotification(`No se encontró contenido específico para "${searchTerm}"`);
     }
   }
   
   highlightElement(element) {
-    // Agregar clase de highlight temporal
     element.classList.add('search-highlight');
     
-    // Remover el highlight después de 3 segundos
     setTimeout(() => {
       element.classList.remove('search-highlight');
     }, 3000);
   }
   
   showSearchNotification(message) {
-    // Crear o actualizar notificación
     let notification = document.getElementById('search-notification');
     
     if (!notification) {
@@ -1058,7 +1147,7 @@ class HeaderManager {
         </button>
       </div>
     `;
-      // Auto-remover después de 8 segundos (más tiempo para leer)
+    
     setTimeout(() => {
       if (notification.parentElement) {
         notification.remove();
@@ -1066,19 +1155,29 @@ class HeaderManager {
     }, 8000);
   }
   
-  /* ===== FUNCIONES DE UTILIDAD PARA BÚSQUEDA ===== */
+  /* ===== FUNCIONES DE UTILIDAD PARA BÚSQUEDA UNIFICADAS ===== */
   
-  showLoadingIndicator(show) {
-    const indicators = document.querySelectorAll('.search-loading');
-    indicators.forEach(indicator => {
-      indicator.classList.toggle('d-none', !show);
-    });
+  showLoadingIndicator(show, type = 'both') {
+    if (type === 'both' || type === 'desktop') {
+      const desktopIndicators = document.querySelectorAll('.search-wrapper:not(.mobile-search-wrapper) .search-loading');
+      desktopIndicators.forEach(indicator => {
+        indicator.classList.toggle('d-none', !show);
+      });
+    }
+    
+    if (type === 'both' || type === 'mobile') {
+      const mobileIndicators = document.querySelectorAll('.mobile-search-wrapper .search-loading');
+      mobileIndicators.forEach(indicator => {
+        indicator.classList.toggle('d-none', !show);
+      });
+    }
   }
   
-  showSearchError() {
-    if (!this.searchSuggestions) return;
+  showSearchError(type = 'desktop') {
+    const suggestionsContainer = this.getSuggestionsContainer(type);
+    if (!suggestionsContainer) return;
     
-    const suggestionsContent = this.searchSuggestions.querySelector('.search-suggestions-content');
+    const suggestionsContent = suggestionsContainer.querySelector('.search-suggestions-content');
     if (suggestionsContent) {
       suggestionsContent.innerHTML = `
         <div class="search-error">
@@ -1091,12 +1190,11 @@ class HeaderManager {
           </div>
         </div>
       `;
-      this.showSearchSuggestions();
+      this.showSearchSuggestions(type);
     }
   }
   
   clearSearchResults() {
-    // Limpiar filtros visuales
     const allCards = document.querySelectorAll('.card');
     allCards.forEach(card => {
       card.style.display = '';
@@ -1104,31 +1202,32 @@ class HeaderManager {
       card.style.transform = '';
     });
     
-    // Remover mensajes de "sin resultados"
     const noResultsMsg = document.getElementById('no-results-message');
     if (noResultsMsg) {
       noResultsMsg.remove();
     }
   }
   
-  highlightSuggestion(index) {
-    // Remover highlight previo
-    const suggestions = this.searchSuggestions.querySelectorAll('.suggestion-item');
+  highlightSuggestion(index, type = 'desktop') {
+    const suggestionsContainer = this.getSuggestionsContainer(type);
+    if (!suggestionsContainer) return;
+    
+    const suggestions = suggestionsContainer.querySelectorAll('.suggestion-item');
     suggestions.forEach(item => item.classList.remove('highlighted'));
     
-    // Agregar highlight al item actual
     if (suggestions[index]) {
       suggestions[index].classList.add('highlighted');
     }
   }
   
-  handleSearchKeyNavigation(e) {
-    if (!this.searchSuggestions || this.searchSuggestions.classList.contains('d-none')) {
+  handleSearchKeyNavigation(e, type = 'desktop') {
+    const suggestionsContainer = this.getSuggestionsContainer(type);
+    if (!suggestionsContainer || suggestionsContainer.classList.contains('d-none')) {
       return;
     }
     
-    const suggestions = this.searchSuggestions.querySelectorAll('.suggestion-item');
-    const currentHighlighted = this.searchSuggestions.querySelector('.suggestion-item.highlighted');
+    const suggestions = suggestionsContainer.querySelectorAll('.suggestion-item');
+    const currentHighlighted = suggestionsContainer.querySelector('.suggestion-item.highlighted');
     let currentIndex = -1;
     
     if (currentHighlighted) {
@@ -1139,55 +1238,59 @@ class HeaderManager {
       case 'ArrowDown':
         e.preventDefault();
         const nextIndex = (currentIndex + 1) % suggestions.length;
-        this.highlightSuggestion(nextIndex);
+        this.highlightSuggestion(nextIndex, type);
         break;
         
       case 'ArrowUp':
         e.preventDefault();
         const prevIndex = currentIndex <= 0 ? suggestions.length - 1 : currentIndex - 1;
-        this.highlightSuggestion(prevIndex);
+        this.highlightSuggestion(prevIndex, type);
         break;
         
       case 'Enter':
         e.preventDefault();
         if (currentHighlighted) {
-          this.handleSuggestionClick(currentHighlighted);
+          this.handleSuggestionClick(currentHighlighted, type);
         }
         break;
         
       case 'Escape':
-        this.hideSearchSuggestions();
+        this.hideSearchSuggestions(type);
         e.target.blur();
         break;
     }
   }
   
-  showSearchSuggestions() {
-    if (this.searchSuggestions) {
-      this.searchSuggestions.classList.remove('d-none');
-      this.searchSuggestions.setAttribute('aria-hidden', 'false');
+  showSearchSuggestions(type = 'desktop') {
+    const suggestionsContainer = this.getSuggestionsContainer(type);
+    if (suggestionsContainer) {
+      suggestionsContainer.classList.remove('d-none');
+      suggestionsContainer.setAttribute('aria-hidden', 'false');
     }
   }
   
-  hideSearchSuggestions() {
-    if (this.searchSuggestions) {
-      this.searchSuggestions.classList.add('d-none');
-      this.searchSuggestions.setAttribute('aria-hidden', 'true');
+  hideSearchSuggestions(type = 'desktop') {
+    const suggestionsContainer = this.getSuggestionsContainer(type);
+    if (suggestionsContainer) {
+      suggestionsContainer.classList.add('d-none');
+      suggestionsContainer.setAttribute('aria-hidden', 'true');
       
-      // Limpiar highlights
-      const suggestions = this.searchSuggestions.querySelectorAll('.suggestion-item');
+      const suggestions = suggestionsContainer.querySelectorAll('.suggestion-item');
       suggestions.forEach(item => item.classList.remove('highlighted'));
     }
   }
+  
+  hideAllSearchSuggestions() {
+    this.hideSearchSuggestions('desktop');
+    this.hideSearchSuggestions('mobile');
+  }
 }
 
-/* ===== FUNCIONES DE NAVEGACIÓN MEJORADAS ===== */
+/* ===== FUNCIONES DE NAVEGACIÓN GLOBALES ===== */
   
 function navigateToSection(sectionId) {
-  // Limpiar el símbolo # si existe
   const cleanId = sectionId.replace('#', '');
   
-  // Deshabilitar navegación interna para secciones que tendrán páginas propias
   if (['inicio', 'historia', 'contacto'].includes(cleanId)) {
     console.log(`Navegación a ${cleanId} deshabilitada para futuras páginas propias`);
     return;
@@ -1196,16 +1299,13 @@ function navigateToSection(sectionId) {
   const targetElement = document.getElementById(cleanId) || document.querySelector(`[data-section="${cleanId}"]`);
   
   if (targetElement) {
-    // Scroll suave al elemento
     targetElement.scrollIntoView({
       behavior: 'smooth',
       block: 'start'
     });
     
-    // Agregar efecto de highlight temporal
     highlightElement(targetElement);
     
-    // Actualizar URL sin recargar la página
     if (history.pushState) {
       history.pushState(null, null, `#${cleanId}`);
     }
@@ -1213,7 +1313,6 @@ function navigateToSection(sectionId) {
 }
 
 function scrollToContent(searchTerm) {
-  // Buscar contenido que coincida en la página actual
   const searchableElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, .card-title, .section-title');
   let bestMatch = null;
   let bestScore = 0;
@@ -1232,38 +1331,31 @@ function scrollToContent(searchTerm) {
   });
   
   if (bestMatch) {
-    // Scroll al elemento encontrado
     bestMatch.scrollIntoView({
       behavior: 'smooth',
       block: 'center'
     });
     
-    // Highlight del elemento
     highlightElement(bestMatch);
   } else {
-    // Si no se encuentra, mostrar mensaje
     showSearchNotification(`No se encontró contenido específico para "${searchTerm}"`);
   }
 }
 
 function highlightElement(element) {
-  // Agregar clase de highlight temporal
   element.classList.add('search-highlight');
   
-  // Remover el highlight después de 3 segundos
   setTimeout(() => {
     element.classList.remove('search-highlight');
   }, 3000);
 }
 
 function showSearchNotification(message) {
-  // Delegar a la instancia de HeaderManager si existe
   if (window.headerManager && typeof window.headerManager.showSearchNotification === 'function') {
     window.headerManager.showSearchNotification(message);
     return;
   }
   
-  // Fallback básico sin botón de cerrar duplicado
   let notification = document.getElementById('search-notification');
   
   if (!notification) {
@@ -1280,7 +1372,6 @@ function showSearchNotification(message) {
     </div>
   `;
   
-  // Auto-remover después de 8 segundos (más tiempo para leer)
   setTimeout(() => {
     if (notification.parentElement) {
       notification.remove();
@@ -1290,16 +1381,13 @@ function showSearchNotification(message) {
 
 /* ===== FUNCIONES LEGACY ===== */
 
-// Función legacy para compatibilidad
 function initializeHeader() {
   if (!window.headerManager) {
     window.headerManager = new HeaderManager();
   }
 }
 
-// Inicializar cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
-  // Agregar clase de carga al header
   const header = document.querySelector('header');
   if (header) {
     setTimeout(() => {
@@ -1307,11 +1395,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 100);
   }
   
-  // Inicializar header manager
   window.headerManager = new HeaderManager();
 });
 
-// CSS adicional para animaciones (se inyecta dinámicamente)
+// CSS adicional para animaciones
 const additionalCSS = `
   @keyframes ripple {
     to {
@@ -1386,12 +1473,24 @@ const additionalCSS = `
   .suggestion-item:hover .suggestion-action {
     opacity: 1;
   }
+
+  .mobile-search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-top: 8px;
+  }
 `;
 
-// Inyectar CSS adicional
 const styleSheet = document.createElement('style');
 styleSheet.textContent = additionalCSS;
 document.head.appendChild(styleSheet);
 
-// Exportar para uso en otros módulos
 window.HeaderManager = HeaderManager;

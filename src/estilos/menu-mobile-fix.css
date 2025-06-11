@@ -1,0 +1,79 @@
+/* Corrección CSS para el menú móvil */
+/* Esta hoja de estilo corrige problemas con la visualización del menú móvil */
+
+/* Asegurar que los elementos del menú estén correctamente inicializados */
+.mobile-nav-item {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+  display: block !important;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+/* Corregir transiciones del menú móvil */
+.mobile-menu {
+  display: none; /* Iniciamos oculto */
+  position: fixed;
+  top: 0; /* Cambiado de top: 100% para mejor posicionamiento */
+  left: 0;
+  right: 0;
+  height: 100vh; /* Altura fija para evitar problemas de cálculo */
+  background: rgba(255, 255, 255, 0.98);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  overflow-y: auto; /* Permitir scroll dentro del menú */
+  transform: translateY(-100%); /* Fuera de la pantalla inicialmente */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Cuando se muestra el menú */
+.mobile-menu.show {
+  transform: translateY(0); /* Posición visible */
+}
+
+/* Modo oscuro */
+.dark .mobile-menu {
+  background: rgba(34, 34, 59, 0.98);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Asegurar que el contenido del menú sea visible */
+.mobile-menu-content {
+  position: relative;
+  z-index: 2; /* Mayor z-index para estar sobre el overlay */
+  padding: 20px 0;
+  height: 100%;
+}
+
+/* Asegurar que la navegación del menú móvil tenga suficiente contraste */
+.mobile-nav-link {
+  margin-bottom: 10px; /* Espacio entre enlaces */
+  background: rgba(255, 255, 255, 0.05); /* Fondo sutil */
+  border: 1px solid rgba(0, 0, 0, 0.05); /* Borde sutil */
+}
+
+.dark .mobile-nav-link {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Transiciones suaves para elementos del menú */
+.mobile-nav-link {
+  transition: transform 0.4s ease, opacity 0.4s ease, background-color 0.3s ease;
+}
+
+/* Modo de depuración - añadir bordes para visualizar elementos */
+.debug-borders .mobile-nav-item {
+  border: 2px solid red;
+}
+
+.debug-borders .mobile-menu-content {
+  border: 2px solid blue;
+}
+
+.debug-borders .mobile-nav-section {
+  border: 2px solid green;
+}
+/* Corrección para Firefox y Safari */
+.mobile-menu-content { z-index: 1001; /* Mayor z-index para estar por encima de otros elementos */ }
