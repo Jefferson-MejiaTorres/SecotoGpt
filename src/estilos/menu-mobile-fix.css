@@ -77,3 +77,53 @@
 }
 /* Corrección para Firefox y Safari */
 .mobile-menu-content { z-index: 1001; /* Mayor z-index para estar por encima de otros elementos */ }
+/* Estilos para el botón de cerrar menú móvil */
+.mobile-menu-close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.mobile-menu-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(0, 0, 0, 0.2);
+  transform: scale(1.05);
+  color: #000;
+}
+
+.mobile-menu-close-btn:active {
+  transform: scale(0.95);
+}
+
+/* Modo oscuro */
+.dark .mobile-menu-close-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.dark .mobile-menu-close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+/* Header del menú móvil */
+.mobile-menu-header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dark .mobile-menu-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}

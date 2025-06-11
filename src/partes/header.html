@@ -126,30 +126,23 @@
         </div>
       </div>
     </div>
-  </nav>
-  <!-- Menú móvil desplegable mejorado -->
+  </nav>  <!-- Menú móvil desplegable mejorado -->
   <div class="mobile-menu d-lg-none" id="mobileMenu" aria-hidden="true">
     <div class="mobile-menu-overlay"></div>
     <div class="mobile-menu-content">
       <div class="container-fluid px-4 py-4">
         
-        <!-- Búsqueda móvil -->
-        <div class="mobile-search-section mb-4">
-          <form role="search" id="mobileSearchForm">
-            <div class="position-relative">
-              <label for="mobileSearchInput" class="visually-hidden">Buscar contenido</label>
-              <i class="bi bi-search search-icon position-absolute" aria-hidden="true"></i>
-              <input 
-                id="mobileSearchInput"
-                class="form-control search-input-mobile" 
-                type="search" 
-                placeholder="Buscar contenido..." 
-                aria-label="Buscar contenido"
-                autocomplete="off">
-            </div>
-          </form>
+        <!-- Botón de cerrar menú móvil -->
+        <div class="mobile-menu-header mb-4 d-flex justify-content-end">
+          <button class="btn mobile-menu-close-btn" 
+                  type="button" 
+                  id="mobileMenuCloseBtn"
+                  aria-label="Cerrar menú de navegación"
+                  title="Cerrar menú">
+            <i class="bi bi-x-lg" aria-hidden="true"></i>
+          </button>
         </div>
-        
+
         <!-- Enlaces de navegación móvil -->
         <nav class="mobile-nav-section" role="navigation" aria-label="Navegación móvil">
           <ul class="mobile-nav-list list-unstyled mb-0" role="menu">

@@ -54,23 +54,16 @@ class HeaderManager {
       }
     });
   }
-
   initializeElements() {
     // Elementos principales
     this.header = document.getElementById('mainHeader');
     this.mobileMenuBtn = document.getElementById('mobileMenuBtn');
     this.mobileMenu = document.getElementById('mobileMenu');
+    this.mobileMenuCloseBtn = document.getElementById('mobileMenuCloseBtn');
     
     // Elementos de búsqueda
     this.mainSearchInput = document.getElementById('mainSearchInput');
-    this.mobileSearchInput = document.getElementById('mobileSearchInput');
     this.searchSuggestions = document.getElementById('searchSuggestions');
-    
-    // Crear sugerencias móviles si no existe
-    this.mobileSearchSuggestions = document.getElementById('mobileSearchSuggestions');
-    if (!this.mobileSearchSuggestions && this.mobileSearchInput) {
-      this.createMobileSearchSuggestions();
-    }
     
     // Validar elementos críticos
     if (!this.header || !this.mainSearchInput) {
@@ -79,26 +72,18 @@ class HeaderManager {
   }
 
   /* ===== FUNCIONALIDAD DE BÚSQUEDA UNIFICADA ===== */
-
   initializeSearch() {
     if (!this.mainSearchInput) return;
 
     // Configurar búsqueda principal
     this.setupSearchInput(this.mainSearchInput, 'desktop');
     
-    // Configurar búsqueda móvil si existe
-    if (this.mobileSearchInput) {
-      this.setupSearchInput(this.mobileSearchInput, 'mobile');
-    }
-    
     // Configurar sugerencias
     this.setupSearchSuggestions();
-    
-    // Cerrar sugerencias al hacer click fuera (con mejor control)
+      // Cerrar sugerencias al hacer click fuera (con mejor control)
     document.addEventListener('click', (e) => {
       const isSearchElement = e.target.closest('.search-wrapper') || 
                              e.target.closest('.search-suggestions') ||
-                             e.target.closest('.mobile-search-suggestions') ||
                              e.target.closest('.suggestion-item') ||
                              e.target.closest('.quick-suggestion-btn') ||
                              e.target.closest('.default-suggestions');
@@ -107,24 +92,7 @@ class HeaderManager {
         setTimeout(() => {
           this.hideAllSearchSuggestions();
         }, 100);
-      }
-    });
-  }
-
-  createMobileSearchSuggestions() {
-    // Crear contenedor de sugerencias para móvil
-    const mobileSearchWrapper = this.mobileSearchInput.closest('.search-wrapper') || this.mobileSearchInput.parentElement;
-    
-    const mobileSuggestions = document.createElement('div');
-    mobileSuggestions.id = 'mobileSearchSuggestions';
-    mobileSuggestions.className = 'search-suggestions mobile-search-suggestions d-none';
-    mobileSuggestions.innerHTML = `
-      <div class="search-suggestions-content"></div>
-    `;
-    
-    // Insertar después del wrapper de búsqueda móvil
-    mobileSearchWrapper.parentNode.insertBefore(mobileSuggestions, mobileSearchWrapper.nextSibling);
-    this.mobileSearchSuggestions = mobileSuggestions;
+      }    });
   }
 
   setupSearchInput(input, type) {
@@ -193,20 +161,13 @@ class HeaderManager {
       input.parentElement.style.transform = 'translateY(0)';
     });
   }
-
   syncSearchInputs(sourceInput, query) {
-    // Sincronizar el valor entre los inputs de búsqueda
-    if (sourceInput === this.mainSearchInput && this.mobileSearchInput) {
-      this.mobileSearchInput.value = query;
-    } else if (sourceInput === this.mobileSearchInput && this.mainSearchInput) {
-      this.mainSearchInput.value = query;
-    }
+    // Función simplificada - solo búsqueda desktop disponible
+    // No hay sincronización móvil necesaria
   }
-
   clearSearch(input, type) {
-    // Limpiar ambos inputs
+    // Limpiar input principal
     if (this.mainSearchInput) this.mainSearchInput.value = '';
-    if (this.mobileSearchInput) this.mobileSearchInput.value = '';
     
     // Enfocar el input actual
     input.focus();
@@ -333,20 +294,13 @@ class HeaderManager {
     this.showSearchSuggestions(type);
     this.attachSuggestionEvents(type);
   }
-
   getSuggestionsContainer(type) {
-    return type === 'mobile' ? this.mobileSearchSuggestions : this.searchSuggestions;
+    return this.searchSuggestions;
   }
-
   setupSearchSuggestions() {
     // Configurar sugerencias para desktop
     if (this.searchSuggestions) {
       this.configureSearchSuggestionsContainer(this.searchSuggestions);
-    }
-    
-    // Configurar sugerencias para móvil
-    if (this.mobileSearchSuggestions) {
-      this.configureSearchSuggestionsContainer(this.mobileSearchSuggestions);
     }
   }
 
@@ -616,14 +570,10 @@ class HeaderManager {
     
     if (url) {
       window.location.href = url;
-    } else {
-      // Actualizar ambos inputs
+    } else {      // Actualizar input principal
       if (this.mainSearchInput) {
         this.mainSearchInput.value = query;
         this.performSearch(query, 'desktop');
-      }
-      if (this.mobileSearchInput) {
-        this.mobileSearchInput.value = query;
       }
     }
     
@@ -657,13 +607,9 @@ class HeaderManager {
     }
     
     this.hideAllSearchSuggestions();
-    
-    // Actualizar ambos inputs con el término seleccionado
+      // Actualizar input principal con el término seleccionado
     if (this.mainSearchInput) {
       this.mainSearchInput.value = title;
-    }
-    if (this.mobileSearchInput) {
-      this.mobileSearchInput.value = title;
     }
     
     // Si es búsqueda móvil, cerrar el menú
@@ -677,7 +623,6 @@ class HeaderManager {
   }
 
   /* ===== MENÚ MÓVIL ANIMADO ===== */
-
   initializeMobileMenu() {
     if (!this.mobileMenuBtn || !this.mobileMenu) return;
 
@@ -685,6 +630,14 @@ class HeaderManager {
       e.preventDefault();
       this.toggleMobileMenu();
     });
+
+    // Botón de cerrar menú móvil
+    if (this.mobileMenuCloseBtn) {
+      this.mobileMenuCloseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        this.closeMobileMenu();
+      });
+    }
 
     const overlay = this.mobileMenu.querySelector('.mobile-menu-overlay');
     if (overlay) {
@@ -1469,23 +1422,8 @@ const additionalCSS = `
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-  
-  .suggestion-item:hover .suggestion-action {
+    .suggestion-item:hover .suggestion-action {
     opacity: 1;
-  }
-
-  .mobile-search-suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-    z-index: 1000;
-    max-height: 400px;
-    overflow-y: auto;
-    margin-top: 8px;
   }
 `;
 
