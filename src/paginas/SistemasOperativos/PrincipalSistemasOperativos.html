@@ -28,57 +28,703 @@
   <!-- Google Fonts Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-500 sistemasoperativos-page component-loading">
-  <!-- Header Placeholder -->
+<body class="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-500 sistemasoperativos-page">  <!-- Header Placeholder -->
   <div id="header-placeholder"></div>
-  <!-- Contenido principal -->
+  
+  <!-- Script de visibilidad inmediata -->
+  <script>
+    // Ejecutar inmediatamente al cargar el DOM
+    (function() {
+      function forceVisibility() {
+        // Remover cualquier clase problemática
+        document.body.classList.remove('component-loading');
+        
+        // Hacer visible todo el contenido
+        const allSections = document.querySelectorAll('section, .hero-section, .intro-section, .timeline-section, .components-section, .types-section, .impact-section, .conclusion-section, .modules-section');
+        allSections.forEach(element => {
+          if (element) {
+            element.style.cssText = `
+              opacity: 1 !important;
+              visibility: visible !important;
+              display: block !important;
+              transform: translateY(0) !important;
+              height: auto !important;
+              max-height: none !important;
+              overflow: visible !important;
+              position: relative !important;
+            `;
+          }
+        });
+        
+        // Asegurar que el main content sea visible
+        const mainContent = document.querySelector('.main-content');
+        if (mainContent) {
+          mainContent.style.cssText = `
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: block !important;
+            min-height: 100vh !important;
+            overflow: visible !important;
+          `;
+        }
+        
+        console.log('🚀 Visibilidad forzada exitosamente');
+      }
+      
+      // Ejecutar inmediatamente
+      forceVisibility();
+      
+      // Ejecutar cuando el DOM esté listo
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', forceVisibility);
+      }
+      
+      // Ejecutar como fallback adicional
+      setTimeout(forceVisibility, 100);
+      setTimeout(forceVisibility, 500);
+    })();
+  </script><!-- Contenido principal -->
   <main class="main-content container-fluid">
-    <!-- Hero Section - Sistemas Operativos -->
+    <!-- Hero Section - Historia de Sistemas Operativos -->
     <section class="hero-section py-5">
       <div class="container">
         <div class="row justify-content-center text-center">
-          <div class="col-lg-8">
+          <div class="col-lg-10">
             <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp">
-              Sistemas Operativos
+              <i class="bi bi-clock-history text-primary me-3"></i>
+              Historia y Evolución de los Sistemas Operativos
             </h1>
             <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-              Explora el corazón de la computación: los sistemas operativos y su gestión de recursos
+              De las Tarjetas Perforadas a la Inteligencia Artificial
             </p>
+            <div class="hero-stats d-flex justify-content-center gap-4 mt-4">
+              <div class="stat-item animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="stat-number">80+</div>
+                <div class="stat-label">Años de Evolución</div>
+              </div>
+              <div class="stat-item animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="stat-number">6</div>
+                <div class="stat-label">Eras Tecnológicas</div>
+              </div>
+              <div class="stat-item animate__animated animate__fadeInUp animate__delay-2s">
+                <div class="stat-number">∞</div>
+                <div class="stat-label">Innovación</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Sección de módulos -->
+    <!-- Introducción -->
+    <section class="intro-section py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="intro-card p-4 rounded-4 shadow-lg scroll-animate">
+              <h2 class="h3 mb-4 text-center">
+                <i class="bi bi-lightbulb text-warning me-2"></i>
+                Introducción
+              </h2>
+              <p class="lead text-center">
+                Los sistemas operativos (SO) son el <strong>alma de la tecnología moderna</strong>, 
+                actuando como intermediarios entre el hardware y el usuario. Su evolución refleja 
+                los avances en computación, desde máquinas gigantescas hasta dispositivos móviles omnipresentes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline de Evolución -->
+    <section class="timeline-section py-5">
+      <div class="container">
+        <h2 class="text-center mb-5 scroll-animate">
+          <i class="bi bi-timeline text-primary me-2"></i>
+          Línea de Tiempo de la Evolución
+        </h2>
+        
+        <div class="timeline">
+          <!-- Era 1: Los Orígenes -->
+          <div class="timeline-item scroll-animate" data-era="1940-1950">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="era-card">
+                <div class="era-header">
+                  <h3><i class="bi bi-gear text-danger me-2"></i>Los Orígenes (1940-1950)</h3>
+                  <span class="era-subtitle">La Era Pre-SO</span>
+                </div>
+                <div class="era-body">
+                  <div class="feature-grid">
+                    <div class="feature-item">
+                      <i class="bi bi-lightning text-warning"></i>
+                      <h5>Programación Directa</h5>
+                      <p>Los primeros computadores (como ENIAC) requerían intervención física mediante interruptores y cables, sin SO. Cada programa se cargaba manualmente en lenguaje máquina (binario).</p>
+                    </div>
+                    <div class="feature-item">
+                      <i class="bi bi-display text-info"></i>
+                      <h5>Monitor Residente (1956)</h5>
+                      <p>Surgió el primer SO rudimentario para el IBM 704, que solo permitía ejecutar programas secuencialmente: al terminar uno, comenzaba el siguiente.</p>
+                    </div>
+                  </div>
+                  <div class="tech-highlight">
+                    <strong>Técnicas clave:</strong> Buffering y spooling optimizaban el tiempo de carga usando almacenamiento temporal.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Era 2: Revolución Técnica -->
+          <div class="timeline-item scroll-animate" data-era="1960-1970">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="era-card">
+                <div class="era-header">
+                  <h3><i class="bi bi-cpu text-success me-2"></i>Revolución Técnica (1960-1970)</h3>
+                  <span class="era-subtitle">Multiprogramación y UNIX</span>
+                </div>
+                <div class="era-body">
+                  <div class="feature-grid">
+                    <div class="feature-item">
+                      <i class="bi bi-diagram-3 text-primary"></i>
+                      <h5>Multiprogramación</h5>
+                      <p>Varios programas en memoria simultáneamente. La CPU alternaba tareas al detectar operaciones de E/S, mejorando la eficiencia.</p>
+                    </div>
+                    <div class="feature-item">
+                      <i class="bi bi-people text-info"></i>
+                      <h5>Tiempo Compartido</h5>
+                      <p>Permitía a múltiples usuarios interactuar concurrentemente mediante terminales (ej.: CTSS del MIT).</p>
+                    </div>
+                    <div class="feature-item unix-highlight">
+                      <i class="bi bi-terminal text-warning"></i>
+                      <h5>UNIX (1969)</h5>
+                      <p>Creado por Ken Thompson y Dennis Ritchie en Bell Labs. Destacó por:</p>
+                      <ul>
+                        <li>Portabilidad (escrito en C)</li>
+                        <li>Diseño modular y multiusuario</li>
+                        <li>Base para SO modernos como Linux y macOS</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Era 3: Era Personal -->
+          <div class="timeline-item scroll-animate" data-era="1980-1990">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="era-card">
+                <div class="era-header">
+                  <h3><i class="bi bi-pc-display text-warning me-2"></i>La Era Personal (1980-1990)</h3>
+                  <span class="era-subtitle">Interfaces Gráficas y Guerra de SO</span>
+                </div>
+                <div class="era-body">
+                  <div class="os-grid">
+                    <div class="os-card" data-os="msdos">
+                      <div class="os-icon">💻</div>
+                      <h5>MS-DOS (1981)</h5>
+                      <p>Lideró la computación personal en PCs IBM. Operaba mediante comandos de texto, sin interfaz gráfica.</p>
+                    </div>
+                    <div class="os-card" data-os="macos">
+                      <div class="os-icon">🖱️</div>
+                      <h5>MacOS (1984)</h5>
+                      <p>Introdujo la primera interfaz gráfica (GUI) exitosa con ventanas, íconos y ratón, revolucionando la usabilidad.</p>
+                    </div>
+                    <div class="os-card" data-os="windows">
+                      <div class="os-icon">🪟</div>
+                      <h5>Windows 1.0 (1985)</h5>
+                      <p>Respuesta de Microsoft a MacOS. Aunque limitado, sentó las bases para Windows 3.0 (1990).</p>
+                    </div>
+                    <div class="os-card" data-os="linux">
+                      <div class="os-icon">🐧</div>
+                      <h5>Linux (1991)</h5>
+                      <p>Núcleo creado por Linus Torvalds, combinado con herramientas GNU. Ejemplo emblemático de código abierto.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Era 4: Modernización -->
+          <div class="timeline-item scroll-animate" data-era="2000-presente">
+            <div class="timeline-marker"></div>
+            <div class="timeline-content">
+              <div class="era-card">
+                <div class="era-header">
+                  <h3><i class="bi bi-phone text-primary me-2"></i>Modernización (2000-Presente)</h3>
+                  <span class="era-subtitle">Móviles, Nube e IA</span>
+                </div>
+                <div class="era-body">
+                  <div class="modern-grid">
+                    <div class="modern-section">
+                      <h5><i class="bi bi-phone text-success me-2"></i>SO Móviles</h5>
+                      <div class="mobile-os">
+                        <div class="mobile-item">
+                          <strong>Android (2008):</strong> Basado en Linux, dominó el mercado de smartphones con integración de servicios Google.
+                        </div>
+                        <div class="mobile-item">
+                          <strong>iOS (2007):</strong> Optimizado para hardware Apple, destacó en seguridad y experiencia de usuario.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modern-section">
+                      <h5><i class="bi bi-cloud text-info me-2"></i>Computación en Nube</h5>
+                      <p>SO como Windows Server y distribuciones Linux (Ubuntu Server) gestionan infraestructuras escalables en AWS, Azure y Google Cloud.</p>
+                    </div>
+                    <div class="modern-section trends">
+                      <h5><i class="bi bi-graph-up text-warning me-2"></i>Tendencias Recientes</h5>
+                      <ul>
+                        <li><strong>Contenedores:</strong> Docker y Kubernetes permiten empaquetar aplicaciones usando núcleos ligeros (ej.: CoreOS)</li>
+                        <li><strong>Inteligencia Artificial:</strong> Integración de motores de IA en SO para optimización predictiva de recursos</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>    <!-- Componentes Clave -->
+    <section class="components-section py-5">
+      <div class="container">
+        <h2 class="text-center mb-5 scroll-animate">
+          <i class="bi bi-gear-wide-connected text-primary me-2"></i>
+          Componentes Clave de un SO
+        </h2>
+        
+        <!-- Descripción introductoria -->
+        <div class="row justify-content-center mb-5">
+          <div class="col-lg-8 text-center">
+            <p class="lead scroll-animate">
+              Un sistema operativo está compuesto por múltiples componentes que trabajan en armonía 
+              para gestionar los recursos del sistema y proporcionar una interfaz entre el usuario y el hardware.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Grid de componentes modernos -->
+        <div class="components-grid">
+          <!-- Kernel -->
+          <div class="component-card scroll-animate" data-component="kernel">
+            <div class="component-card-inner">
+              <div class="component-front">
+                <div class="component-icon kernel">
+                  <i class="bi bi-cpu"></i>
+                </div>
+                <h3 class="component-title">Kernel (Núcleo)</h3>
+                <p class="component-summary">El corazón del sistema operativo</p>
+                <div class="component-stats">
+                  <span class="stat-badge">Core</span>
+                  <span class="priority-level">Crítico</span>
+                </div>
+              </div>
+              <div class="component-back">
+                <h4><i class="bi bi-cpu me-2"></i>Kernel</h4>
+                <div class="component-function">
+                  <h5>Función:</h5>
+                  <p>Gestiona recursos hardware: memoria, CPU, dispositivos E/S, y actúa como intermediario entre software y hardware.</p>
+                </div>
+                <div class="component-examples">
+                  <h5>Ejemplos:</h5>
+                  <div class="examples-list">
+                    <span class="example-tag linux">Linux Kernel</span>
+                    <span class="example-tag windows">NT Kernel</span>
+                    <span class="example-tag macos">XNU Kernel</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interfaz de Usuario -->
+          <div class="component-card scroll-animate" data-component="interface">
+            <div class="component-card-inner">
+              <div class="component-front">
+                <div class="component-icon interface">
+                  <i class="bi bi-window-desktop"></i>
+                </div>
+                <h3 class="component-title">Interfaz de Usuario</h3>
+                <p class="component-summary">Puente usuario-sistema</p>
+                <div class="component-stats">
+                  <span class="stat-badge">UI/UX</span>
+                  <span class="priority-level">Alto</span>
+                </div>
+              </div>
+              <div class="component-back">
+                <h4><i class="bi bi-window-desktop me-2"></i>Interfaz</h4>
+                <div class="component-function">
+                  <h5>Función:</h5>
+                  <p>Mediación usuario-hardware mediante CLI (terminal) o GUI (ventanas), permitiendo interacción intuitiva.</p>
+                </div>
+                <div class="component-examples">
+                  <h5>Ejemplos:</h5>
+                  <div class="examples-list">
+                    <span class="example-tag cli">Bash (CLI)</span>
+                    <span class="example-tag gui">Explorer (GUI)</span>
+                    <span class="example-tag modern">Touch UI</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sistema de Archivos -->
+          <div class="component-card scroll-animate" data-component="filesystem">
+            <div class="component-card-inner">
+              <div class="component-front">
+                <div class="component-icon filesystem">
+                  <i class="bi bi-folder-fill"></i>
+                </div>
+                <h3 class="component-title">Sistema de Archivos</h3>
+                <p class="component-summary">Organización de datos</p>
+                <div class="component-stats">
+                  <span class="stat-badge">Storage</span>
+                  <span class="priority-level">Esencial</span>
+                </div>
+              </div>
+              <div class="component-back">
+                <h4><i class="bi bi-folder-fill me-2"></i>Sistema de Archivos</h4>
+                <div class="component-function">
+                  <h5>Función:</h5>
+                  <p>Organiza y gestiona datos en discos, controla acceso, permisos y estructura jerárquica de directorios.</p>
+                </div>
+                <div class="component-examples">
+                  <h5>Ejemplos:</h5>
+                  <div class="examples-list">
+                    <span class="example-tag ntfs">NTFS (Windows)</span>
+                    <span class="example-tag ext4">ext4 (Linux)</span>
+                    <span class="example-tag apfs">APFS (macOS)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gestor de Memoria -->
+          <div class="component-card scroll-animate" data-component="memory">
+            <div class="component-card-inner">
+              <div class="component-front">
+                <div class="component-icon memory">
+                  <i class="bi bi-memory"></i>
+                </div>
+                <h3 class="component-title">Gestor de Memoria</h3>
+                <p class="component-summary">Administración de RAM</p>
+                <div class="component-stats">
+                  <span class="stat-badge">RAM</span>
+                  <span class="priority-level">Crítico</span>
+                </div>
+              </div>
+              <div class="component-back">
+                <h4><i class="bi bi-memory me-2"></i>Gestor de Memoria</h4>
+                <div class="component-function">
+                  <h5>Función:</h5>
+                  <p>Asigna RAM a procesos, implementa memoria virtual, paginación y gestiona el intercambio (swap).</p>
+                </div>
+                <div class="component-examples">
+                  <h5>Técnicas:</h5>
+                  <div class="examples-list">
+                    <span class="example-tag paging">Paginación</span>
+                    <span class="example-tag swap">Swapping</span>
+                    <span class="example-tag virtual">Memoria Virtual</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gestor de Procesos -->
+          <div class="component-card scroll-animate" data-component="process">
+            <div class="component-card-inner">
+              <div class="component-front">
+                <div class="component-icon process">
+                  <i class="bi bi-diagram-3"></i>
+                </div>
+                <h3 class="component-title">Gestor de Procesos</h3>
+                <p class="component-summary">Control de ejecución</p>
+                <div class="component-stats">
+                  <span class="stat-badge">CPU</span>
+                  <span class="priority-level">Alto</span>
+                </div>
+              </div>
+              <div class="component-back">
+                <h4><i class="bi bi-diagram-3 me-2"></i>Gestor de Procesos</h4>
+                <div class="component-function">
+                  <h5>Función:</h5>
+                  <p>Controla creación, planificación, suspensión y terminación de procesos. Gestiona multitarea y concurrencia.</p>
+                </div>
+                <div class="component-examples">
+                  <h5>Algoritmos:</h5>
+                  <div class="examples-list">
+                    <span class="example-tag scheduler">Round Robin</span>
+                    <span class="example-tag priority">Prioridades</span>
+                    <span class="example-tag thread">Threading</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Controladores de Dispositivos -->
+          <div class="component-card scroll-animate" data-component="drivers">
+            <div class="component-card-inner">
+              <div class="component-front">
+                <div class="component-icon drivers">
+                  <i class="bi bi-usb-drive"></i>
+                </div>
+                <h3 class="component-title">Controladores</h3>
+                <p class="component-summary">Comunicación hardware</p>
+                <div class="component-stats">
+                  <span class="stat-badge">I/O</span>
+                  <span class="priority-level">Medio</span>
+                </div>
+              </div>
+              <div class="component-back">
+                <h4><i class="bi bi-usb-drive me-2"></i>Controladores</h4>
+                <div class="component-function">
+                  <h5>Función:</h5>
+                  <p>Programas que permiten al SO comunicarse con dispositivos específicos como impresoras, tarjetas gráficas, etc.</p>
+                </div>
+                <div class="component-examples">
+                  <h5>Tipos:</h5>
+                  <div class="examples-list">
+                    <span class="example-tag gpu">GPU Drivers</span>
+                    <span class="example-tag audio">Audio Drivers</span>
+                    <span class="example-tag network">Network Drivers</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Diagrama de interacción -->
+        <div class="components-interaction mt-5">
+          <div class="row justify-content-center">
+            <div class="col-lg-10">
+              <div class="interaction-diagram scroll-animate">
+                <h3 class="text-center mb-4">
+                  <i class="bi bi-diagram-2 text-primary me-2"></i>
+                  Interacción entre Componentes
+                </h3>
+                <div class="diagram-container">
+                  <div class="interaction-flow">
+                    <div class="flow-step" data-step="1">
+                      <i class="bi bi-person-fill"></i>
+                      <span>Usuario</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step" data-step="2">
+                      <i class="bi bi-window-desktop"></i>
+                      <span>Interfaz</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step" data-step="3">
+                      <i class="bi bi-cpu"></i>
+                      <span>Kernel</span>
+                    </div>
+                    <div class="flow-arrow">→</div>
+                    <div class="flow-step" data-step="4">
+                      <i class="bi bi-gear"></i>
+                      <span>Hardware</span>
+                    </div>
+                  </div>
+                  <p class="diagram-description text-center mt-3">
+                    Los componentes trabajan en conjunto para procesar las solicitudes del usuario 
+                    y gestionar los recursos del sistema de manera eficiente.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tipos de Sistemas Operativos -->
+    <section class="types-section py-5">
+      <div class="container">
+        <h2 class="text-center mb-5 scroll-animate">
+          <i class="bi bi-diagram-2 text-primary me-2"></i>
+          Tipos de Sistemas Operativos
+        </h2>
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="type-card scroll-animate">
+              <div class="type-header">
+                <i class="bi bi-list-task text-primary"></i>
+                <h4>Por Gestión de Tareas</h4>
+              </div>
+              <div class="type-content">
+                <div class="type-item">
+                  <h6><i class="bi bi-circle-fill text-warning me-2"></i>Monotarea</h6>
+                  <p>Ejecuta un proceso a la vez (ej.: MS-DOS)</p>
+                </div>
+                <div class="type-item">
+                  <h6><i class="bi bi-circle-fill text-success me-2"></i>Multitarea</h6>
+                  <p>Ejecuta múltiples procesos concurrentemente (ej.: Windows, Linux)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="type-card scroll-animate">
+              <div class="type-header">
+                <i class="bi bi-people text-info"></i>
+                <h4>Por Usuarios</h4>
+              </div>
+              <div class="type-content">
+                <div class="type-item">
+                  <h6><i class="bi bi-person-fill text-warning me-2"></i>Monousuario</h6>
+                  <p>Un usuario activo (ej.: Windows 95)</p>
+                </div>
+                <div class="type-item">
+                  <h6><i class="bi bi-people-fill text-success me-2"></i>Multiusuario</h6>
+                  <p>Múltiples usuarios simultáneos (ej.: UNIX, servidores)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="type-card scroll-animate">
+              <div class="type-header">
+                <i class="bi bi-gear text-danger"></i>
+                <h4>Por Especialización</h4>
+              </div>
+              <div class="type-content">
+                <div class="type-item">
+                  <h6><i class="bi bi-stopwatch text-danger me-2"></i>Tiempo Real</h6>
+                  <p>Para sistemas críticos (ej.: control industrial)</p>
+                </div>
+                <div class="type-item">
+                  <h6><i class="bi bi-cpu text-info me-2"></i>Embebidos</h6>
+                  <p>En dispositivos IoT (ej.: FreeRTOS en electrodomésticos)</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Impacto Social y Futuro -->
+    <section class="impact-section py-5">
+      <div class="container">
+        <h2 class="text-center mb-5 scroll-animate">
+          <i class="bi bi-globe text-primary me-2"></i>
+          Impacto Social y Futuro
+        </h2>
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="impact-card scroll-animate">
+              <h4><i class="bi bi-heart text-danger me-2"></i>Impacto Social</h4>
+              <ul class="impact-list">
+                <li><strong>Democratización:</strong> GUI y SO móviles hicieron la tecnología accesible a no expertos</li>
+                <li><strong>Educación:</strong> Plataformas como Moodle (basada en Linux) revolucionaron el e-learning</li>
+                <li><strong>Desafíos:</strong> Seguridad (ransomware), brecha digital y ética en IA</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="future-card scroll-animate">
+              <h4><i class="bi bi-rocket text-success me-2"></i>Futuro</h4>
+              <ul class="future-list">
+                <li><strong>Computación Cuántica:</strong> SO especializados en gestión de qubits (ej.: proyectos de IBM)</li>
+                <li><strong>SO Autónomos:</strong> Auto-reparación y optimización predictiva</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Conclusión y Dato Curioso -->
+    <section class="conclusion-section py-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="conclusion-card scroll-animate">
+              <h2 class="text-center mb-4">
+                <i class="bi bi-award text-warning me-2"></i>
+                Conclusión
+              </h2>
+              <p class="lead text-center mb-4">
+                Desde el Monitor Residente hasta los sistemas distribuidos en la nube, los SO han sido 
+                <strong>catalizadores de la revolución digital</strong>. Su historia es un testimonio de 
+                innovación técnica, desde la abstracción del hardware hasta la creación de ecosistemas globales interconectados.
+              </p>
+              <blockquote class="conclusion-quote">
+                <p>"El sistema operativo es el protocolo básico de operatividad que coordina todas las funciones de comunicaciones, procesamiento e interacción"</p>
+                <footer>— Profesor Eduardo Rueda</footer>
+              </blockquote>
+              
+              <div class="fun-fact mt-5">
+                <h4><i class="bi bi-lightbulb text-warning me-2"></i>¿Sabías que?</h4>
+                <p class="fun-fact-text">
+                  La primera versión de UNIX ocupaba solo <strong>64 KB</strong> de memoria. Hoy, un smartphone 
+                  ejecuta sistemas <strong>500,000 veces más complejos</strong>, evidenciando seis décadas de evolución exponencial.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Enlaces a otros módulos -->
     <section class="modules-section py-5">
       <div class="container">
+        <h2 class="text-center mb-5 scroll-animate">
+          <i class="bi bi-collection text-primary me-2"></i>
+          Explora Más Módulos
+        </h2>
         <div class="row g-4">
           <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-              <div class="card-body text-center">
-                <i class="bi bi-cpu display-4 text-primary mb-3"></i>
-                <h5 class="card-title">Gestión de Procesos</h5>
-                <p class="card-text">Administración y control de procesos del sistema</p>
+            <a href="../GestionProcesos/PrincipalGestionProcesos.html" class="module-link">
+              <div class="module-card h-100 scroll-animate">
+                <div class="module-icon">
+                  <i class="bi bi-cpu"></i>
+                </div>
+                <h5>Gestión de Procesos</h5>
+                <p>Administración y control de procesos del sistema</p>
+                <div class="module-arrow">
+                  <i class="bi bi-arrow-right"></i>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-              <div class="card-body text-center">
-                <i class="bi bi-memory display-4 text-success mb-3"></i>
-                <h5 class="card-title">Gestión de Memoria</h5>
-                <p class="card-text">Manejo eficiente de la memoria del sistema</p>
+            <a href="../GestionMemoria/PrincipalGestionMemoria.html" class="module-link">
+              <div class="module-card h-100 scroll-animate">
+                <div class="module-icon">
+                  <i class="bi bi-memory"></i>
+                </div>
+                <h5>Gestión de Memoria</h5>
+                <p>Manejo eficiente de la memoria del sistema</p>
+                <div class="module-arrow">
+                  <i class="bi bi-arrow-right"></i>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
           <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-              <div class="card-body text-center">
-                <i class="bi bi-hdd display-4 text-warning mb-3"></i>
-                <h5 class="card-title">Gestión de Almacenamiento</h5>
-                <p class="card-text">Organización y control del almacenamiento</p>
+            <a href="../GestionAlmacenamiento/PrincipalGestionAlmacenamiento.html" class="module-link">
+              <div class="module-card h-100 scroll-animate">
+                <div class="module-icon">
+                  <i class="bi bi-hdd"></i>
+                </div>
+                <h5>Gestión de Almacenamiento</h5>
+                <p>Organización y control del almacenamiento</p>
+                <div class="module-arrow">
+                  <i class="bi bi-arrow-right"></i>
+                </div>
               </div>
-            </div>
+            </a>
           </div>
         </div>
       </div>
@@ -87,9 +733,38 @@
 
   <!-- Indicador de progreso de scroll -->
   <div class="scroll-progress"></div>
-
   <!-- Footer Placeholder -->
   <div id="footer-placeholder"></div>
+  <!-- Script inmediato para asegurar visibilidad -->
+  <script>
+    // Asegurar que todo el contenido sea visible inmediatamente
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('.hero-section, .intro-section, .timeline-section, .components-section, .types-section, .impact-section, .conclusion-section, .modules-section');
+      sections.forEach(section => {
+        if (section) {
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0)';
+          section.style.visibility = 'visible';
+          section.style.display = 'block';
+        }
+      });
+      console.log('✅ Contenido forzado a ser visible');
+    });
+    
+    // Fallback adicional
+    setTimeout(() => {
+      const sections = document.querySelectorAll('.hero-section, .intro-section, .timeline-section, .components-section, .types-section, .impact-section, .conclusion-section, .modules-section');
+      sections.forEach(section => {
+        if (section) {
+          section.style.opacity = '1';
+          section.style.transform = 'translateY(0)';
+          section.style.visibility = 'visible';
+          section.style.display = 'block';
+        }
+      });
+      console.log('🆘 Fallback ejecutado');
+    }, 100);
+  </script>
 
   <!-- Scripts -->
   <!-- Bootstrap JS -->
