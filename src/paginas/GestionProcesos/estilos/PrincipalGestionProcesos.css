@@ -343,23 +343,17 @@ body.gestionprocesos-page {
 }
 
 /* ===== LOADING STATES ===== */
-.component-loading .development-section {
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-/* Una vez cargado */
-body:not(.component-loading) .development-section {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.8s ease;
-}
-
-/* Fallback para asegurar visibilidad */
 .development-section {
   opacity: 1;
   transform: translateY(0);
-  transition: all 0.8s ease;
+  display: block;
+  visibility: visible;
+}
+
+.development-card {
+  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 
 body:not(.component-loading) .development-card {

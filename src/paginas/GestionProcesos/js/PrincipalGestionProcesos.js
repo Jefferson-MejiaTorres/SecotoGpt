@@ -43,8 +43,7 @@ class GestionProcesosManager {
     }
     
     console.warn('⚠️ Componentes tardaron en cargar, continuando...');
-  }
-  initializeDevelopmentPage() {
+  }  initializeDevelopmentPage() {
     console.log('🔧 Inicializando página de desarrollo...');
     
     // Verificar que existe la sección de desarrollo
@@ -52,14 +51,21 @@ class GestionProcesosManager {
     if (developmentSection) {
       console.log('✅ Sección de desarrollo encontrada');
       
-      // Hacer visible la sección inmediatamente
+      // Asegurar que la sección sea completamente visible
       developmentSection.style.opacity = '1';
       developmentSection.style.transform = 'translateY(0)';
+      developmentSection.style.display = 'block';
+      developmentSection.style.visibility = 'visible';
       
-      // Agregar efecto de entrada
-      setTimeout(() => {
-        developmentSection.classList.add('animate__animated', 'animate__fadeInUp');
-      }, 300);
+      // También para la tarjeta
+      const developmentCard = document.querySelector('.development-card');
+      if (developmentCard) {
+        developmentCard.style.opacity = '1';
+        developmentCard.style.display = 'block';
+        developmentCard.style.visibility = 'visible';
+      }
+      
+      console.log('✅ Sección de desarrollo configurada como visible');
     } else {
       console.warn('⚠️ Sección de desarrollo no encontrada');
     }
