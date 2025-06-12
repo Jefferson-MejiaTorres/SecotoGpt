@@ -690,9 +690,6 @@ Consulta el archivo [LICENSE](LICENSE) para más detalles.
 *Lead Developer & Educational Designer*
 
 [![GitHub](https://img.shields.io/badge/GitHub-Jefferson--MejiaTorres-181717?style=for-the-badge&logo=github)](https://github.com/Jefferson-MejiaTorres)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Jefferson%20Mejía-0077B5?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/jefferson-mejia-torres)
-[![Email](https://img.shields.io/badge/Email-secotogpt%40universidad.edu-D14836?style=for-the-badge&logo=gmail)](mailto:secotogpt@universidad.edu)
-[![Portfolio](https://img.shields.io/badge/Portfolio-En%20Construcción-FF6B6B?style=for-the-badge&logo=react)](https://jefferson-portfolio.vercel.app)
 
 </div>
 
