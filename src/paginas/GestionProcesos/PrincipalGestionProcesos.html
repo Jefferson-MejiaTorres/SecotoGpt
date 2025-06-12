@@ -1,106 +1,191 @@
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gestión de Procesos - SeCoToGpt</title>
-  
-  <!-- Cache Control Meta Tags -->
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
   <!-- Tailwind CSS compilado -->
-  <link href="../../../public/tailwind.css?v=1749743578903.90ad2z?v=1749743560255.pcpzbw" rel="stylesheet">
+  <link href="../../../public/tailwind.css" rel="stylesheet">
   <!-- Estilos principales -->
-  <link href="../../estilos/principal.css?v=1749743578903.90ad2z?v=1749743560255.pcpzbw" rel="stylesheet">
+  <link href="../../estilos/principal.css" rel="stylesheet">
   <!-- Estilos header/footer -->
-  <link href="../../estilos/header-modern.css?v=1749743578903.90ad2z?v=1749743560255.pcpzbw" rel="stylesheet">
-  <link href="../../estilos/menu-mobile-fix.css?v=1749743578903.90ad2z?v=1749743560255.pcpzbw" rel="stylesheet">
-  <link href="../../estilos/footer-modern.css?v=1749743578903.90ad2z?v=1749743560255.pcpzbw" rel="stylesheet">
+  <link href="../../estilos/header-modern.css" rel="stylesheet">
+  <link href="../../estilos/menu-mobile-fix.css" rel="stylesheet">
+  <link href="../../estilos/footer-modern.css" rel="stylesheet">
   <!-- Estilos comunes de Página Principal -->
-  <link href="../../PaginaPrincipal/estilos/pagina-principal.css?v=1749743578903.90ad2z?v=1749743560255.pcpzbw" rel="stylesheet">
-  <link href="../../PaginaPrincipal/estilos/efectos-especiales.css?v=1749743578903.90ad2z?v=1749743560255.pcpzbw" rel="stylesheet">
+  <link href="../../PaginaPrincipal/estilos/pagina-principal.css" rel="stylesheet">
+  <link href="../../PaginaPrincipal/estilos/efectos-especiales.css" rel="stylesheet">
   <!-- Estilos específicos de Gestión de Procesos -->
-  <link href="./estilos/PrincipalGestionProcesos.css?v=1749743578903.90ad2z?v=1749743560255.pcpzbw" rel="stylesheet">
+  <link href="./estilos/PrincipalGestionProcesos.css" rel="stylesheet">
   <!-- Favicon -->
   <link rel="icon" href="../../../imagenes/logo_secotogpt.svg">
   <!-- Animate.css para animaciones -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
   <!-- Google Fonts Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-500 gestionprocesos-page component-loading">
+
+<body
+  class="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-500 gestionprocesos-page component-loading">
   <!-- Header Placeholder -->
   <div id="header-placeholder"></div>
+
   <!-- Contenido principal -->
-  <main class="main-content container-fluid">
-    <!-- Sección de página en desarrollo -->
-    <section class="development-section py-5">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8 col-xl-6">
-            <div class="development-card">
-              <div class="development-card-inner">
-                <div class="development-card-body text-center p-5">
-                  <!-- Icono principal animado -->
-                  <div class="development-icon-container mb-4">
-                    <i class="bi bi-cpu development-icon"></i>
-                    <div class="development-pulse-1"></div>
-                    <div class="development-pulse-2"></div>
-                    <div class="development-pulse-3"></div>
-                  </div>
-                  
-                  <!-- Título principal -->
-                  <h1 class="development-title mb-4">
-                    Gestión de Procesos
-                  </h1>
-                    <!-- Mensaje de desarrollo -->
-                  <div class="development-message mb-4">
-                    <h3 class="mb-3">
-                      <i class="bi bi-gear-fill me-2"></i>
-                      Página en Desarrollo
-                    </h3>
-                    <p class="development-text">
-                      Estamos trabajando arduamente para brindarte el mejor contenido sobre 
-                      <strong>Gestión de Procesos</strong> en sistemas operativos.
-                    </p>
-                    <p class="development-subtext">
-                      Pronto tendrás acceso a simuladores interactivos, ejercicios prácticos 
-                      y explicaciones detalladas sobre planificación de procesos, estados, 
-                      hilos y comunicación entre procesos.
-                    </p>
-                  </div>
-                  
-                  <!-- Barra de progreso -->
-                  <div class="development-progress mb-4">
-                    <div class="development-progress-bar">
-                      <div class="development-progress-fill"></div>
-                    </div>
-                    <small class="development-progress-text">Desarrollo en progreso...</small>
-                  </div>
-                  
-                  <!-- Botón de regreso -->
-                  <div class="development-actions">
-                    <button onclick="window.history.back()" class="btn-development">
-                      <i class="bi bi-arrow-left me-2"></i>
-                      Volver Atrás
-                    </button>
-                    <button onclick="window.location.href='../../../secotogpt.html'" class="btn-development btn-development-primary">
-                      <i class="bi bi-house me-2"></i>
-                      Ir al Inicio
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <main class="container" role="main" aria-label="Contenido principal de gestión de procesos">
+    <h1 tabindex="0">Gestión de Procesos en Sistemas Operativos</h1>
+    <p class="typing-animate" tabindex="0">
+      A continuación se presenta un compendio de los conceptos fundamentales sobre la gestión de procesos, extraídos de
+      los materiales proporcionados, junto con información adicional actualizada y de valor estratégico.
+    </p>
+
+    <section class="container" aria-labelledby="definicionProceso" tabindex="0">
+      <h2 id="definicionProceso">
+        <span class="material-icons" aria-hidden="true"></span>
+        <i class="bi bi-arrow-right-circle"></i>
+        1. Definición de Proceso
+      </h2>
+      <ul>
+        <li><strong>Programa vs. Proceso</strong>: Un programa es un conjunto pasivo de instrucciones, mientras que un
+          proceso es un programa en ejecución que utiliza recursos del sistema: CPU, dispositivos de E/S, etc.</li>
+        <li><strong>Proceso</strong>: Entidad activa con contexto de ejecución y su propio contador de programa.</li>
+      </ul>
+
+      <h2 ><span class="material-icons" aria-hidden="true"></span>
+        <i class="bi bi-file-earmark-text"></i> 2. Ciclo de Vida de un Proceso</h2>
+      <ul>
+        <li><strong>Estados</strong>:
+          <ul>
+            <li><strong>Nuevo</strong>: Proceso creado.</li>
+            <li><strong>Listo</strong>: Espera asignación de CPU.</li>
+            <li><strong>Ejecutando</strong>: Se ejecuta en la CPU.</li>
+            <li><strong>Esperando/Bloqueado</strong>: A la espera de un evento o recurso.</li>
+            <li><strong>Terminado</strong>: Finalizó su ejecución.</li>
+          </ul>
+        </li>
+        <li><strong>Transiciones de estado</strong>: Nuevo → Listo → Ejecutando → Esperando/Listo/Terminado.</li>
+      </ul>
+
+      <h2><span class="material-icons" aria-hidden="true"></span> 
+        <i class="bi bi-gear"> </i>3. Estructura de un Proceso (PCB)</h2>
+      <p>El <strong>Process Control Block (PCB)</strong> almacena la información necesaria para gestionar un proceso:
+      </p>
+      <ul>
+        <li>Identificador (PID)</li>
+        <li>Estado actual</li>
+        <li>Contador de programa</li>
+        <li>Registros de CPU</li>
+        <li>Información de planificación (prioridad, quantum)</li>
+        <li>Recursos de E/S y comunicación interprocesos (pipes, colas)</li>
+      </ul>
+
+      <h2><span class="material-icons" aria-hidden="true"></span>
+        <i class="bi bi-list-check"></i> 4. Tipos de Procesos y Jerarquía</h2>
+      <ul>
+        <li><strong>Independientes vs. Interdependientes</strong>: Dependen o no de recursos o datos de otros procesos.
+        </li>
+        <li><strong>Usuario vs. Sistema</strong>: Iniciados por el usuario o por el propio SO.</li>
+        <li><strong>Primer plano vs. Segundo plano</strong>: Requieren o no interacción directa con el usuario.</li>
+        <li><strong>Padre e Hijo</strong>: Relación jerárquica en la creación (fork, CreateProcess).</li>
+      </ul>
+
+      <h2><span class="material-icons" aria-hidden="true"></span> 
+        <i class="bi bi-file-earmark"></i>
+        5. Planificación de Procesos</h2>
+      <p><strong>Objetivos</strong>: Equidad, eficiencia, tiempo de respuesta y utilización de la CPU.</p>
+
+      <div class="table-responsive">
+        <table aria-describedby="descripcionPlanificacion" role="table" tabindex="0">
+          <caption id="descripcionPlanificacion" class="sr-only">Descripción de algoritmos de planificación de procesos
+          </caption>
+          <thead>
+            <tr>
+              <th> text Algoritmo</th>
+              <th scope="colgroup" >breve</th>
+              <th scope="col">Ventaja</th>
+              <th scope="col">Desventaja</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>FCFS</td>
+              <td>Orden de llegada</td>
+              <td>Simple</td>
+              <td>Efecto convoy</td>
+            </tr>
+            <tr>
+              <td>SJF</td>
+              <td>Prioriza el trabajo más corto</td>
+              <td>Minimiza espera media</td>
+              <td>Posible inanición</td>
+            </tr>
+            <tr>
+              <td>Round Robin</td>
+              <td>Quantum fijo por proceso</td>
+              <td>Equidad, predecible</td>
+              <td>Depende del tamaño del quantum</td>
+            </tr>
+            <tr>
+              <td>Prioridades</td>
+              <td>Según nivel de prioridad</td>
+              <td>Control de urgencia</td>
+              <td>Inanición de baja prioridad</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
+      <h2><span class="material-icons" aria-hidden="true"></span> <i class="bi bi-arrow-right"></i>6. Sincronización e Interbloqueo</h2>
+      <ul>
+        <li><strong>Sincronización</strong>: Asegura acceso ordenado a recursos compartidos.
+          <ul>
+            <li>Semáforos, mutex, monitores.</li>
+          </ul>
+        </li>
+        <li><strong>Condiciones de Interbloqueo</strong>:
+          <ol>
+            <li>Exclusión mutua</li>
+            <li>Retención y espera</li>
+            <li>No apropiación</li>
+            <li>Espera circular</li>
+          </ol>
+        </li>
+        <li><strong>Prevención y recuperación</strong>: Algoritmo del banquero, detección y reinicio de procesos.</li>
+      </ul>
+
+      <h2><span class="material-icons" aria-hidden="true"></span>
+        <i class="bi bi-file-earmark"></i> 7. Hilos (Threads)</h2>
+      <ul>
+        <li>Unidad más pequeña de ejecución dentro de un proceso. Comparten espacio de direcciones.</li>
+        <li><strong>Modelos de hilos</strong>: Usuario, kernel, híbrido.</li>
+        <li><strong>Ventajas</strong>: Menor sobrecarga, paralelismo real, comunicación rápida.</li>
+        <li><strong>Problemas</strong>: Condiciones de carrera, deadlock, starvation.</li>
+      </ul>
+    </section>
+
+    <section class="container" aria-labelledby="infoAdicional" tabindex="0">
+      <h2 id="infoAdicional"><span class="material-icons" aria-hidden="true"></span> 
+        <i class="bi bi-file-earmark-text"></i>Información Adicional y Tendencias
+        Actuales</h2>
+      <ul>
+        <li><strong>Planificadores Multinivel y Feedback</strong>: Sistemas modernos (Linux CFS, Windows Scheduler) usan
+          colas multinivel con retroalimentación dinámica para equilibrar interactividad y throughput.</li>
+        <li><strong>Sistemas en Tiempo Real</strong>: Algoritmos Rate Monotonic (RMS) y Earliest Deadline First (EDF)
+          garantizan plazos críticos en aplicaciones embebidas.</li>
+        <li><strong>Contenerización y Microservicios</strong>: Docker y Kubernetes aíslan procesos en contenedores,
+          gestionando recursos con cgroups y namespaces.</li>
+        <li><strong>Observabilidad y Métricas</strong>: Herramientas como <code>htop</code>, <code>perf</code> y
+          sistemas de telemetría (Prometheus) permiten medir utilización de CPU, latencias y cuellos de botella.</li>
+        <li><strong>Procesos Ligthweight y Servidores Asíncronos</strong>: Arquitecturas basadas en eventos (Node.js,
+          Golang goroutines) optimizan la concurrencia sin hilos pesados.</li>
+        <li><strong>Seguridad y Sandboxing</strong>: Tecnologías como SELinux, AppArmor y sandboxing de navegadores
+          aíslan procesos para minimizar riesgos.</li>
+      </ul>
     </section>
   </main>
 
@@ -109,26 +194,24 @@
 
   <!-- Footer Placeholder -->
   <div id="footer-placeholder"></div>
+
   <!-- Scripts -->
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  
-  <!-- Cache Buster (debe cargarse primero) -->
-  <script src="../../utils/cache-buster.js?v=1749743578903.90ad2z?v=1749743560255.pcpzbw"></script>
-  
   <!-- Component Loader -->
-  <script src="../../componentes/componentLoader.js?v=1749743578903.90ad2z?v=1749743560255.pcpzbw"></script>
+  <script src="../../componentes/componentLoader.js"></script>
   <!-- Header Modern JS -->
-  <script src="../../componentes/header-modern.js?v=1749743578903.90ad2z?v=1749743560255.pcpzbw"></script>
+  <script src="../../componentes/header-modern.js"></script>
   <!-- Menu Mobile Debug JS -->
-  <script src="../../componentes/menu-mobile-debug.js?v=1749743578903.90ad2z?v=1749743560255.pcpzbw"></script>
+  <script src="../../componentes/menu-mobile-debug.js"></script>
   <!-- Search URL Fix JS -->
-  <script src="../../componentes/search-url-fix.js?v=1749743578903.90ad2z?v=1749743560255.pcpzbw"></script>
+  <script src="../../componentes/search-url-fix.js"></script>
   <!-- Dark Mode Toggle JS -->
-  <script src="../../componentes/modoOscuro.js?v=1749743578903.90ad2z?v=1749743560255.pcpzbw"></script>
+  <script src="../../componentes/modoOscuro.js"></script>
   <!-- Footer Functionality JS -->
-  <script src="../../componentes/footer.js?v=1749743578903.90ad2z?v=1749743560255.pcpzbw"></script>
+  <script src="../../componentes/footer.js"></script>
   <!-- JS específico de la página -->
-  <script src="js/PrincipalGestionProcesos.js?v=1749743578903.90ad2z?v=1749743560255.pcpzbw"></script>
+  <script src="js/PrincipalGestionProcesos.js"></script>
 </body>
+
 </html>
