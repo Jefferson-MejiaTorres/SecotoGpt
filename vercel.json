@@ -22,8 +22,50 @@
       "source": "/gestion-almacenamiento",
       "destination": "/src/paginas/GestionAlmacenamiento/PrincipalGestionAlmacenamiento.html"
     }
-  ],
-  "headers": [
+  ],  "headers": [
+    {
+      "source": "/(.*\\.(html|htm))$",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options", 
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(css|js))$",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(ico|jpg|jpeg|png|gif|svg|webp|woff|woff2|ttf|eot))$",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
     {
       "source": "/(.*)",
       "headers": [
@@ -41,7 +83,7 @@
         },
         {
           "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "value": "public, max-age=3600"
         }
       ]
     }

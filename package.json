@@ -4,10 +4,13 @@
   "description": "Una plataforma educativa interactiva para el aprendizaje de Sistemas Operativos y Plataformas Tecnológicas",
   "main": "secotogpt.html",
   "scripts": {
-    "build": "postcss ./src/estilos/principal.css -o ./public/tailwind.css",
+    "build": "npm run build-css && npm run cache-bust",
+    "build-css": "postcss ./src/estilos/principal.css -o ./public/tailwind.css",
+    "cache-bust": "node ./scripts/cache-bust.js",
     "dev": "npm run build && npx live-server --port=3000 --open=/secotogpt.html",
-    "build-css": "postcss ./src/estilos/principal.css -o ./public/tailwind.css --watch",
-    "start": "npm run dev"
+    "build-css-watch": "postcss ./src/estilos/principal.css -o ./public/tailwind.css --watch",
+    "start": "npm run dev",
+    "deploy": "npm run build && echo 'Ready for deployment'"
   },
   "repository": {
     "type": "git",
