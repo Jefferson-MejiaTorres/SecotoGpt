@@ -1230,6 +1230,49 @@ body.sistemasoperativos-page {
   }
 }
 
+/* ===== DESHABILITAR EFECTOS FLIP EN MÓVIL ===== */
+/* Eliminar completamente efectos de toque y flip en dispositivos móviles */
+@media (max-width: 768px) {
+  .component-card,
+  .component-card:hover,
+  .component-card:active,
+  .component-card:focus,
+  .component-card.flipped {
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .component-card-inner {
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .component-card.flipped .component-card-inner {
+    transform: none !important;
+  }
+  
+  /* Eliminar indicadores de toque */
+  .component-front::after,
+  .component-back::after {
+    display: none !important;
+  }
+  
+  /* Deshabilitar cursor pointer en móvil */
+  .component-card {
+    cursor: default !important;
+    pointer-events: auto !important;
+  }
+  
+  /* Asegurar que solo se muestre el frente */
+  .component-back {
+    display: none !important;
+  }
+  
+  .component-front {
+    display: flex !important;
+  }
+}
+
 /* ===== ANIMACIONES ADICIONALES ===== */
 .component-card {
   animation: fadeInUp 0.6s ease forwards;

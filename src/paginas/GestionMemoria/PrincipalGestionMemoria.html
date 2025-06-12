@@ -31,81 +31,66 @@
 <body class="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-500 gestionmemoria-page component-loading">
   <!-- Header Placeholder -->
   <div id="header-placeholder"></div>
-
   <!-- Contenido principal -->
   <main class="main-content container-fluid">
-    <!-- Hero Section - Gestión de Memoria -->
-    <section class="hero-section py-5">
+    <!-- Sección de página en desarrollo -->
+    <section class="development-section py-5">
       <div class="container">
-        <div class="row justify-content-center text-center">
-          <div class="col-lg-8">
-            <h1 class="display-4 fw-bold mb-4 animate__animated animate__fadeInUp">
-              <i class="bi bi-memory text-success me-3"></i>
-              Gestión de Memoria
-            </h1>
-            <p class="lead mb-4 animate__animated animate__fadeInUp animate__delay-1s">
-              Descubre cómo los sistemas operativos administran la memoria RAM, virtual y física
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Sección de conceptos principales -->
-    <section class="concepts-section py-5">
-      <div class="container">
-        <div class="row g-4">
-          <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-              <div class="card-body text-center">
-                <i class="bi bi-ram display-4 text-success mb-3"></i>
-                <h5 class="card-title">Memoria Física</h5>
-                <p class="card-text">Gestión directa de la memoria RAM del sistema</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-              <div class="card-body text-center">
-                <i class="bi bi-cloud-upload display-4 text-info mb-3"></i>
-                <h5 class="card-title">Memoria Virtual</h5>
-                <p class="card-text">Extensión de la memoria física usando almacenamiento secundario</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-              <div class="card-body text-center">
-                <i class="bi bi-grid-3x3 display-4 text-warning mb-3"></i>
-                <h5 class="card-title">Paginación</h5>
-                <p class="card-text">División de la memoria en páginas de tamaño fijo</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-              <div class="card-body text-center">
-                <i class="bi bi-segmented-nav display-4 text-danger mb-3"></i>
-                <h5 class="card-title">Segmentación</h5>
-                <p class="card-text">Organización de memoria en segmentos lógicos</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-              <div class="card-body text-center">
-                <i class="bi bi-recycle display-4 text-primary mb-3"></i>
-                <h5 class="card-title">Recolección de Basura</h5>
-                <p class="card-text">Liberación automática de memoria no utilizada</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4">
-            <div class="card h-100 border-0 shadow-sm">
-              <div class="card-body text-center">
-                <i class="bi bi-speedometer display-4 text-secondary mb-3"></i>
-                <h5 class="card-title">Optimización</h5>
-                <p class="card-text">Técnicas para mejorar el uso eficiente de la memoria</p>
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-xl-6">
+            <div class="development-card">
+              <div class="development-card-inner">
+                <div class="development-card-body text-center p-5">
+                  <!-- Icono principal animado -->
+                  <div class="development-icon-container mb-4">
+                    <i class="bi bi-memory development-icon"></i>
+                    <div class="development-pulse-1"></div>
+                    <div class="development-pulse-2"></div>
+                    <div class="development-pulse-3"></div>
+                  </div>
+                  
+                  <!-- Título principal -->
+                  <h1 class="development-title mb-4">
+                    Gestión de Memoria
+                  </h1>
+                  
+                  <!-- Mensaje de desarrollo -->
+                  <div class="development-message mb-4">
+                    <h3 class="mb-3">
+                      <i class="bi bi-gear-fill me-2"></i>
+                      Página en Desarrollo
+                    </h3>
+                    <p class="development-text">
+                      Estamos trabajando arduamente para brindarte el mejor contenido sobre 
+                      <strong>Gestión de Memoria</strong> en sistemas operativos.
+                    </p>
+                    <p class="development-subtext">
+                      Pronto tendrás acceso a simuladores interactivos, ejercicios prácticos 
+                      y explicaciones detalladas sobre memoria física, virtual, paginación, 
+                      segmentación y técnicas de optimización.
+                    </p>
+                  </div>
+                  
+                  <!-- Barra de progreso -->
+                  <div class="development-progress mb-4">
+                    <div class="development-progress-bar">
+                      <div class="development-progress-fill"></div>
+                    </div>
+                    <small class="development-progress-text">Desarrollo en progreso...</small>
+                  </div>
+                  
+                  <!-- Botón de regreso -->
+                  <div class="development-actions">
+                    <button onclick="window.history.back()" class="btn-development">
+                      <i class="bi bi-arrow-left me-2"></i>
+                      Volver Atrás
+                    </button>
+                    <button onclick="window.location.href='../../../secotogpt.html'" class="btn-development btn-development-primary">
+                      <i class="bi bi-house me-2"></i>
+                      Ir al Inicio
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

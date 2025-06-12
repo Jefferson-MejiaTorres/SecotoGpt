@@ -1,5 +1,5 @@
 /* ===== ESTILOS ESPECÍFICOS PÁGINA GESTIÓN DE PROCESOS ===== */
-/* Diseño moderno con animaciones y efectos específicos para procesos */
+/* Diseño moderno con tarjeta de desarrollo y efectos especiales */
 
 /* ===== VARIABLES CSS ===== */
 :root {
@@ -8,6 +8,13 @@
   --process-secondary: #6610f2;
   --process-accent: #e21cff;
   --process-gradient: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+  
+  /* Colores para desarrollo */
+  --dev-bg: #ffffff;
+  --dev-text: #2c3e50;
+  --dev-border: #e9ecef;
+  --dev-shadow: rgba(0, 0, 0, 0.1);
+  --dev-accent: #f8f9fa;
   
   /* Efectos y sombras */
   --process-glow: 0 0 20px rgba(13, 110, 253, 0.3);
@@ -19,219 +26,353 @@
   --process-primary: #4285f4;
   --process-secondary: #8b5cf6;
   --process-accent: #f444f4;
+  
+  /* Colores para desarrollo en modo oscuro */
+  --dev-bg: #1a1a1a;
+  --dev-text: #e9ecef;
+  --dev-border: #343a40;
+  --dev-shadow: rgba(0, 0, 0, 0.3);
+  --dev-accent: #2d3436;
 }
 
 /* ===== ESTILOS GLOBALES ===== */
 body.gestionprocesos-page {
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ===== HERO SECTION ===== */
-.hero-section {
-  background: var(--process-gradient);
-  color: white;
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+}
+
+/* ===== SECCIÓN DE DESARROLLO ===== */
+.development-section {
+  padding: 3rem 0;
+}
+
+.development-card {
+  background: var(--dev-bg);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px var(--dev-shadow);
+  border: 1px solid var(--dev-border);
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-.hero-section::before {
+.development-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 80px var(--dev-shadow);
+}
+
+.development-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="3" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.08)"/><circle cx="80" cy="80" r="3" fill="rgba(255,255,255,0.12)"/><line x1="20" y1="20" x2="50" y2="50" stroke="rgba(255,255,255,0.1)" stroke-width="1"/><line x1="50" y1="50" x2="80" y2="80" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></svg>') repeat;
-  opacity: 0.3;
+  height: 4px;
+  background: var(--process-gradient);
 }
 
-.hero-section .container {
+.development-card-inner {
   position: relative;
   z-index: 2;
 }
 
-.hero-section h1 {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+.development-card-body {
+  color: var(--dev-text);
 }
 
-/* ===== SECCIÓN DE CONCEPTOS ===== */
-.concepts-section {
-  padding: 4rem 0;
-}
-
-.concepts-section .card {
-  transition: all 0.3s ease;
-  border-radius: 15px;
-  overflow: hidden;
+/* ===== ICONO PRINCIPAL ANIMADO ===== */
+.development-icon-container {
   position: relative;
-  border: 2px solid transparent;
+  display: inline-block;
+  width: 120px;
+  height: 120px;
 }
 
-.concepts-section .card::before {
-  content: '';
+.development-icon {
+  font-size: 4rem;
+  color: var(--process-primary);
+  position: relative;
+  z-index: 10;
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 120px;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+
+.development-pulse-1,
+.development-pulse-2,
+.development-pulse-3 {
   position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: var(--process-gradient);
-  border-radius: 15px;
-  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--process-primary);
+  border-radius: 50%;
   opacity: 0;
-  transition: opacity 0.3s ease;
 }
 
-.concepts-section .card:hover::before {
-  opacity: 1;
+.development-pulse-1 {
+  width: 100px;
+  height: 100px;
+  animation: pulse 2s infinite;
 }
 
-.concepts-section .card:hover {
-  transform: translateY(-10px) rotateX(5deg);
-  box-shadow: var(--process-shadow);
+.development-pulse-2 {
+  width: 120px;
+  height: 120px;
+  animation: pulse 2s infinite 0.3s;
 }
 
-.concepts-section .card-body {
-  padding: 2rem;
-  background: white;
-  border-radius: 13px;
-  position: relative;
-  z-index: 1;
+.development-pulse-3 {
+  width: 140px;
+  height: 140px;
+  animation: pulse 2s infinite 0.6s;
 }
 
-.dark .concepts-section .card-body {
-  background: var(--color-bg);
-}
-
-.concepts-section .bi {
-  transition: all 0.3s ease;
-}
-
-.concepts-section .card:hover .bi {
-  transform: scale(1.2) rotate(360deg);
-  filter: drop-shadow(var(--process-glow));
-}
-
-/* ===== ANIMACIONES ===== */
-@keyframes processFlow {
-  0% { 
-    transform: translateX(-10px);
-    opacity: 0.7;
-  }
-  50% { 
-    transform: translateX(10px);
-    opacity: 1;
-  }
-  100% { 
-    transform: translateX(-10px);
-    opacity: 0.7;
-  }
-}
-
-@keyframes processQueue {
-  0%, 100% { 
-    transform: scale(1) rotate(0deg);
-  }
-  25% { 
-    transform: scale(1.1) rotate(90deg);
-  }
-  50% { 
-    transform: scale(1) rotate(180deg);
-  }
-  75% { 
-    transform: scale(1.1) rotate(270deg);
-  }
-}
-
-.concepts-section .card:nth-child(1) {
-  animation: processFlow 3s ease-in-out infinite;
-}
-
-.concepts-section .card:nth-child(2) {
-  animation: processFlow 3s ease-in-out infinite 0.5s;
-}
-
-.concepts-section .card:nth-child(3) {
-  animation: processFlow 3s ease-in-out infinite 1s;
-}
-
-.concepts-section .card:nth-child(4) {
-  animation: processQueue 6s linear infinite;
-}
-
-.concepts-section .card:nth-child(5) {
-  animation: processQueue 6s linear infinite 2s;
-}
-
-.concepts-section .card:nth-child(6) {
-  animation: processQueue 6s linear infinite 4s;
-}
-
-/* ===== EFECTOS ESPECÍFICOS DE PROCESOS ===== */
-.process-highlight {
+/* ===== TÍTULOS Y TEXTO ===== */
+.development-title {
+  font-size: 2.5rem;
+  font-weight: 700;
   background: var(--process-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-weight: 700;
+  margin-bottom: 2rem;
 }
 
-.process-indicator {
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
+.development-message h3 {
+  color: var(--process-primary);
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.development-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--dev-text);
+  margin-bottom: 1rem;
+}
+
+.development-subtext {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--dev-text);
+  opacity: 0.8;
+}
+
+/* ===== BARRA DE PROGRESO ===== */
+.development-progress {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.development-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--dev-accent);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.development-progress-fill {
+  height: 100%;
+  background: var(--process-gradient);
+  border-radius: 20px;
+  width: 65%;
+  animation: progressFill 3s ease-in-out infinite;
+}
+
+.development-progress-text {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--dev-text);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* ===== BOTONES ===== */
+.development-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-development {
+  padding: 12px 24px;
+  border: 2px solid var(--process-primary);
+  border-radius: 25px;
+  background: transparent;
+  color: var(--process-primary);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-development:hover {
   background: var(--process-primary);
-  margin-right: 8px;
-  animation: processPulse 2s ease-in-out infinite;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(13, 110, 253, 0.3);
 }
 
-@keyframes processPulse {
-  0%, 100% { 
-    opacity: 1;
-    transform: scale(1);
+.btn-development-primary {
+  background: var(--process-gradient);
+  color: white;
+  border: none;
+}
+
+.btn-development-primary:hover {
+  background: var(--process-gradient);
+  color: white;
+  filter: brightness(1.1);
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0);
   }
-  50% { 
-    opacity: 0.5;
-    transform: scale(1.3);
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+@keyframes progressFill {
+  0%, 100% {
+    width: 65%;
+  }
+  50% {
+    width: 75%;
   }
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .hero-section h1 {
-    font-size: 2.5rem;
+  .development-title {
+    font-size: 2rem;
   }
   
-  .concepts-section .card-body {
-    padding: 1.5rem;
+  .development-card-body {
+    padding: 2rem 1.5rem;
   }
   
-  .concepts-section .card:hover {
-    transform: translateY(-5px);
+  .development-icon {
+    font-size: 3rem;
+  }
+  
+  .development-icon-container {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .development-icon {
+    line-height: 100px;
+  }
+  
+  .development-pulse-1 {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .development-pulse-2 {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .development-pulse-3 {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .development-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-development {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .development-title {
+    font-size: 1.75rem;
+  }
+  
+  .development-text {
+    font-size: 1rem;
+  }
+  
+  .development-message h3 {
+    font-size: 1.25rem;
   }
 }
 
 /* ===== LOADING STATES ===== */
-.component-loading .hero-section {
+.component-loading .development-section {
   opacity: 0;
   transform: translateY(30px);
 }
 
-.component-loading .concepts-section {
-  opacity: 0;
-  transform: translateY(50px);
-}
-
 /* Una vez cargado */
-body:not(.component-loading) .hero-section {
+body:not(.component-loading) .development-section {
   opacity: 1;
   transform: translateY(0);
   transition: all 0.8s ease;
 }
 
-body:not(.component-loading) .concepts-section {
+/* Fallback para asegurar visibilidad */
+.development-section {
   opacity: 1;
   transform: translateY(0);
-  transition: all 1s ease 0.3s;
+  transition: all 0.8s ease;
+}
+
+body:not(.component-loading) .development-card {
+  animation: cardEntrance 1s ease;
+}
+
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

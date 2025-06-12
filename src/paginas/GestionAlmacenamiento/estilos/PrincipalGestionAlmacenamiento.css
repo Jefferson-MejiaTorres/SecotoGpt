@@ -1,143 +1,378 @@
 /* ===== ESTILOS ESPECÍFICOS PÁGINA GESTIÓN DE ALMACENAMIENTO ===== */
-/* Diseño moderno con animaciones y efectos específicos para almacenamiento */
+/* Diseño moderno con tarjeta de desarrollo y efectos especiales */
 
 /* ===== VARIABLES CSS ===== */
 :root {
   /* Colores específicos para almacenamiento */
-  --storage-primary: #ffc107;
-  --storage-secondary: #fd7e14;
-  --storage-accent: #20c997;
-  --storage-gradient: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+  --storage-primary: #8b5cf6;
+  --storage-secondary: #a855f7;
+  --storage-accent: #c084fc;
+  --storage-gradient: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+  
+  /* Colores para desarrollo */
+  --dev-bg: #ffffff;
+  --dev-text: #2c3e50;
+  --dev-border: #e9ecef;
+  --dev-shadow: rgba(0, 0, 0, 0.1);
+  --dev-accent: #f8f9fa;
   
   /* Efectos y sombras */
-  --storage-glow: 0 0 20px rgba(255, 193, 7, 0.3);
-  --storage-shadow: 0 4px 15px rgba(255, 193, 7, 0.2);
+  --storage-glow: 0 0 20px rgba(139, 92, 246, 0.3);
+  --storage-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
 }
 
 /* Modo oscuro */
 .dark {
-  --storage-primary: #ffcd39;
-  --storage-secondary: #ff8c42;
-  --storage-accent: #26d0ce;
+  --storage-primary: #9f7aea;
+  --storage-secondary: #b794f6;
+  --storage-accent: #d6bcfa;
+  
+  /* Colores para desarrollo en modo oscuro */
+  --dev-bg: #1a1a1a;
+  --dev-text: #e9ecef;
+  --dev-border: #343a40;
+  --dev-shadow: rgba(0, 0, 0, 0.3);
+  --dev-accent: #2d3436;
 }
 
 /* ===== ESTILOS GLOBALES ===== */
 body.gestionalmacenamiento-page {
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* ===== HERO SECTION ===== */
-.hero-section {
-  background: var(--storage-gradient);
-  color: white;
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 200px);
+}
+
+/* ===== SECCIÓN DE DESARROLLO ===== */
+.development-section {
+  padding: 3rem 0;
+}
+
+.development-card {
+  background: var(--dev-bg);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px var(--dev-shadow);
+  border: 1px solid var(--dev-border);
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
 
-.hero-section::before {
+.development-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 80px var(--dev-shadow);
+}
+
+.development-card::before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
-  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-  opacity: 0.3;
+  height: 4px;
+  background: var(--storage-gradient);
 }
 
-.hero-section .container {
+.development-card-inner {
   position: relative;
   z-index: 2;
 }
 
-.hero-section h1 {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+.development-card-body {
+  color: var(--dev-text);
 }
 
-/* ===== SECCIÓN DE CONCEPTOS ===== */
-.concepts-section {
-  padding: 4rem 0;
+/* ===== ICONO PRINCIPAL ANIMADO ===== */
+.development-icon-container {
+  position: relative;
+  display: inline-block;
+  width: 120px;
+  height: 120px;
 }
 
-.concepts-section .card {
-  transition: all 0.3s ease;
-  border-radius: 15px;
-  overflow: hidden;
+.development-icon {
+  font-size: 4rem;
+  color: var(--storage-primary);
+  position: relative;
+  z-index: 10;
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 120px;
+  animation: iconFloat 3s ease-in-out infinite;
 }
 
-.concepts-section .card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--storage-shadow);
+.development-pulse-1,
+.development-pulse-2,
+.development-pulse-3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--storage-primary);
+  border-radius: 50%;
+  opacity: 0;
 }
 
-.concepts-section .card-body {
-  padding: 2rem;
+.development-pulse-1 {
+  width: 100px;
+  height: 100px;
+  animation: pulse 2s infinite;
 }
 
-.concepts-section .bi {
-  transition: all 0.3s ease;
+.development-pulse-2 {
+  width: 120px;
+  height: 120px;
+  animation: pulse 2s infinite 0.3s;
 }
 
-.concepts-section .card:hover .bi {
-  transform: scale(1.1);
-  filter: drop-shadow(var(--storage-glow));
+.development-pulse-3 {
+  width: 140px;
+  height: 140px;
+  animation: pulse 2s infinite 0.6s;
 }
 
-/* ===== ANIMACIONES ===== */
-@keyframes storageFloat {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-.concepts-section .card:nth-child(odd) {
-  animation: storageFloat 3s ease-in-out infinite;
-}
-
-.concepts-section .card:nth-child(even) {
-  animation: storageFloat 3s ease-in-out infinite reverse;
-}
-
-/* ===== EFECTOS ESPECÍFICOS DE ALMACENAMIENTO ===== */
-.storage-highlight {
+/* ===== TÍTULOS Y TEXTO ===== */
+.development-title {
+  font-size: 2.5rem;
+  font-weight: 700;
   background: var(--storage-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+.development-message h3 {
+  color: var(--storage-primary);
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.development-text {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: var(--dev-text);
+  margin-bottom: 1rem;
+}
+
+.development-subtext {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--dev-text);
+  opacity: 0.8;
+}
+
+/* ===== BARRA DE PROGRESO ===== */
+.development-progress {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.development-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--dev-accent);
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.development-progress-fill {
+  height: 100%;
+  background: var(--storage-gradient);
+  border-radius: 20px;
+  width: 65%;
+  animation: progressFill 3s ease-in-out infinite;
+}
+
+.development-progress-text {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--dev-text);
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* ===== BOTONES ===== */
+.development-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-development {
+  padding: 12px 24px;
+  border: 2px solid var(--storage-primary);
+  border-radius: 25px;
+  background: transparent;
+  color: var(--storage-primary);
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn-development:hover {
+  background: var(--storage-primary);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(139, 92, 246, 0.3);
+}
+
+.btn-development-primary {
+  background: var(--storage-gradient);
+  color: white;
+  border: none;
+}
+
+.btn-development-primary:hover {
+  background: var(--storage-gradient);
+  color: white;
+  filter: brightness(1.1);
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+}
+
+@keyframes progressFill {
+  0%, 100% {
+    width: 65%;
+  }
+  50% {
+    width: 75%;
+  }
 }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .hero-section h1 {
-    font-size: 2.5rem;
+  .development-title {
+    font-size: 2rem;
   }
   
-  .concepts-section .card-body {
-    padding: 1.5rem;
+  .development-card-body {
+    padding: 2rem 1.5rem;
+  }
+  
+  .development-icon {
+    font-size: 3rem;
+  }
+  
+  .development-icon-container {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .development-icon {
+    line-height: 100px;
+  }
+  
+  .development-pulse-1 {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .development-pulse-2 {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .development-pulse-3 {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .development-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .btn-development {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .development-title {
+    font-size: 1.75rem;
+  }
+  
+  .development-text {
+    font-size: 1rem;
+  }
+  
+  .development-message h3 {
+    font-size: 1.25rem;
   }
 }
 
 /* ===== LOADING STATES ===== */
-.component-loading .hero-section {
+.component-loading .development-section {
   opacity: 0;
   transform: translateY(30px);
 }
 
-.component-loading .concepts-section {
-  opacity: 0;
-  transform: translateY(50px);
-}
-
 /* Una vez cargado */
-body:not(.component-loading) .hero-section {
+body:not(.component-loading) .development-section {
   opacity: 1;
   transform: translateY(0);
   transition: all 0.8s ease;
 }
 
-body:not(.component-loading) .concepts-section {
+/* Fallback para asegurar visibilidad */
+.development-section {
   opacity: 1;
   transform: translateY(0);
-  transition: all 1s ease 0.3s;
+  transition: all 0.8s ease;
+}
+
+body:not(.component-loading) .development-card {
+  animation: cardEntrance 1s ease;
+}
+
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }

@@ -1,12 +1,11 @@
 /**
  * JavaScript específico para la página de Gestión de Memoria
- * Funcionalidades: animaciones, simulaciones de memoria y efectos específicos
+ * Funcionalidades: animaciones y efectos de página en desarrollo
  */
 
 class GestionMemoriaManager {
   constructor() {
     this.initialized = false;
-    this.memoryUsage = 75; // Simulación de uso de memoria
     this.init();
   }
 
@@ -16,15 +15,14 @@ class GestionMemoriaManager {
     // Esperar a que los componentes se carguen
     await this.waitForComponents();
     
-    // Inicializar funcionalidades
-    this.initializeMemoryAnimations();
-    this.initializeMemorySimulation();
-    this.initializeCardInteractions();
-    this.initializeScrollEffects();
+    // Inicializar funcionalidades específicas para página en desarrollo
+    this.initializeDevelopmentPage();
+    this.initializeDevelopmentAnimations();
+    this.initializeButtonInteractions();
     this.removeLoadingClass();
     
     this.initialized = true;
-    console.log('✅ Gestión de Memoria Manager inicializado');
+    console.log('✅ Gestión de Memoria Manager inicializado - Página en Desarrollo');
   }
 
   async waitForComponents() {
@@ -47,224 +45,209 @@ class GestionMemoriaManager {
     console.warn('⚠️ Componentes tardaron en cargar, continuando...');
   }
 
-  initializeMemoryAnimations() {
-    console.log('🎨 Inicializando animaciones de memoria...');
+  initializeDevelopmentPage() {
+    console.log('🔧 Inicializando página de desarrollo...');
     
-    // Animación especial para el hero
-    const heroTitle = document.querySelector('.hero-section h1');
-    if (heroTitle) {
-      heroTitle.addEventListener('mouseenter', () => {
-        heroTitle.style.transform = 'scale(1.05)';
-        heroTitle.style.filter = 'drop-shadow(0 0 20px rgba(25, 135, 84, 0.5))';
-      });
+    // Verificar que existe la sección de desarrollo
+    const developmentSection = document.querySelector('.development-section');
+    if (developmentSection) {
+      console.log('✅ Sección de desarrollo encontrada');
       
-      heroTitle.addEventListener('mouseleave', () => {
-        heroTitle.style.transform = 'scale(1)';
-        heroTitle.style.filter = '';
-      });
-    }
-
-    // Efectos de memoria en los iconos
-    const memoryIcons = document.querySelectorAll('.concepts-section .bi');
-    memoryIcons.forEach((icon, index) => {
-      // Efecto de "carga de memoria"
-      icon.addEventListener('mouseenter', () => {
-        icon.style.filter = 'drop-shadow(0 0 15px rgba(25, 135, 84, 0.6)) brightness(1.3)';
-        icon.style.transform = 'scale(1.2) rotateY(180deg)';
-      });
+      // Hacer visible la sección inmediatamente
+      developmentSection.style.opacity = '1';
+      developmentSection.style.transform = 'translateY(0)';
       
-      icon.addEventListener('mouseleave', () => {
-        icon.style.filter = '';
-        icon.style.transform = '';
-      });
-
-      // Animación de pulso escalonada
+      // Agregar efecto de entrada
       setTimeout(() => {
-        icon.style.animation = 'memoryPulse 3s ease-in-out infinite';
-      }, index * 500);
-    });
-  }
-
-  initializeMemorySimulation() {
-    console.log('🔄 Inicializando simulación de memoria...');
-    
-    // Crear barra de memoria en el hero si no existe
-    const heroSection = document.querySelector('.hero-section .container');
-    if (heroSection && !document.querySelector('.memory-usage-bar')) {
-      const memoryBar = document.createElement('div');
-      memoryBar.className = 'memory-usage-bar mt-4';
-      memoryBar.innerHTML = `
-        <div class="row justify-content-center">
-          <div class="col-lg-6">
-            <div class="memory-display p-3 rounded" style="background: rgba(255,255,255,0.1);">
-              <h6 class="text-white mb-2">Uso de Memoria del Sistema</h6>
-              <div class="memory-bar mb-2" style="height: 20px; background: rgba(255,255,255,0.2); border-radius: 10px; overflow: hidden;">
-                <div class="memory-fill" style="height: 100%; width: ${this.memoryUsage}%; background: linear-gradient(90deg, #20c997, #198754); transition: width 1s ease;"></div>
-              </div>
-              <small class="text-white-50">RAM: <span class="memory-percentage">${this.memoryUsage}</span>% utilizada</small>
-            </div>
-          </div>
-        </div>
-      `;
-      heroSection.appendChild(memoryBar);
-      
-      // Simular cambios en el uso de memoria
-      this.startMemorySimulation();
+        developmentSection.classList.add('animate__animated', 'animate__fadeInUp');
+      }, 300);
+    } else {
+      console.warn('⚠️ Sección de desarrollo no encontrada');
     }
   }
 
-  startMemorySimulation() {
-    setInterval(() => {
-      // Fluctuar el uso de memoria entre 60% y 90%
-      this.memoryUsage = Math.floor(Math.random() * 30) + 60;
+  initializeDevelopmentAnimations() {
+    console.log('🎨 Inicializando animaciones de desarrollo...');
+    
+    // Animar el icono principal
+    const developmentIcon = document.querySelector('.development-icon');
+    if (developmentIcon) {
+      // Agregar efecto hover adicional
+      developmentIcon.addEventListener('mouseenter', () => {
+        developmentIcon.style.transform = 'scale(1.1) rotate(10deg)';
+        developmentIcon.style.filter = 'drop-shadow(0 0 20px rgba(25, 135, 84, 0.8))';
+      });
       
-      const memoryFill = document.querySelector('.memory-fill');
-      const memoryPercentage = document.querySelector('.memory-percentage');
-      
-      if (memoryFill && memoryPercentage) {
-        memoryFill.style.width = `${this.memoryUsage}%`;
-        memoryPercentage.textContent = this.memoryUsage;
+      developmentIcon.addEventListener('mouseleave', () => {
+        developmentIcon.style.transform = '';
+        developmentIcon.style.filter = '';
+      });
+    }
+
+    // Animar la tarjeta de desarrollo
+    const developmentCard = document.querySelector('.development-card');
+    if (developmentCard) {
+      // Efecto de entrada retrasado
+      setTimeout(() => {
+        developmentCard.style.transform = 'translateY(0)';
+        developmentCard.style.opacity = '1';
+      }, 500);
+
+      // Efecto parallax sutil al hacer scroll
+      window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const parallax = scrolled * 0.1;
+        developmentCard.style.transform = `translateY(${parallax}px)`;
+      });
+    }
+
+    // Animar elementos de progreso
+    const progressFill = document.querySelector('.development-progress-fill');
+    if (progressFill) {
+      setTimeout(() => {
+        progressFill.style.width = '65%';
+      }, 1000);
+    }
+  }
+
+  initializeButtonInteractions() {
+    console.log('🎯 Configurando interacciones de botones...');
+    
+    // Botón de volver atrás
+    const backButtons = document.querySelectorAll('[onclick*="history.back"]');
+    backButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('🔙 Navegando hacia atrás');
         
-        // Cambiar color según el uso
-        if (this.memoryUsage > 85) {
-          memoryFill.style.background = 'linear-gradient(90deg, #dc3545, #fd7e14)';
-        } else if (this.memoryUsage > 75) {
-          memoryFill.style.background = 'linear-gradient(90deg, #ffc107, #fd7e14)';
-        } else {
-          memoryFill.style.background = 'linear-gradient(90deg, #20c997, #198754)';
-        }
-      }
-    }, 3000);
-  }
-
-  initializeCardInteractions() {
-    console.log('🎯 Configurando interacciones de tarjetas de memoria...');
-    
-    const cards = document.querySelectorAll('.concepts-section .card');
-    cards.forEach((card, index) => {
-      // Efecto de entrada escalonado
-      setTimeout(() => {
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
-      }, index * 150);
-
-      // Efecto de click con simulación de asignación de memoria
-      card.addEventListener('click', () => {
-        this.simulateMemoryAllocation(card);
-        this.showMemoryInfo(card);
-      });
-
-      // Efectos de hover con gradiente de memoria
-      card.addEventListener('mouseenter', () => {
-        card.style.boxShadow = '0 8px 30px rgba(25, 135, 84, 0.3)';
-        card.style.background = 'linear-gradient(135deg, rgba(25, 135, 84, 0.05), rgba(32, 201, 151, 0.05))';
-      });
-
-      card.addEventListener('mouseleave', () => {
-        card.style.boxShadow = '';
-        card.style.background = '';
+        // Efecto visual antes de navegar
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          window.history.back();
+        }, 150);
       });
     });
-  }
 
-  simulateMemoryAllocation(card) {
-    console.log('💾 Simulando asignación de memoria...');
-    
-    // Crear efecto visual de asignación de memoria
-    const allocationEffect = document.createElement('div');
-    allocationEffect.style.cssText = `
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(45deg, transparent, rgba(25, 135, 84, 0.2), transparent);
-      pointer-events: none;
-      border-radius: 15px;
-      animation: memoryAllocation 1s ease-out;
-    `;
-    
-    card.style.position = 'relative';
-    card.appendChild(allocationEffect);
-    
-    setTimeout(() => {
-      allocationEffect.remove();
-    }, 1000);
-  }
-
-  showMemoryInfo(card) {
-    const title = card.querySelector('.card-title').textContent;
-    console.log(`🧠 Mostrando información de memoria: ${title}`);
-    
-    // Simular información específica de memoria
-    const memoryInfo = {
-      'Memoria Física': '8GB DDR4 - 2400MHz',
-      'Memoria Virtual': '16GB Virtual Memory',
-      'Paginación': '4KB pages - LRU Algorithm',
-      'Segmentación': 'Code, Data, Stack segments',
-      'Recolección de Basura': 'Mark & Sweep GC',
-      'Optimización': 'Memory pooling enabled'
-    };
-    
-    const info = memoryInfo[title] || 'Información detallada disponible próximamente';
-    console.log(`📋 ${title}: ${info}`);
-  }
-
-  initializeScrollEffects() {
-    console.log('📜 Configurando efectos de scroll para memoria...');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate__animated', 'animate__fadeInLeft');
-          
-          // Efecto especial para tarjetas pares
-          if (Array.from(entry.target.parentNode.children).indexOf(entry.target) % 2 === 1) {
-            entry.target.classList.remove('animate__fadeInLeft');
-            entry.target.classList.add('animate__fadeInRight');
-          }
-        }
+    // Botón de ir al inicio
+    const homeButtons = document.querySelectorAll('[onclick*="secotogpt.html"]');
+    homeButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        console.log('🏠 Navegando al inicio');
+        
+        // Efecto visual antes de navegar
+        button.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+          window.location.href = '../../../secotogpt.html';
+        }, 150);
       });
-    }, {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
     });
 
-    // Observar elementos para animación
-    const animateElements = document.querySelectorAll('.concepts-section .card');
-    animateElements.forEach(el => {
-      observer.observe(el);
+    // Agregar efectos hover a todos los botones de desarrollo
+    const developmentButtons = document.querySelectorAll('.btn-development');
+    developmentButtons.forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        button.style.transform = 'translateY(-2px) scale(1.05)';
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        button.style.transform = '';
+      });
     });
   }
 
   removeLoadingClass() {
     console.log('🎬 Removiendo clase de carga...');
+    
+    // Remover clase de loading del body
     document.body.classList.remove('component-loading');
+    
+    // Asegurar que el contenido sea visible
+    const developmentSection = document.querySelector('.development-section');
+    if (developmentSection) {
+      developmentSection.style.opacity = '1';
+      developmentSection.style.transform = 'translateY(0)';
+      developmentSection.style.transition = 'all 0.8s ease';
+    }
+    
+    // Mostrar mensaje en consola
+    console.log('✅ Página de desarrollo visible y cargada correctamente');
   }
 
-  // Método para obtener estadísticas de memoria
-  getMemoryStats() {
+  // Método para debugging - verificar estado de elementos
+  debugPageState() {
+    console.log('🔍 Estado de la página:');
+    console.log('- Body classes:', document.body.classList.toString());
+    console.log('- Development section:', document.querySelector('.development-section') ? 'Existe' : 'No existe');
+    console.log('- Development card:', document.querySelector('.development-card') ? 'Existe' : 'No existe');
+    console.log('- Manager initialized:', this.initialized);
+  }
+
+  // Método para obtener información de desarrollo
+  getDevelopmentInfo() {
     return {
-      usage: this.memoryUsage,
-      total: '8GB',
-      available: `${Math.round((100 - this.memoryUsage) / 100 * 8 * 100) / 100}GB`,
-      type: 'DDR4'
+      page: 'Gestión de Memoria',
+      status: 'En desarrollo',
+      progress: '65%',
+      features: [
+        'Memoria física y virtual',
+        'Paginación y segmentación',
+        'Técnicas de optimización',
+        'Simuladores interactivos'
+      ]
     };
-  }
-
-  // Método para simular diferentes tipos de memoria
-  simulateMemoryType(type) {
-    console.log(`🔄 Simulando tipo de memoria: ${type}`);
-    // Implementar según necesidades futuras
   }
 }
 
 // CSS adicional para animaciones específicas de memoria
 const memoryCSS = `
-  @keyframes memoryAllocation {
-    0% { transform: translateX(-100%) rotate(0deg); opacity: 0; }
-    50% { opacity: 1; }
-    100% { transform: translateX(100%) rotate(360deg); opacity: 0; }
+  @keyframes cardEntrance {
+    0% {
+      opacity: 0;
+      transform: translateY(50px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  @keyframes iconFloat {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes pulse {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+    50% {
+      opacity: 0.6;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+  }
+  
+  .development-section {
+    transition: all 0.8s ease;
+  }
+  
+  .component-loading .development-section {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  
+  body:not(.component-loading) .development-section {
+    opacity: 1;
+    transform: translateY(0);
   }
 `;
 
@@ -274,12 +257,28 @@ document.head.appendChild(styleSheet);
 
 // Inicialización cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🏁 DOM cargado - Inicializando Gestión de Memoria');
+  console.log('🏁 DOM cargado - Inicializando Gestión de Memoria (Desarrollo)');
   
   if (!window.gestionMemoriaManager) {
     window.gestionMemoriaManager = new GestionMemoriaManager();
   }
 });
+
+// Backup para asegurar inicialización
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!window.gestionMemoriaManager) {
+      console.log('🔄 Inicialización de respaldo');
+      window.gestionMemoriaManager = new GestionMemoriaManager();
+    }
+  });
+} else {
+  // DOM ya está cargado
+  console.log('🚀 DOM ya cargado - Inicializando inmediatamente');
+  if (!window.gestionMemoriaManager) {
+    window.gestionMemoriaManager = new GestionMemoriaManager();
+  }
+}
 
 // Export para compatibilidad
 if (typeof module !== 'undefined' && module.exports) {
