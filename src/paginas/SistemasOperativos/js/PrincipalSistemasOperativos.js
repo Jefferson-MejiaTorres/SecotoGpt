@@ -267,25 +267,16 @@ class SistemasOperativosManager {
     item.addEventListener('mouseenter', () => {
       this.highlightRelatedContent(item);
     });
-  }
-  // Inicializar componentes interactivos
+  }  // Inicializar componentes interactivos
   initializeComponentCards() {
     console.log('🎯 Inicializando tarjetas de componentes...');
     
     const componentCards = document.querySelectorAll('.component-card');
     
     componentCards.forEach((card, index) => {
-      // Detectar dispositivo táctil
-      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      
-      // Configurar eventos según el dispositivo
-      if (isTouchDevice) {
-        // Manejo específico para dispositivos táctiles
-        this.setupTouchEvents(card);
-      } else {
-        // Manejo para dispositivos con mouse
-        this.setupMouseEvents(card);
-      }
+      // Solo usar eventos de mouse para todos los dispositivos
+      // Manejo para dispositivos con mouse (aplicado a todos)
+      this.setupMouseEvents(card);
       
       // Agregar animación de entrada con delay
       setTimeout(() => {
