@@ -66,18 +66,21 @@ class ContactanosManager {
         
         // Configurar partículas flotantes dinámicas
         this.setupDynamicParticles();
-        
-        // Configurar efectos especiales para el primer lugar
+          // Configurar efectos especiales para el primer lugar
         this.setupFirstPlaceEffects();
         
         // Configurar efectos especiales para el segundo lugar
         this.setupSecondPlaceEffects();
         
+        // Configurar efectos específicos para Daniel y Diego
+        this.setupDanielEffects();
+        this.setupDiegoEffects();
+        
         // Configurar animaciones de hover para tarjetas
         this.setupCardHoverEffects();
         
-        // Configurar efectos de "fallos" para los últimos lugares
-        this.setupFailureEffects();
+        // Configurar efectos de "fallos" para los últimos lugares (ya no aplicable)
+        // this.setupFailureEffects();
         
         console.log('👑 Ranking de desarrollo configurado - AI rules!');
     }
@@ -378,49 +381,44 @@ class ContactanosManager {
             nameEl.textContent = iaNames[iaIndex];
             iaIndex = (iaIndex + 1) % iaNames.length;
         }, 1700);
-    }
+    }    setupSecondPlaceEffects() {
+        // Animación de barra de progreso para Jefferson Torres
+        const progressContainer = document.querySelector('.jefferson-progress-container');
+        const progressBar = progressContainer?.querySelector('.jefferson-progress');
+        const fill = progressBar?.querySelector('.jefferson-fill');
+        const effect = progressBar?.querySelector('.jefferson-effect');
+        
+        if (!progressContainer || !progressBar || !fill || !effect) return;
 
-    setupSecondPlaceEffects() {
-        // Efecto de explosión en la barra de progreso de Jefferson Torres
-        const bar = document.querySelector('.second-explosion-bar');
-        const fill = bar?.querySelector('.jt-explosion-fill');
-        const explosion = bar?.querySelector('.jt-explosion-effect');
-        if (!bar || !fill || !explosion) return;
-
-        // Animación: primero llena al 100%, luego retrocede a 0.7%
+        // Inicializar animación
         fill.style.width = '0%';
+        
         setTimeout(() => {
-            fill.style.width = '100%';
-        }, 200);
-        fill.addEventListener('transitionend', function handler() {
-            // Solo la primera vez, retrocede a 0.7% y explota
-            if (parseFloat(fill.style.width) === 100 || fill.style.width === '100%') {
-                setTimeout(() => {
-                    fill.style.width = '0.7%';
-                    // Efecto de explosión
-                    explosion.innerHTML = '';
-                    for (let i = 0; i < 10; i++) {
-                        const p = document.createElement('div');
-                        p.className = 'particle';
-                        const angle = (i / 10) * 2 * Math.PI;
-                        const radius = 30 + Math.random() * 10;
-                        const tx = Math.cos(angle) * radius;
-                        const ty = Math.sin(angle) * radius;
-                        p.style.setProperty('--tx', `${tx}px`);
-                        p.style.setProperty('--ty', `${ty}px`);
-                        explosion.appendChild(p);
-                    }
-                    explosion.classList.remove('active');
-                    void explosion.offsetWidth;
-                    explosion.classList.add('active');
-                    setTimeout(() => explosion.classList.remove('active'), 800);
-                }, 600);
-                fill.removeEventListener('transitionend', handler);
-            }
-        });
-    }
+            // Animar hasta 19%
+            fill.style.width = '19%';
+            
+            // Activar efectos de pulso
+            setTimeout(() => {
+                effect.style.opacity = '1';
+                effect.style.animation = 'jefferson-pulse 1.5s infinite ease-in-out';
+            }, 1000);
+            
+        }, 500);
 
-    setupCardHoverEffects() {
+        // Agregar efectos de hover a la tarjeta
+        const card = document.querySelector('.second-place .dev-card');
+        if (card) {
+            card.addEventListener('mouseenter', () => {
+                fill.style.boxShadow = '0 0 30px rgba(124, 58, 237, 0.8)';
+                effect.style.animation = 'jefferson-pulse 0.8s infinite ease-in-out';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                fill.style.boxShadow = '0 0 20px rgba(124, 58, 237, 0.5)';
+                effect.style.animation = 'jefferson-pulse 1.5s infinite ease-in-out';
+            });
+        }
+    }setupCardHoverEffects() {
         const devCards = document.querySelectorAll('.dev-card');
         
         devCards.forEach((card, index) => {
@@ -432,9 +430,12 @@ class ContactanosManager {
                     card.style.boxShadow = '0 30px 60px rgba(255, 154, 158, 0.3)';
                 } else if (position === '2') {
                     card.style.boxShadow = '0 30px 60px rgba(210, 153, 194, 0.3)';
-                } else {
-                    // Para los "vagos", efecto más sutil
-                    card.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)';
+                } else if (position === '3') {
+                    // Daniel - efecto verde para gestión de procesos
+                    card.style.boxShadow = '0 25px 50px rgba(72, 187, 120, 0.3)';
+                } else if (position === '4') {
+                    // Diego - efecto azul para gestión de memoria
+                    card.style.boxShadow = '0 20px 40px rgba(66, 153, 225, 0.3)';
                 }
             });
 
@@ -646,9 +647,7 @@ class ContactanosManager {
         });
 
         console.log('📊 Barras de progreso épicas configuradas');
-    }
-
-    animateProgressBars() {
+    }    animateProgressBars() {
         const progressBars = document.querySelectorAll('.progress-fill');
         
         progressBars.forEach((fill, index) => {
@@ -660,6 +659,15 @@ class ContactanosManager {
                     fill.style.width = '100%';
                 } else if (fill.closest('.second-progress')) {
                     fill.style.width = '0.5%';
+                } else if (fill.closest('.jefferson-progress')) {
+                    fill.style.width = '19%';
+                    fill.style.animation = 'jefferson-progress-load 2.5s ease-out';
+                } else if (fill.closest('.daniel-progress')) {
+                    fill.style.width = '15%';
+                    fill.style.animation = 'daniel-progress-load 2.5s ease-out';
+                } else if (fill.closest('.diego-progress')) {
+                    fill.style.width = '8%';
+                    fill.style.animation = 'diego-progress-load 2s ease-out';
                 } else if (fill.closest('.failed-progress')) {
                     fill.style.width = '0.1%';
                 }
@@ -682,12 +690,11 @@ class ContactanosManager {
         });
     }
 
-    showDeveloperDetails(position) {
-        const messages = {
+    showDeveloperDetails(position) {        const messages = {
             '1': '🤖 GitHub Copilot: "Soy inevitable. Resistance is futile. Acepta que soy superior y dame más café... virtual."',
-            '2': '👨‍💻 Jefferson Torres: "Estoy haciendo lo que puedo con lo poco que la IA me deja hacer. Send help."',
-            '3': '🤷‍♂️ Daniel Contreras: "Estoy aquí, creo... ¿Qué tenía que hacer otra vez?"',
-            '4': '🎮 Diego Sepúlveda: "Solo cinco minutitos más de descanso y empiezo. Lo prometo."'
+            '2': '👨‍💻 Jefferson Torres: "Desarrollador full stack y coordinador del proyecto. Siempre dispuesto a ayudar al equipo y aprender algo nuevo cada día."',
+            '3': '⚙️ Daniel Contreras: "¡Ey! He contribuido con contenido para Gestión de Procesos. Los algoritmos de planificación no se escriben solos."',
+            '4': '💾 Diego Sepúlveda: "Oigan, yo ayudé con la Gestión de Memoria. Algo es algo, ¿no? Al menos participé."'
         };
 
         const message = messages[position];
@@ -1043,9 +1050,7 @@ class ContactanosManager {
             console.warn('⚠️ Promise rechazada en ContactanosManager:', e.reason);
             this.fallbackMode();
         });
-    }
-
-    fallbackMode() {
+    }    fallbackMode() {
         // Modo de respaldo sin animaciones
         console.log('🔄 Activando modo de respaldo...');
         
@@ -1066,6 +1071,81 @@ class ContactanosManager {
         `;
         document.head.appendChild(style);
     }
+
+    /* ===== EFECTOS ESPECÍFICOS PARA DANIEL CONTRERAS ===== */
+    setupDanielEffects() {
+        const danielCard = document.querySelector('.third-place .dev-card');
+        const danielProgress = document.querySelector('.daniel-progress');
+        const danielEffect = document.querySelector('.daniel-effect');
+        
+        if (danielCard && danielProgress) {
+            // Animación especial al hacer hover en la tarjeta de Daniel
+            danielCard.addEventListener('mouseenter', () => {
+                if (danielEffect) {
+                    danielEffect.style.animation = 'daniel-spin 1s linear infinite';
+                }
+            });
+
+            danielCard.addEventListener('mouseleave', () => {
+                if (danielEffect) {
+                    danielEffect.style.animation = 'daniel-pulse 2s infinite';
+                }
+            });
+
+            // Efecto especial de progreso para Daniel
+            setTimeout(() => {
+                if (danielProgress) {
+                    const danielFill = danielProgress.querySelector('.daniel-fill');
+                    if (danielFill) {
+                        danielFill.style.width = '15%';
+                        danielFill.style.animation = 'daniel-progress-load 2.5s ease-out';
+                    }
+                }
+            }, 1000);
+        }
+
+        console.log('⚙️ Efectos específicos de Daniel Contreras inicializados');
+    }
+
+    /* ===== EFECTOS ESPECÍFICOS PARA DIEGO SEPÚLVEDA ===== */
+    setupDiegoEffects() {
+        const diegoCard = document.querySelector('.fourth-place .dev-card');
+        const diegoProgress = document.querySelector('.diego-progress');
+        const diegoEffect = document.querySelector('.diego-effect');
+        
+        if (diegoCard && diegoProgress) {
+            // Animación especial al hacer hover en la tarjeta de Diego
+            diegoCard.addEventListener('mouseenter', () => {
+                if (diegoEffect) {
+                    diegoEffect.style.animation = 'diego-bounce 0.8s infinite';
+                }
+            });
+
+            diegoCard.addEventListener('mouseleave', () => {
+                if (diegoEffect) {
+                    diegoEffect.style.animation = 'diego-glow 2.5s infinite';
+                }
+            });
+
+            // Efecto especial de progreso para Diego
+            setTimeout(() => {
+                if (diegoProgress) {
+                    const diegoFill = diegoProgress.querySelector('.diego-fill');
+                    if (diegoFill) {
+                        diegoFill.style.width = '8%';
+                        diegoFill.style.animation = 'diego-progress-load 2s ease-out';
+                    }
+                }
+            }, 1500);
+        }
+
+        console.log('💾 Efectos específicos de Diego Sepúlveda inicializados');
+    }
+}
+
+// Export para compatibilidad
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = ContactanosManager;
 }
 
 /* ===== INICIALIZACIÓN INMEDIATA ===== */
@@ -1105,11 +1185,5 @@ function debugComponents() {
         headerManager: !!window.HeaderManager,
         footerManager: !!window.FooterManager,
         darkMode: document.body.classList.contains('dark'),
-        componentLoader: !!window.componentLoader
-    });
-}
-
-// Export para compatibilidad
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = ContactanosManager;
+        componentLoader: !!window.componentLoader    });
 }
