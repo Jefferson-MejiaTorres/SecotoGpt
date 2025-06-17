@@ -28,71 +28,462 @@
   <!-- Google Fonts Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-500 gestionalmacenamiento-page component-loading">
-  <!-- Header Placeholder -->
+<body class="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-500 gestionalmacenamiento-page component-loading">  <!-- Header Placeholder -->
   <div id="header-placeholder"></div>
-  <!-- Contenido principal -->
-  <main class="main-content container-fluid">
-    <!-- Sección de página en desarrollo -->
-    <section class="development-section py-5">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8 col-xl-6">
-            <div class="development-card">
-              <div class="development-card-inner">
-                <div class="development-card-body text-center p-5">
-                  <!-- Icono principal animado -->
-                  <div class="development-icon-container mb-4">
-                    <i class="bi bi-hdd-stack development-icon"></i>
-                    <div class="development-pulse-1"></div>
-                    <div class="development-pulse-2"></div>
-                    <div class="development-pulse-3"></div>
-                  </div>
-                  
-                  <!-- Título principal -->
-                  <h1 class="development-title mb-4">
-                    Gestión de Almacenamiento
-                  </h1>
-                  
-                  <!-- Mensaje de desarrollo -->
-                  <div class="development-message mb-4">
-                    <h3 class="mb-3">
-                      <i class="bi bi-gear-fill me-2"></i>
-                      Página en Desarrollo
-                    </h3>
-                    <p class="development-text">
-                      Estamos trabajando arduamente para brindarte el mejor contenido sobre 
-                      <strong>Gestión de Almacenamiento</strong> en sistemas operativos.
-                    </p>
-                    <p class="development-subtext">
-                      Pronto tendrás acceso a simuladores interactivos, ejercicios prácticos 
-                      y explicaciones detalladas sobre sistemas de archivos, particionado, 
-                      respaldo y optimización de almacenamiento.
-                    </p>
-                  </div>
-                  
-                  <!-- Barra de progreso -->
-                  <div class="development-progress mb-4">
-                    <div class="development-progress-bar">
-                      <div class="development-progress-fill"></div>
-                    </div>
-                    <small class="development-progress-text">Desarrollo en progreso...</small>
-                  </div>
-                  
-                  <!-- Botón de regreso -->
-                  <div class="development-actions">
-                    <button onclick="window.history.back()" class="btn-development">
-                      <i class="bi bi-arrow-left me-2"></i>
-                      Volver Atrás
-                    </button>
-                    <button onclick="window.location.href='../../../secotogpt.html'" class="btn-development btn-development-primary">
-                      <i class="bi bi-house me-2"></i>
-                      Ir al Inicio
-                    </button>
-                  </div>
-                </div>
-              </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="hero-content text-center">
+        <div class="hero-badge">
+          <i class="bi bi-hdd-stack me-2"></i>
+          Gestión de Almacenamiento
+        </div>
+        <h1 id="hero-title" class="hero-title">
+          Estrategias de <span class="gradient-text">Almacenamiento</span> y Optimización
+        </h1>
+        <p class="hero-subtitle typing-animate">
+          Descubre el corazón de la eficiencia digital, desde discos duros hasta nubes híbridas
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="bi bi-layers"></i>
             </div>
+            <div class="stat-number">3</div>
+            <div class="stat-label">Niveles de Jerarquía</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="bi bi-speedometer2"></i>
+            </div>
+            <div class="stat-number">7000</div>
+            <div class="stat-label">MB/s NVMe</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <div class="stat-number">360</div>
+            <div class="stat-label">TB Almacenamiento 5D</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-decoration"></div>
+  </section>
+
+  <!-- Contenido principal -->
+  <main class="container main-content" role="main" aria-label="Contenido principal de gestión de almacenamiento">
+    
+    <!-- Conceptos Clave -->
+    <section class="content-section fade-in" aria-labelledby="conceptosClave">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-lightbulb"></i>
+        </div>
+        <h2 id="conceptosClave">Conceptos Clave y Objetivos</h2>
+      </div>
+      <div class="content-grid">
+        <div class="info-card">
+          <h3><i class="bi bi-diagram-3 me-2"></i>Gestión de Almacenamiento</h3>
+          <p>Supervisión de recursos físicos y lógicos para almacenar datos, garantizando disponibilidad, integridad y cumplimiento normativo en sistemas operativos modernos.</p>
+        </div>
+        <div class="info-card">
+          <h3><i class="bi bi-bullseye me-2"></i>Objetivos Principales</h3>
+          <ul class="objectives-list">
+            <li><strong>Acceso Rápido:</strong> Datos disponibles para usuarios y aplicaciones</li>
+            <li><strong>Protección:</strong> Ciberseguridad y recuperación ante desastres</li>
+            <li><strong>Optimización:</strong> Uso eficiente de espacio y recursos</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jerarquía de Almacenamiento -->
+    <section class="content-section fade-in" aria-labelledby="jerarquiaAlmacenamiento">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-bar-chart-steps"></i>
+        </div>
+        <h2 id="jerarquiaAlmacenamiento">Jerarquía de Almacenamiento</h2>
+      </div>
+      
+      <div class="hierarchy-intro">
+        <p><strong>El almacenamiento secundario equilibra costo y rendimiento,</strong> mientras el terciario asegura datos a largo plazo con diferentes velocidades y capacidades.</p>
+      </div>
+
+      <div class="storage-hierarchy">
+        <div class="hierarchy-level" data-level="primary">
+          <div class="level-icon">
+            <i class="bi bi-memory"></i>
+          </div>
+          <h4>Primario (RAM)</h4>
+          <div class="level-stats">
+            <span class="speed">Velocidad: Nanosegundos</span>
+            <span class="examples">DRAM, SRAM</span>
+            <span class="usage">Datos en ejecución</span>
+          </div>
+          <p>Memoria volátil de acceso ultra-rápido para procesos activos</p>
+        </div>
+        
+        <div class="hierarchy-arrow">
+          <i class="bi bi-arrow-down"></i>
+        </div>
+        
+        <div class="hierarchy-level" data-level="secondary">
+          <div class="level-icon">
+            <i class="bi bi-hdd"></i>
+          </div>
+          <h4>Secundario (Disco)</h4>
+          <div class="level-stats">
+            <span class="speed">Velocidad: Microsegundos</span>
+            <span class="examples">HDD, SSD, NVMe</span>
+            <span class="usage">Sistema operativo, aplicaciones</span>
+          </div>
+          <p>Almacenamiento persistente para el sistema y programas</p>
+        </div>
+        
+        <div class="hierarchy-arrow">
+          <i class="bi bi-arrow-down"></i>
+        </div>
+        
+        <div class="hierarchy-level" data-level="tertiary">
+          <div class="level-icon">
+            <i class="bi bi-archive"></i>
+          </div>
+          <h4>Terciario (Archivo)</h4>
+          <div class="level-stats">
+            <span class="speed">Velocidad: Milisegundos-segundos</span>
+            <span class="examples">Cintas, Cloud, Almacenamiento 5D</span>
+            <span class="usage">Copias de seguridad, archivado</span>
+          </div>
+          <p>Almacenamiento masivo para datos históricos y respaldos</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tecnologías Actuales -->
+    <section class="content-section fade-in" aria-labelledby="tecnologiasActuales">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-cpu"></i>
+        </div>
+        <h2 id="tecnologiasActuales">Tecnologías de Almacenamiento</h2>
+      </div>
+      <div class="technologies-grid">
+        <div class="technology-card" data-tech="magnetic">
+          <div class="tech-header">
+            <i class="bi bi-hdd-fill"></i>
+            <h3>Almacenamiento Magnético</h3>
+          </div>
+          <div class="tech-specs">
+            <div class="spec-item">
+              <strong>Capacidad:</strong> Hasta 20 TB
+            </div>
+            <div class="spec-item">
+              <strong>Costo:</strong> Bajo costo/GB
+            </div>
+            <div class="spec-item">
+              <strong>Uso ideal:</strong> Archivado no crítico
+            </div>
+          </div>
+          <p class="tech-description">
+            Ideal para documentos históricos gubernamentales y datos de archivo de largo plazo.
+          </p>
+        </div>
+        
+        <div class="technology-card" data-tech="ssd">
+          <div class="tech-header">
+            <i class="bi bi-device-ssd"></i>
+            <h3>Estado Sólido (SSD/NVMe)</h3>
+          </div>
+          <div class="tech-specs">
+            <div class="spec-item">
+              <strong>Rendimiento:</strong> 500-7000 MB/s
+            </div>
+            <div class="spec-item">
+              <strong>Latencia:</strong> Microsegundos
+            </div>
+            <div class="spec-item">
+              <strong>Uso ideal:</strong> Bases de datos transaccionales
+            </div>
+          </div>
+          <p class="tech-description">
+            Perfecto para sistemas bancarios y aplicaciones que requieren alta velocidad.
+          </p>
+        </div>
+        
+        <div class="technology-card" data-tech="quantum">
+          <div class="tech-header">
+            <i class="bi bi-gem"></i>
+            <h3>Almacenamiento 5D</h3>
+          </div>
+          <div class="tech-specs">
+            <div class="spec-item">
+              <strong>Capacidad:</strong> 360 TB por disco
+            </div>
+            <div class="spec-item">
+              <strong>Durabilidad:</strong> 100+ años
+            </div>
+            <div class="spec-item">
+              <strong>Material:</strong> Discos de cuarzo
+            </div>
+          </div>
+          <p class="tech-description">
+            Tecnología del futuro para almacenamiento permanente a escala masiva.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Arquitecturas -->
+    <section class="content-section fade-in" aria-labelledby="arquitecturas">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-diagram-2"></i>
+        </div>
+        <h2 id="arquitecturas">Arquitecturas de Almacenamiento</h2>
+      </div>
+      
+      <div class="architectures-intro">
+        <p><strong>Cada arquitectura ofrece diferentes ventajas</strong> según las necesidades específicas de rendimiento, escalabilidad y complejidad de gestión.</p>
+      </div>
+
+      <div class="architectures-table-container">
+        <table class="architectures-table" aria-describedby="descripcionArquitecturas" role="table">
+          <thead>
+            <tr>
+              <th>Tipo</th>
+              <th>Ventajas</th>
+              <th>Limitaciones</th>
+              <th>Caso de Uso</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>DAS</strong></td>
+              <td>Bajo costo, configuración simple</td>
+              <td>Escalabilidad limitada</td>
+              <td>Servidores locales pequeños</td>
+            </tr>
+            <tr>
+              <td><strong>NAS</strong></td>
+              <td>Acceso multi-usuario vía red (NFS/SMB)</td>
+              <td>Rendimiento moderado</td>
+              <td>Compartición de archivos en entidades gubernamentales</td>
+            </tr>
+            <tr>
+              <td><strong>SAN</strong></td>
+              <td>Alto rendimiento (Fibre Channel)</td>
+              <td>Complejidad de gestión</td>
+              <td>Sistemas críticos en telecomunicaciones</td>
+            </tr>
+            <tr>
+              <td><strong>SDS</strong></td>
+              <td>Flexibilidad, independencia del hardware</td>
+              <td>Requiere expertise especializado</td>
+              <td>Bancos con múltiples niveles de servicio</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Métodos de Gestión -->
+    <section class="content-section fade-in" aria-labelledby="metodosGestion">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-gear-wide-connected"></i>
+        </div>
+        <h2 id="metodosGestion">Métodos de Gestión y Optimización</h2>
+      </div>
+      
+      <div class="management-grid">
+        <div class="management-card">
+          <div class="management-header">
+            <i class="bi bi-shield-shaded"></i>
+            <h3>Configuraciones RAID</h3>
+          </div>
+          <div class="raid-list">
+            <div class="raid-item">
+              <strong>RAID 1 (Mirroring):</strong> Duplicación en discos para tolerancia a fallos total
+            </div>
+            <div class="raid-item">
+              <strong>RAID 5 (Paridad distribuida):</strong> Balance óptimo entre rendimiento y redundancia
+            </div>
+            <div class="raid-item">
+              <strong>RAID 10:</strong> Combinación de mirroring y striping para máximo rendimiento
+            </div>
+          </div>
+        </div>
+        
+        <div class="management-card">
+          <div class="management-header">
+            <i class="bi bi-stack"></i>
+            <h3>Optimización Avanzada</h3>
+          </div>
+          <div class="optimization-list">
+            <div class="optimization-item">
+              <strong>Tiering Automático:</strong> Mover datos fríos/cálidos entre SSD/HDD inteligentemente
+            </div>
+            <div class="optimization-item">
+              <strong>Deduplicación:</strong> Eliminar datos redundantes, ahorrando 30-50% de espacio
+            </div>
+            <div class="optimization-item">
+              <strong>Compresión:</strong> Reducir el tamaño físico de archivos sin pérdida de datos
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seguridad y Cumplimiento -->
+    <section class="content-section fade-in" aria-labelledby="seguridad">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-shield-check"></i>
+        </div>
+        <h2 id="seguridad">Seguridad y Cumplimiento</h2>
+      </div>
+      
+      <div class="security-grid">
+        <div class="security-card">
+          <div class="security-header">
+            <i class="bi bi-exclamation-triangle"></i>
+            <h3>Amenazas Principales</h3>
+          </div>
+          <div class="threats-content">
+            <ul class="threats-list">
+              <li>Ransomware y malware avanzado</li>
+              <li>Errores humanos en gestión</li>
+              <li>Accesos no autorizados</li>
+              <li>Fallos de hardware</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="security-card">
+          <div class="security-header">
+            <i class="bi bi-lock"></i>
+            <h3>Soluciones de Protección</h3>
+          </div>
+          <div class="solutions-content">
+            <div class="solution-item">
+              <strong>Cifrado AES-256:</strong> Para datos en reposo y en tránsito
+            </div>
+            <div class="solution-item">
+              <strong>Air-gapped Storage:</strong> Cintas desconectadas de redes
+            </div>
+            <div class="solution-item">
+              <strong>Cumplimiento:</strong> Políticas GDPR/HIPAA automáticas
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tendencias Futuras -->
+    <section class="content-section fade-in modern-trends" aria-labelledby="tendenciasFuturas">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-rocket-takeoff"></i>
+        </div>
+        <h2 id="tendenciasFuturas">Tendencias Futuras</h2>
+      </div>
+      
+      <div class="trends-grid">
+        <div class="trend-card">
+          <div class="trend-icon">
+            <i class="bi bi-brain"></i>
+          </div>
+          <h3>Almacenamiento Inteligente</h3>
+          <p>IA para data tiering predictivo y detección automática de anomalías en patrones de uso.</p>
+          <code>AI + Machine Learning</code>
+          <strong>Beneficio:</strong> Optimización automática del 40% en costos operativos.
+        </div>
+        
+        <div class="trend-card">
+          <div class="trend-icon">
+            <i class="bi bi-cloud-arrow-up"></i>
+          </div>
+          <h3>Nube Híbrida</h3>
+          <p>Combinación de private cloud para datos sensibles + public cloud para escalabilidad masiva.</p>
+          <code>Hybrid Multi-Cloud</code>
+          <strong>Beneficio:</strong> Flexibilidad total con seguridad enterprise.
+        </div>
+        
+        <div class="trend-card">
+          <div class="trend-icon">
+            <i class="bi bi-atom"></i>
+          </div>
+          <h3>Computación Cuántica</h3>
+          <p>Almacenamiento en qubits para cifrado irrompible y procesamiento cuántico.</p>
+          <code>Quantum Storage</code>
+          <strong>Beneficio:</strong> Seguridad cuántica a prueba de futuro.
+        </div>
+        
+        <div class="trend-card">
+          <div class="trend-icon">
+            <i class="bi bi-leaf"></i>
+          </div>
+          <h3>Green Storage</h3>
+          <p>Tecnologías sostenibles con reducción drástica de energía en centros de datos.</p>
+          <code>Sustainable Tech</code>
+          <strong>Beneficio:</strong> Reducción del 60% en consumo energético.
+        </div>
+      </div>
+    </section>
+
+    <!-- Casos de Éxito -->
+    <section class="content-section fade-in" aria-labelledby="casosExito">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-trophy"></i>
+        </div>
+        <h2 id="casosExito">Casos de Éxito Reales</h2>
+      </div>
+      
+      <div class="success-cases">
+        <div class="case-card">
+          <div class="case-header">
+            <i class="bi bi-building"></i>
+            <h4>Entidad Gubernamental</h4>
+          </div>
+          <p class="case-description">
+            Migración a NAS con políticas de retención automatizadas
+          </p>
+          <div class="case-result">
+            <span class="result-percentage">40%</span>
+            <span class="result-description">Reducción en costos de almacenamiento</span>
+          </div>
+        </div>
+        
+        <div class="case-card">
+          <div class="case-header">
+            <i class="bi bi-bank"></i>
+            <h4>Banco Latinoamericano</h4>
+          </div>
+          <p class="case-description">
+            Implementación de SDS con NVMe para transacciones críticas
+          </p>
+          <div class="case-result">
+            <span class="result-percentage">65%</span>
+            <span class="result-description">Aceleración en procesos transaccionales</span>
+          </div>
+        </div>
+        
+        <div class="case-card">
+          <div class="case-header">
+            <i class="bi bi-broadcast"></i>
+            <h4>Telecomunicaciones 5G</h4>
+          </div>
+          <p class="case-description">
+            Almacenamiento de objetos para IoT masivo
+          </p>
+          <div class="case-result">
+            <span class="result-percentage">1M+</span>
+            <span class="result-description">Dispositivos/km² gestionados</span>
           </div>
         </div>
       </div>
