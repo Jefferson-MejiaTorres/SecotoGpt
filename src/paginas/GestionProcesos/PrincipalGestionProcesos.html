@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Gestión de Procesos - SeCoToGpt</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <!-- Tailwind CSS compilado -->
+  <link href="../../../public/tailwind.css" rel="stylesheet">
+  <!-- Estilos principales -->
+  <link href="../../estilos/principal.css" rel="stylesheet">
+  <!-- Estilos header/footer -->
+  <link href="../../estilos/header-modern.css" rel="stylesheet">
+  <link href="../../estilos/menu-mobile-fix.css" rel="stylesheet">
+  <link href="../../estilos/footer-modern.css" rel="stylesheet">
+  <!-- Estilos comunes de Página Principal -->
+  <link href="../../PaginaPrincipal/estilos/pagina-principal.css" rel="stylesheet">
+  <link href="../../PaginaPrincipal/estilos/efectos-especiales.css" rel="stylesheet">  <!-- Estilos específicos de Gestión de Procesos -->
+  <link href="./estilos/PrincipalGestionProcesos.css?v=1750165722" rel="stylesheet">
+  <!-- Favicon -->
+  <link rel="icon" href="../../../imagenes/logo_secotogpt.svg">
+  <!-- Animate.css para animaciones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <!-- Google Fonts Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body
+  class="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-500 gestionprocesos-page component-loading">
+  <!-- Header Placeholder -->
+  <div id="header-placeholder"></div>
+
+  <!-- Hero Section -->
+  <section class="hero-section" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="hero-content text-center">
+        <div class="hero-badge">
+          <i class="bi bi-cpu-fill"></i>
+          <span>Gestión de Procesos</span>
+        </div>
+        <h1 id="hero-title" class="hero-title">
+          Gestión de Procesos en 
+          <span class="gradient-text">Sistemas Operativos</span>
+        </h1>
+        <p class="hero-subtitle typing-animate">
+          Descubre los fundamentos de la gestión de procesos, desde su ciclo de vida hasta las técnicas avanzadas de planificación y sincronización que hacen posible la multitarea moderna.
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="bi bi-gear-fill"></i>
+            </div>
+            <div class="stat-number">5</div>
+            <div class="stat-label">Estados del Proceso</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="bi bi-list-check"></i>
+            </div>
+            <div class="stat-number">4</div>
+            <div class="stat-label">Algoritmos Principales</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="bi bi-arrow-repeat"></i>
+            </div>
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Procesos Concurrentes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-decoration"></div>
+  </section>
+
+  <!-- Contenido principal -->
+  <main class="container main-content" role="main" aria-label="Contenido principal de gestión de procesos">
+    
+    <!-- Definición de Proceso -->
+    <section class="content-section fade-in" aria-labelledby="definicionProceso">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-arrow-right-circle"></i>
+        </div>
+        <h2 id="definicionProceso">Definición de Proceso</h2>
+      </div>
+      <div class="content-grid">
+        <div class="info-card">
+          <h3><i class="bi bi-file-code"></i> Programa vs. Proceso</h3>
+          <p>Un <strong>programa</strong> es un conjunto pasivo de instrucciones almacenadas en disco, mientras que un <strong>proceso</strong> es un programa en ejecución activa que utiliza recursos del sistema como CPU, memoria y dispositivos de E/S.</p>
+        </div>
+        <div class="info-card">
+          <h3><i class="bi bi-cpu"></i> Entidad Activa</h3>
+          <p>Un proceso es una entidad activa con su propio contexto de ejecución, contador de programa, registros de CPU y espacio de direcciones en memoria.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ciclo de Vida -->
+    <section class="content-section fade-in" aria-labelledby="cicloVida">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-arrow-repeat"></i>
+        </div>
+        <h2 id="cicloVida">Ciclo de Vida de un Proceso</h2>
+      </div>
+      
+      <div class="process-flow">
+        <div class="flow-step" data-state="nuevo">
+          <div class="step-icon">
+            <i class="bi bi-plus-circle"></i>
+          </div>
+          <h4>Nuevo</h4>
+          <p>Proceso creado</p>
+        </div>
+        <div class="flow-arrow">
+          <i class="bi bi-arrow-right"></i>
+        </div>
+        <div class="flow-step" data-state="listo">
+          <div class="step-icon">
+            <i class="bi bi-hourglass-split"></i>
+          </div>
+          <h4>Listo</h4>
+          <p>Espera asignación de CPU</p>
+        </div>
+        <div class="flow-arrow">
+          <i class="bi bi-arrow-right"></i>
+        </div>
+        <div class="flow-step" data-state="ejecutando">
+          <div class="step-icon">
+            <i class="bi bi-play-circle-fill"></i>
+          </div>
+          <h4>Ejecutando</h4>
+          <p>Se ejecuta en la CPU</p>
+        </div>
+        <div class="flow-arrow">
+          <i class="bi bi-arrow-down"></i>
+        </div>
+        <div class="flow-step" data-state="esperando">
+          <div class="step-icon">
+            <i class="bi bi-pause-circle"></i>
+          </div>
+          <h4>Esperando</h4>
+          <p>A la espera de un evento</p>
+        </div>
+        <div class="flow-arrow">
+          <i class="bi bi-arrow-right"></i>
+        </div>
+        <div class="flow-step" data-state="terminado">
+          <div class="step-icon">
+            <i class="bi bi-check-circle-fill"></i>
+          </div>
+          <h4>Terminado</h4>
+          <p>Finalizó su ejecución</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PCB Structure -->
+    <section class="content-section fade-in" aria-labelledby="estructuraPCB">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-gear"></i>
+        </div>
+        <h2 id="estructuraPCB">Estructura de un Proceso (PCB)</h2>
+      </div>
+      <div class="pcb-card">
+        <div class="pcb-header">
+          <h3><i class="bi bi-file-earmark-text"></i> Process Control Block</h3>
+          <p>El PCB almacena toda la información necesaria para gestionar un proceso:</p>
+        </div>
+        <div class="pcb-components">
+          <div class="pcb-item">
+            <div class="pcb-icon">
+              <i class="bi bi-fingerprint"></i>
+            </div>
+            <div class="pcb-content">
+              <h4>Identificador (PID)</h4>
+              <p>Número único que identifica al proceso</p>
+            </div>
+          </div>
+          <div class="pcb-item">
+            <div class="pcb-icon">
+              <i class="bi bi-circle-fill"></i>
+            </div>
+            <div class="pcb-content">
+              <h4>Estado actual</h4>
+              <p>Nuevo, Listo, Ejecutando, Esperando, Terminado</p>
+            </div>
+          </div>
+          <div class="pcb-item">
+            <div class="pcb-icon">
+              <i class="bi bi-speedometer2"></i>
+            </div>
+            <div class="pcb-content">
+              <h4>Contador de programa</h4>
+              <p>Dirección de la siguiente instrucción a ejecutar</p>
+            </div>
+          </div>
+          <div class="pcb-item">
+            <div class="pcb-icon">
+              <i class="bi bi-cpu"></i>
+            </div>
+            <div class="pcb-content">
+              <h4>Registros de CPU</h4>
+              <p>Estado de todos los registros del procesador</p>
+            </div>
+          </div>
+          <div class="pcb-item">
+            <div class="pcb-icon">
+              <i class="bi bi-star-fill"></i>
+            </div>
+            <div class="pcb-content">
+              <h4>Información de planificación</h4>
+              <p>Prioridad, quantum, tiempo de CPU usado</p>
+            </div>
+          </div>
+          <div class="pcb-item">
+            <div class="pcb-icon">
+              <i class="bi bi-hdd-stack"></i>
+            </div>
+            <div class="pcb-content">
+              <h4>Recursos de E/S</h4>
+              <p>Archivos abiertos, pipes, colas de comunicación</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tipos de Procesos -->
+    <section class="content-section fade-in" aria-labelledby="tiposProcesos">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-list-check"></i>
+        </div>
+        <h2 id="tiposProcesos">Tipos de Procesos y Jerarquía</h2>
+      </div>
+      <div class="types-grid">
+        <div class="type-card">
+          <div class="type-header">
+            <i class="bi bi-diagram-3"></i>
+            <h3>Dependencia</h3>
+          </div>
+          <div class="type-list">
+            <div class="type-item">
+              <strong>Independientes:</strong> No dependen de otros procesos
+            </div>
+            <div class="type-item">
+              <strong>Interdependientes:</strong> Requieren datos o recursos de otros procesos
+            </div>
+          </div>
+        </div>
+        <div class="type-card">
+          <div class="type-header">
+            <i class="bi bi-person-gear"></i>
+            <h3>Origen</h3>
+          </div>
+          <div class="type-list">
+            <div class="type-item">
+              <strong>Usuario:</strong> Iniciados por aplicaciones del usuario
+            </div>
+            <div class="type-item">
+              <strong>Sistema:</strong> Iniciados por el sistema operativo
+            </div>
+          </div>
+        </div>
+        <div class="type-card">
+          <div class="type-header">
+            <i class="bi bi-window"></i>
+            <h3>Interacción</h3>
+          </div>
+          <div class="type-list">
+            <div class="type-item">
+              <strong>Primer plano:</strong> Requieren interacción directa
+            </div>
+            <div class="type-item">
+              <strong>Segundo plano:</strong> Ejecutan sin intervención del usuario
+            </div>
+          </div>
+        </div>
+        <div class="type-card">
+          <div class="type-header">
+            <i class="bi bi-diagram-2"></i>
+            <h3>Jerarquía</h3>
+          </div>
+          <div class="type-list">
+            <div class="type-item">
+              <strong>Padre:</strong> Crea otros procesos (fork, CreateProcess)
+            </div>
+            <div class="type-item">
+              <strong>Hijo:</strong> Creado por un proceso padre
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Planificación -->
+    <section class="content-section fade-in" aria-labelledby="planificacion">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-calendar-check"></i>
+        </div>
+        <h2 id="planificacion">Planificación de Procesos</h2>
+      </div>
+      
+      <div class="planning-intro">
+        <p><strong>Objetivos principales:</strong> Garantizar equidad, eficiencia, minimizar tiempo de respuesta y maximizar la utilización de la CPU.</p>
+      </div>
+
+      <div class="algorithms-table-container">
+        <table class="algorithms-table" aria-describedby="descripcionPlanificacion" role="table">
+          <caption id="descripcionPlanificacion" class="sr-only">Algoritmos de planificación de procesos con sus características principales</caption>
+          <thead>
+            <tr>
+              <th scope="col">Algoritmo</th>
+              <th scope="col">Descripción breve</th>
+              <th scope="col">Ventaja</th>
+              <th scope="col">Desventaja</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="fade-in">
+              <td><strong>FCFS</strong></td>
+              <td>Orden de llegada (First Come, First Served)</td>
+              <td>Simple de implementar</td>
+              <td>Efecto convoy en procesos largos</td>
+            </tr>
+            <tr class="fade-in">
+              <td><strong>SJF</strong></td>
+              <td>Prioriza el trabajo más corto (Shortest Job First)</td>
+              <td>Minimiza tiempo de espera promedio</td>
+              <td>Posible inanición de procesos largos</td>
+            </tr>
+            <tr class="fade-in">
+              <td><strong>Round Robin</strong></td>
+              <td>Quantum fijo de tiempo por proceso</td>
+              <td>Equidad y tiempo de respuesta predecible</td>
+              <td>Rendimiento depende del tamaño del quantum</td>
+            </tr>
+            <tr class="fade-in">
+              <td><strong>Prioridades</strong></td>
+              <td>Asignación según nivel de prioridad</td>
+              <td>Control sobre procesos urgentes</td>
+              <td>Inanición de procesos de baja prioridad</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Sincronización -->
+    <section class="content-section fade-in" aria-labelledby="sincronizacion">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-arrow-left-right"></i>
+        </div>
+        <h2 id="sincronizacion">Sincronización e Interbloqueo</h2>
+      </div>
+      
+      <div class="sync-grid">
+        <div class="sync-card">
+          <h3><i class="bi bi-lock"></i> Sincronización</h3>
+          <p>Asegura el acceso ordenado a recursos compartidos mediante:</p>
+          <ul class="sync-list">
+            <li><strong>Semáforos:</strong> Contadores para controlar acceso</li>
+            <li><strong>Mutex:</strong> Exclusión mutua binaria</li>
+            <li><strong>Monitores:</strong> Estructuras de alto nivel</li>
+          </ul>
+        </div>
+        
+        <div class="deadlock-card">
+          <h3><i class="bi bi-exclamation-triangle"></i> Condiciones de Interbloqueo</h3>
+          <div class="deadlock-conditions">
+            <div class="condition-item">
+              <span class="condition-number">1</span>
+              <span>Exclusión mutua</span>
+            </div>
+            <div class="condition-item">
+              <span class="condition-number">2</span>
+              <span>Retención y espera</span>
+            </div>
+            <div class="condition-item">
+              <span class="condition-number">3</span>
+              <span>No apropiación</span>
+            </div>
+            <div class="condition-item">
+              <span class="condition-number">4</span>
+              <span>Espera circular</span>
+            </div>
+          </div>
+          
+          <div class="prevention-methods">
+            <h4><i class="bi bi-shield-check"></i> Prevención y Recuperación</h4>
+            <ul>
+              <li>Algoritmo del banquero</li>
+              <li>Detección y reinicio de procesos</li>
+              <li>Evitar condiciones de Coffman</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hilos -->
+    <section class="content-section fade-in" aria-labelledby="hilos">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-bezier2"></i>
+        </div>
+        <h2 id="hilos">Hilos (Threads)</h2>
+      </div>
+      
+      <div class="threads-content">
+        <div class="threads-overview">
+          <p>Los hilos son la unidad más pequeña de ejecución dentro de un proceso. Comparten el mismo espacio de direcciones pero tienen su propio stack y registros.</p>
+        </div>
+        
+        <div class="threads-grid">
+          <div class="thread-card">
+            <h3><i class="bi bi-diagram-3"></i> Modelos de Hilos</h3>
+            <ul>
+              <li><strong>Usuario:</strong> Gestionados por bibliotecas</li>
+              <li><strong>Kernel:</strong> Gestionados por el SO</li>
+              <li><strong>Híbrido:</strong> Combinación de ambos</li>
+            </ul>
+          </div>
+          
+          <div class="thread-card">
+            <h3><i class="bi bi-check-circle"></i> Ventajas</h3>
+            <ul>
+              <li>Menor sobrecarga de creación</li>
+              <li>Paralelismo real en sistemas SMP</li>
+              <li>Comunicación rápida (memoria compartida)</li>
+              <li>Mejor respuesta en aplicaciones interactivas</li>
+            </ul>
+          </div>
+          
+          <div class="thread-card">
+            <h3><i class="bi bi-exclamation-triangle"></i> Problemas</h3>
+            <ul>
+              <li>Condiciones de carrera (race conditions)</li>
+              <li>Interbloqueos (deadlocks)</li>
+              <li>Inanición (starvation)</li>
+              <li>Complejidad en la sincronización</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Información Adicional -->
+    <section class="content-section fade-in modern-trends" aria-labelledby="infoAdicional">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-rocket-takeoff"></i>
+        </div>
+        <h2 id="infoAdicional">Tendencias Actuales y Tecnologías Emergentes</h2>
+      </div>
+      
+      <div class="trends-grid">
+        <div class="trend-card">
+          <div class="trend-icon">
+            <i class="bi bi-layers"></i>
+          </div>
+          <h3>Planificadores Multinivel</h3>
+          <p>Sistemas modernos como <strong>Linux CFS</strong> y <strong>Windows Scheduler</strong> utilizan colas multinivel con retroalimentación dinámica para equilibrar interactividad y throughput.</p>
+        </div>
+        
+        <div class="trend-card">
+          <div class="trend-icon">
+            <i class="bi bi-stopwatch"></i>
+          </div>
+          <h3>Sistemas en Tiempo Real</h3>
+          <p>Algoritmos <strong>Rate Monotonic (RMS)</strong> y <strong>Earliest Deadline First (EDF)</strong> garantizan plazos críticos en aplicaciones embebidas y de misión crítica.</p>
+        </div>
+        
+        <div class="trend-card">
+          <div class="trend-icon">
+            <i class="bi bi-box"></i>
+          </div>
+          <h3>Contenerización</h3>
+          <p><strong>Docker</strong> y <strong>Kubernetes</strong> aíslan procesos en contenedores, gestionando recursos con cgroups y namespaces para mayor eficiencia.</p>
+        </div>
+        
+        <div class="trend-card">
+          <div class="trend-icon">
+            <i class="bi bi-graph-up"></i>
+          </div>
+          <h3>Observabilidad</h3>
+          <p>Herramientas como <code>htop</code>, <code>perf</code> y sistemas de telemetría (<strong>Prometheus</strong>) permiten medir utilización, latencias y cuellos de botella.</p>
+        </div>
+        
+        <div class="trend-card">
+          <div class="trend-icon">
+            <i class="bi bi-lightning"></i>
+          </div>
+          <h3>Procesos Asíncronos</h3>
+          <p>Arquitecturas basadas en eventos (<strong>Node.js</strong>, <strong>Golang goroutines</strong>) optimizan la concurrencia sin hilos pesados del sistema.</p>
+        </div>
+        
+        <div class="trend-card">
+          <div class="trend-icon">
+            <i class="bi bi-shield"></i>
+          </div>
+          <h3>Seguridad y Sandboxing</h3>
+          <p>Tecnologías como <strong>SELinux</strong>, <strong>AppArmor</strong> y sandboxing de navegadores aíslan procesos para minimizar riesgos de seguridad.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Indicador de progreso de scroll -->
+  <div class="scroll-progress"></div>
+
+  <!-- Footer Placeholder -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Scripts -->
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Component Loader -->
+  <script src="../../componentes/componentLoader.js"></script>
+  <!-- Header Modern JS -->
+  <script src="../../componentes/header-modern.js"></script>
+  <!-- Menu Mobile Debug JS -->
+  <script src="../../componentes/menu-mobile-debug.js"></script>
+  <!-- Search URL Fix JS -->
+  <script src="../../componentes/search-url-fix.js"></script>
+  <!-- Dark Mode Toggle JS -->
+  <script src="../../componentes/modoOscuro.js"></script>
+  <!-- Footer Functionality JS -->
+  <script src="../../componentes/footer.js"></script>
+  <!-- JS específico de la página -->
+  <script src="js/PrincipalGestionProcesos.js?v=1750165722"></script>
+</body>
+
+</html>
