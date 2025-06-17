@@ -31,73 +31,506 @@
 <body class="min-h-screen bg-[var(--color-bg)] text-[var(--color-text)] transition-colors duration-500 gestionmemoria-page component-loading">
   <!-- Header Placeholder -->
   <div id="header-placeholder"></div>
+
+  <!-- Hero Section -->
+  <section class="hero-section" aria-labelledby="hero-title">
+    <div class="container">
+      <div class="hero-content text-center">
+        <div class="hero-badge">
+          <i class="bi bi-memory me-2"></i>
+          Gestión de Memoria
+        </div>
+        <h1 id="hero-title" class="hero-title">
+          Administración y <span class="gradient-text">Optimización</span> de Memoria
+        </h1>
+        <p class="hero-subtitle typing-animate">
+          Explora los mecanismos fundamentales que permiten la gestión eficiente de la memoria en sistemas modernos
+        </p>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="bi bi-hdd-stack"></i>
+            </div>
+            <div class="stat-number">4</div>
+            <div class="stat-label">Niveles de Memoria</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="bi bi-grid-3x3-gap"></i>
+            </div>
+            <div class="stat-number">64KB</div>
+            <div class="stat-label">Tamaño de Página</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="bi bi-arrow-repeat"></i>
+            </div>
+            <div class="stat-number">8</div>
+            <div class="stat-label">Algoritmos de Reemplazo</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-decoration"></div>
+  </section>
+
   <!-- Contenido principal -->
-  <main class="main-content container-fluid">
-    <!-- Sección de página en desarrollo -->
-    <section class="development-section py-5">
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-8 col-xl-6">
-            <div class="development-card">
-              <div class="development-card-inner">
-                <div class="development-card-body text-center p-5">
-                  <!-- Icono principal animado -->
-                  <div class="development-icon-container mb-4">
-                    <i class="bi bi-memory development-icon"></i>
-                    <div class="development-pulse-1"></div>
-                    <div class="development-pulse-2"></div>
-                    <div class="development-pulse-3"></div>
-                  </div>
-                  
-                  <!-- Título principal -->
-                  <h1 class="development-title mb-4">
-                    Gestión de Memoria
-                  </h1>
-                  
-                  <!-- Mensaje de desarrollo -->
-                  <div class="development-message mb-4">
-                    <h3 class="mb-3">
-                      <i class="bi bi-gear-fill me-2"></i>
-                      Página en Desarrollo
-                    </h3>
-                    <p class="development-text">
-                      Estamos trabajando arduamente para brindarte el mejor contenido sobre 
-                      <strong>Gestión de Memoria</strong> en sistemas operativos.
-                    </p>
-                    <p class="development-subtext">
-                      Pronto tendrás acceso a simuladores interactivos, ejercicios prácticos 
-                      y explicaciones detalladas sobre memoria física, virtual, paginación, 
-                      segmentación y técnicas de optimización.
-                    </p>
-                  </div>
-                  
-                  <!-- Barra de progreso -->
-                  <div class="development-progress mb-4">
-                    <div class="development-progress-bar">
-                      <div class="development-progress-fill"></div>
-                    </div>
-                    <small class="development-progress-text">Desarrollo en progreso...</small>
-                  </div>
-                  
-                  <!-- Botón de regreso -->
-                  <div class="development-actions">
-                    <button onclick="window.history.back()" class="btn-development">
-                      <i class="bi bi-arrow-left me-2"></i>
-                      Volver Atrás
-                    </button>
-                    <button onclick="window.location.href='../../../secotogpt.html'" class="btn-development btn-development-primary">
-                      <i class="bi bi-house me-2"></i>
-                      Ir al Inicio
-                    </button>
-                  </div>
-                </div>
+  <main class="container main-content" role="main" aria-label="Contenido principal de gestión de memoria">
+    
+    <!-- Definición de Memoria -->
+    <section class="content-section fade-in" aria-labelledby="definicionMemoria">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-memory"></i>
+        </div>
+        <h2 id="definicionMemoria">¿Qué es la Gestión de Memoria?</h2>
+      </div>
+      <div class="content-grid">
+        <div class="info-card">
+          <h3><i class="bi bi-cpu me-2"></i>Concepto Fundamental</h3>
+          <p>La gestión de memoria es el proceso mediante el cual el sistema operativo controla y coordina el uso de la memoria principal (RAM) del computador, optimizando la asignación y liberación de espacios de memoria para los programas en ejecución.</p>
+        </div>
+        <div class="info-card">
+          <h3><i class="bi bi-diagram-3 me-2"></i>Importancia</h3>
+          <p>Una gestión eficiente de memoria permite ejecutar múltiples programas simultáneamente, maximiza el rendimiento del sistema, previene conflictos entre procesos y garantiza la estabilidad del sistema operativo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Jerarquía de Memoria -->
+    <section class="content-section fade-in" aria-labelledby="jerarquiaMemoria">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-bar-chart-steps"></i>
+        </div>
+        <h2 id="jerarquiaMemoria">Jerarquía de Memoria</h2>
+      </div>
+      
+      <div class="memory-hierarchy">
+        <div class="hierarchy-level" data-level="cpu">
+          <div class="level-icon">
+            <i class="bi bi-cpu-fill"></i>
+          </div>
+          <h4>Registros de CPU</h4>
+          <div class="level-stats">
+            <span class="speed">Velocidad: Inmediata</span>
+            <span class="capacity">Capacidad: Bytes</span>
+            <span class="cost">Costo: Muy Alto</span>
+          </div>
+          <p>Los registros más rápidos del procesador, acceso instantáneo</p>
+        </div>
+        
+        <div class="hierarchy-arrow">
+          <i class="bi bi-arrow-down"></i>
+        </div>
+        
+        <div class="hierarchy-level" data-level="cache">
+          <div class="level-icon">
+            <i class="bi bi-hdd-network"></i>
+          </div>
+          <h4>Memoria Caché</h4>
+          <div class="level-stats">
+            <span class="speed">Velocidad: < 1ns</span>
+            <span class="capacity">Capacidad: KB-MB</span>
+            <span class="cost">Costo: Alto</span>
+          </div>
+          <p>Memoria ultra-rápida que almacena datos frecuentemente utilizados</p>
+        </div>
+        
+        <div class="hierarchy-arrow">
+          <i class="bi bi-arrow-down"></i>
+        </div>
+        
+        <div class="hierarchy-level" data-level="ram">
+          <div class="level-icon">
+            <i class="bi bi-memory"></i>
+          </div>
+          <h4>Memoria Principal (RAM)</h4>
+          <div class="level-stats">
+            <span class="speed">Velocidad: 10-100ns</span>
+            <span class="capacity">Capacidad: GB</span>
+            <span class="cost">Costo: Medio</span>
+          </div>
+          <p>Memoria principal donde se cargan los programas en ejecución</p>
+        </div>
+        
+        <div class="hierarchy-arrow">
+          <i class="bi bi-arrow-down"></i>
+        </div>
+        
+        <div class="hierarchy-level" data-level="storage">
+          <div class="level-icon">
+            <i class="bi bi-hdd"></i>
+          </div>
+          <h4>Almacenamiento Secundario</h4>
+          <div class="level-stats">
+            <span class="speed">Velocidad: ms</span>
+            <span class="capacity">Capacidad: TB</span>
+            <span class="cost">Costo: Bajo</span>
+          </div>
+          <p>Discos duros, SSD y otros dispositivos de almacenamiento permanente</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tipos de Memoria -->
+    <section class="content-section fade-in" aria-labelledby="tiposMemoria">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-diagram-2"></i>
+        </div>
+        <h2 id="tiposMemoria">Tipos de Gestión de Memoria</h2>
+      </div>
+      <div class="types-grid">
+        <div class="type-card">
+          <div class="type-header">
+            <i class="bi bi-hdd-fill"></i>
+            <h3>Memoria Física</h3>
+          </div>
+          <div class="type-list">
+            <div class="type-item">
+              <strong>Partición Fija:</strong> División estática de la memoria en bloques de tamaño fijo
+            </div>
+            <div class="type-item">
+              <strong>Partición Variable:</strong> Asignación dinámica según las necesidades del proceso
+            </div>
+            <div class="type-item">
+              <strong>Compactación:</strong> Reorganización para eliminar fragmentación externa
+            </div>
+          </div>
+        </div>
+        
+        <div class="type-card">
+          <div class="type-header">
+            <i class="bi bi-cloud-arrow-up"></i>
+            <h3>Memoria Virtual</h3>
+          </div>
+          <div class="type-list">
+            <div class="type-item">
+              <strong>Paginación:</strong> División de memoria en páginas de tamaño fijo
+            </div>
+            <div class="type-item">
+              <strong>Segmentación:</strong> División lógica según la estructura del programa
+            </div>
+            <div class="type-item">
+              <strong>Paginación Segmentada:</strong> Combinación de ambas técnicas
+            </div>
+          </div>
+        </div>
+        
+        <div class="type-card">
+          <div class="type-header">
+            <i class="bi bi-shield-check"></i>
+            <h3>Protección</h3>
+          </div>
+          <div class="type-list">
+            <div class="type-item">
+              <strong>Límites de Base:</strong> Definición de rangos de memoria válidos
+            </div>
+            <div class="type-item">
+              <strong>Bits de Protección:</strong> Control de permisos de lectura/escritura/ejecución
+            </div>
+            <div class="type-item">
+              <strong>Aislamiento:</strong> Separación entre espacios de procesos
+            </div>
+          </div>
+        </div>
+        
+        <div class="type-card">
+          <div class="type-header">
+            <i class="bi bi-speedometer2"></i>
+            <h3>Optimización</h3>
+          </div>
+          <div class="type-list">
+            <div class="type-item">
+              <strong>Localidad Temporal:</strong> Datos usados recientemente tienden a usarse de nuevo
+            </div>
+            <div class="type-item">
+              <strong>Localidad Espacial:</strong> Datos cercanos tienden a usarse juntos
+            </div>
+            <div class="type-item">
+              <strong>Prefetching:</strong> Carga anticipada de datos probables
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Paginación -->
+    <section class="content-section fade-in" aria-labelledby="paginacion">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-grid-3x3-gap"></i>
+        </div>
+        <h2 id="paginacion">Sistema de Paginación</h2>
+      </div>
+      
+      <div class="pagination-intro">
+        <p><strong>La paginación</strong> es una técnica de gestión de memoria que divide tanto la memoria física como la virtual en bloques de tamaño fijo llamados páginas, permitiendo una asignación más eficiente y flexible.</p>
+      </div>
+
+      <div class="pagination-content">
+        <div class="pagination-card">
+          <div class="pagination-header">
+            <h3><i class="bi bi-table me-2"></i>Tabla de Páginas</h3>
+            <p>Estructura que mapea páginas virtuales a marcos de página físicos</p>
+          </div>
+          <div class="pagination-components">
+            <div class="pagination-item">
+              <div class="pagination-icon">
+                <i class="bi bi-hash"></i>
+              </div>
+              <div class="pagination-content-item">
+                <h4>Número de Página Virtual</h4>
+                <p>Índice que identifica cada página en el espacio virtual del proceso</p>
+              </div>
+            </div>
+            <div class="pagination-item">
+              <div class="pagination-icon">
+                <i class="bi bi-geo-alt"></i>
+              </div>
+              <div class="pagination-content-item">
+                <h4>Marco de Página Físico</h4>
+                <p>Dirección real en memoria física donde se encuentra la página</p>
+              </div>
+            </div>
+            <div class="pagination-item">
+              <div class="pagination-icon">
+                <i class="bi bi-check-circle"></i>
+              </div>
+              <div class="pagination-content-item">
+                <h4>Bit de Validez</h4>
+                <p>Indica si la página está actualmente en memoria física</p>
+              </div>
+            </div>
+            <div class="pagination-item">
+              <div class="pagination-icon">
+                <i class="bi bi-shield"></i>
+              </div>
+              <div class="pagination-content-item">
+                <h4>Bits de Protección</h4>
+                <p>Definen permisos de lectura, escritura y ejecución</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  </main>
+
+    <!-- Algoritmos de Reemplazo -->
+    <section class="content-section fade-in" aria-labelledby="algoritmos">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-arrow-clockwise"></i>
+        </div>
+        <h2 id="algoritmos">Algoritmos de Reemplazo de Páginas</h2>
+      </div>
+      
+      <div class="algorithms-intro">
+        <p><strong>Cuando la memoria física se llena,</strong> el sistema debe decidir qué páginas reemplazar para hacer espacio a nuevas páginas. Los algoritmos de reemplazo determinan esta selección.</p>
+      </div>
+
+      <div class="algorithms-table-container">
+        <table class="algorithms-table" aria-describedby="descripcionAlgoritmos" role="table">
+          <thead>
+            <tr>
+              <th>Algoritmo</th>
+              <th>Descripción</th>
+              <th>Complejidad</th>
+              <th>Eficiencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>FIFO</strong></td>
+              <td>Reemplaza la página que llegó primero (First In, First Out)</td>
+              <td>O(1)</td>
+              <td>Baja</td>
+            </tr>
+            <tr>
+              <td><strong>LRU</strong></td>
+              <td>Reemplaza la página usada menos recientemente</td>
+              <td>O(1) con hardware</td>
+              <td>Alta</td>
+            </tr>
+            <tr>
+              <td><strong>Óptimo</strong></td>
+              <td>Reemplaza la página que no se usará por más tiempo</td>
+              <td>Teórico</td>
+              <td>Máxima</td>
+            </tr>
+            <tr>
+              <td><strong>Clock</strong></td>
+              <td>Aproximación de LRU usando bit de referencia</td>
+              <td>O(n)</td>
+              <td>Media-Alta</td>
+            </tr>
+            <tr>
+              <td><strong>LFU</strong></td>
+              <td>Reemplaza la página usada con menor frecuencia</td>
+              <td>O(log n)</td>
+              <td>Media</td>
+            </tr>
+            <tr>
+              <td><strong>MFU</strong></td>
+              <td>Reemplaza la página usada con mayor frecuencia</td>
+              <td>O(log n)</td>
+              <td>Baja</td>
+            </tr>
+            <tr>
+              <td><strong>Random</strong></td>
+              <td>Selecciona una página aleatoriamente para reemplazar</td>
+              <td>O(1)</td>
+              <td>Variable</td>
+            </tr>
+            <tr>
+              <td><strong>Second Chance</strong></td>
+              <td>FIFO modificado que da una segunda oportunidad</td>
+              <td>O(n)</td>
+              <td>Media</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Fragmentación -->
+    <section class="content-section fade-in" aria-labelledby="fragmentacion">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-puzzle"></i>
+        </div>
+        <h2 id="fragmentacion">Fragmentación de Memoria</h2>
+      </div>
+      
+      <div class="fragmentation-grid">
+        <div class="fragmentation-card">
+          <div class="fragmentation-header">
+            <i class="bi bi-grid"></i>
+            <h3>Fragmentación Externa</h3>
+          </div>
+          <div class="fragmentation-content">
+            <p><strong>Definición:</strong> Espacios libres de memoria que no pueden utilizarse porque están divididos en fragmentos demasiado pequeños.</p>
+            
+            <h4>Características:</h4>
+            <ul class="fragmentation-list">
+              <li>Ocurre en asignación variable</li>
+              <li>Memoria total disponible pero no contigua</li>
+              <li>Reduce eficiencia del sistema</li>
+            </ul>
+            
+            <h4>Soluciones:</h4>
+            <div class="solutions-list">
+              <div class="solution-item">
+                <strong>Compactación:</strong> Reorganizar memoria para juntar espacios libres
+              </div>
+              <div class="solution-item">
+                <strong>Paginación:</strong> Elimina fragmentación externa por completo
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="fragmentation-card">
+          <div class="fragmentation-header">
+            <i class="bi bi-boxes"></i>
+            <h3>Fragmentación Interna</h3>
+          </div>
+          <div class="fragmentation-content">
+            <p><strong>Definición:</strong> Memoria desperdiciada dentro de una unidad de asignación porque el proceso no utiliza todo el espacio asignado.</p>
+            
+            <h4>Características:</h4>
+            <ul class="fragmentation-list">
+              <li>Ocurre en asignación fija</li>
+              <li>Espacio asignado pero no utilizado</li>
+              <li>Promedio: 50% del bloque</li>
+            </ul>
+            
+            <h4>Soluciones:</h4>
+            <div class="solutions-list">
+              <div class="solution-item">
+                <strong>Particiones Múltiples:</strong> Diferentes tamaños de partición
+              </div>
+              <div class="solution-item">
+                <strong>Segmentación:</strong> Asignación según necesidades reales
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Técnicas Modernas -->
+    <section class="content-section fade-in modern-techniques" aria-labelledby="tecnicasModernas">
+      <div class="section-header">
+        <div class="section-icon">
+          <i class="bi bi-rocket-takeoff"></i>
+        </div>
+        <h2 id="tecnicasModernas">Técnicas Modernas de Gestión</h2>
+      </div>
+      
+      <div class="techniques-grid">
+        <div class="technique-card">
+          <div class="technique-icon">
+            <i class="bi bi-lightning-charge"></i>
+          </div>
+          <h3>Copy-on-Write (COW)</h3>
+          <p>Técnica que permite compartir páginas entre procesos hasta que uno de ellos modifica el contenido, momento en el que se crea una copia.</p>
+          <code>fork() + COW = eficiencia</code>
+          <strong>Beneficio:</strong> Reduce uso de memoria y mejora rendimiento en creación de procesos.
+        </div>
+        
+        <div class="technique-card">
+          <div class="technique-icon">
+            <i class="bi bi-memory"></i>
+          </div>
+          <h3>Memoria Compartida</h3>
+          <p>Permite que múltiples procesos accedan a la misma región de memoria física, facilitando la comunicación entre procesos.</p>
+          <code>shm_open() + mmap()</code>
+          <strong>Beneficio:</strong> Comunicación rápida y eficiente entre procesos relacionados.
+        </div>
+        
+        <div class="technique-card">
+          <div class="technique-icon">
+            <i class="bi bi-cpu"></i>
+          </div>
+          <h3>NUMA (Non-Uniform Memory Access)</h3>
+          <p>Arquitectura donde el tiempo de acceso a memoria depende de la ubicación relativa del procesador y la memoria.</p>
+          <code>numactl --cpubind=0</code>
+          <strong>Beneficio:</strong> Optimiza rendimiento en sistemas multiprocesador.
+        </div>
+        
+        <div class="technique-card">
+          <div class="technique-icon">
+            <i class="bi bi-shuffle"></i>
+          </div>
+          <h3>Ballooning</h3>
+          <p>Técnica de virtualización que permite al hipervisor reclamar memoria de máquinas virtuales cuando es necesario.</p>
+          <code>VMware Tools + ballooning</code>
+          <strong>Beneficio:</strong> Gestión dinámica de memoria en entornos virtualizados.
+        </div>
+        
+        <div class="technique-card">
+          <div class="technique-icon">
+            <i class="bi bi-arrow-up-right"></i>
+          </div>
+          <h3>Huge Pages</h3>
+          <p>Uso de páginas de mayor tamaño (2MB, 1GB) para reducir la sobrecarga de la tabla de páginas en aplicaciones que manejan grandes cantidades de memoria.</p>
+          <code>echo 20 > /proc/sys/vm/nr_hugepages</code>
+          <strong>Beneficio:</strong> Mejora rendimiento en aplicaciones intensivas en memoria.
+        </div>
+        
+        <div class="technique-card">
+          <div class="technique-icon">
+            <i class="bi bi-arrow-repeat"></i>
+          </div>
+          <h3>Memory Compression</h3>
+          <p>Compresión de páginas en memoria antes de intercambiarlas al disco, reduciendo la necesidad de I/O.</p>
+          <code>zswap + lz4</code>
+          <strong>Beneficio:</strong> Reduce latencia y mejora responsividad del sistema.
+        </div>
+      </div>
+    </section>  </main>
 
   <!-- Indicador de progreso de scroll -->
   <div class="scroll-progress"></div>

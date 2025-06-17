@@ -1,286 +1,775 @@
 /**
- * JavaScript específico para la página de Gestión de Memoria
- * Funcionalidades: animaciones y efectos de página en desarrollo
+ * JavaScript avanzado para Gestión de Memoria - SeCoToGpt
+ * Funcionalidades completas:
+ * - Animaciones typing personalizadas
+ * - IntersectionObserver para elementos específicos
+ * - Indicador de progreso de scroll
+ * - Efectos interactivos para jerarquía de memoria
+ * - Animaciones para tabla de algoritmos
+ * - Efectos especiales para cards y técnicas modernas
+ * - Optimizaciones de rendimiento y accesibilidad
  */
 
-class GestionMemoriaManager {
-  constructor() {
-    this.initialized = false;
-    this.init();
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('🧠 Inicializando Gestión de Memoria - Sistema Avanzado...');
+
+  // Quitar clase de loading tras carga inicial
+  setTimeout(() => {
+    document.body.classList.remove('component-loading');
+    console.log('✅ Página de Gestión de Memoria cargada completamente');
+  }, 100);
+
+  // ===== ANIMACIÓN TYPING MEJORADA PARA SUBTÍTULO HERO =====
+  function typingAnimation(element, speed = 35) {
+    const originalText = element.textContent.trim();
+    element.textContent = '';
+    element.style.width = 'auto';
+    element.style.minHeight = '1.5em';
+    element.style.borderRight = '3px solid var(--memory-primary)';
+    element.style.display = 'inline-block';
+    element.style.verticalAlign = 'top';
+    element.style.whiteSpace = 'normal';
+    element.style.maxWidth = '100%';
+    
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i < originalText.length) {
+        element.textContent += originalText[i];
+        i++;
+      } else {
+        clearInterval(interval);
+        element.style.borderRight = '';
+        element.classList.add('typing-complete');
+      }
+    }, speed);
   }
 
-  async init() {
-    console.log('🧠 Inicializando Gestión de Memoria Manager...');
-    
-    // Esperar a que los componentes se carguen
-    await this.waitForComponents();
-    
-    // Inicializar funcionalidades específicas para página en desarrollo
-    this.initializeDevelopmentPage();
-    this.initializeDevelopmentAnimations();
-    this.initializeButtonInteractions();
-    this.removeLoadingClass();
-    
-    this.initialized = true;
-    console.log('✅ Gestión de Memoria Manager inicializado - Página en Desarrollo');
+  // Inicializar typing en el hero subtitle
+  const subtitle = document.querySelector('.hero-subtitle.typing-animate');
+  if (subtitle) {
+    setTimeout(() => typingAnimation(subtitle), 1500);
   }
+  // ===== INTERSECTION OBSERVER AVANZADO PARA ANIMACIONES =====
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
 
-  async waitForComponents() {
-    let attempts = 0;
-    const maxAttempts = 50;
-    
-    while (attempts < maxAttempts) {
-      const header = document.querySelector('#header-placeholder .modern-header');
-      const footer = document.querySelector('#footer-placeholder .footer-modern');
+  const revealOnScroll = (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        
+        // Animaciones específicas según el tipo de elemento
+        if (entry.target.classList.contains('content-grid')) {
+          animateGridChildren(entry.target, 150);
+        } else if (entry.target.classList.contains('types-grid')) {
+          animateGridChildren(entry.target, 120);
+        } else if (entry.target.classList.contains('techniques-grid')) {
+          animateGridChildren(entry.target, 100);
+        } else if (entry.target.classList.contains('fragmentation-grid')) {
+          animateGridChildren(entry.target, 200);
+        } else if (entry.target.classList.contains('memory-hierarchy')) {
+          animateHierarchyLevels(entry.target);
+        } else if (entry.target.classList.contains('pagination-components')) {
+          animateGridChildren(entry.target, 80);
+        } else if (entry.target.classList.contains('algorithms-table')) {
+          animateTableRows(entry.target);
+        } else if (entry.target.classList.contains('hero-stats')) {
+          animateStatsItems(entry.target);
+        }
+        
+        observer.unobserve(entry.target);
+      }
+    });
+  };
+
+  // Función para animar hijos de grids con delay escalonado
+  function animateGridChildren(gridElement, baseDelay = 100) {
+    Array.from(gridElement.children).forEach((child, index) => {
+      child.style.opacity = '0';
+      child.style.transform = 'translateY(30px) scale(0.95)';
+      child.style.transition = 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
       
-      if (header && footer) {
-        console.log('✅ Componentes cargados correctamente');
-        return;
+      setTimeout(() => {
+        child.style.opacity = '1';
+        child.style.transform = 'translateY(0) scale(1)';
+        child.classList.add('visible');
+      }, index * baseDelay);
+    });
+  }
+
+  // Función específica para animar niveles de jerarquía
+  function animateHierarchyLevels(hierarchyElement) {
+    const levels = hierarchyElement.querySelectorAll('.hierarchy-level');
+    const arrows = hierarchyElement.querySelectorAll('.hierarchy-arrow');
+    
+    levels.forEach((level, index) => {
+      level.style.opacity = '0';
+      level.style.transform = 'translateX(-50px) scale(0.9)';
+      level.style.transition = 'all 1s cubic-bezier(0.4, 0, 0.2, 1)';
+      
+      setTimeout(() => {
+        level.style.opacity = '1';
+        level.style.transform = 'translateX(0) scale(1)';
+        level.classList.add('visible');
+        
+        // Animar estadísticas internas
+        setTimeout(() => {
+          const stats = level.querySelectorAll('.level-stats span');
+          stats.forEach((stat, statIndex) => {
+            stat.style.opacity = '0';
+            stat.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+              stat.style.opacity = '1';
+              stat.style.transform = 'scale(1)';
+              stat.style.transition = 'all 0.4s ease';
+            }, statIndex * 100);
+          });
+        }, 300);
+      }, index * 200);
+    });
+    
+    // Animar flechas después de los niveles
+    setTimeout(() => {
+      arrows.forEach((arrow, index) => {
+        arrow.style.opacity = '0';
+        setTimeout(() => {
+          arrow.style.opacity = '1';
+          arrow.style.transition = 'opacity 0.5s ease';
+        }, index * 200);
+      });
+    }, levels.length * 200);
+  }
+
+  // Función para animar estadísticas del hero
+  function animateStatsItems(statsElement) {
+    const items = statsElement.querySelectorAll('.stat-item');
+    items.forEach((item, index) => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(20px) scale(0.9)';
+      item.style.transition = 'all 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      
+      setTimeout(() => {
+        item.style.opacity = '1';
+        item.style.transform = 'translateY(0) scale(1)';
+        
+        // Animar números con efecto contador
+        const numberElement = item.querySelector('.stat-number');
+        if (numberElement) {
+          animateCounter(numberElement, 800);
+        }
+      }, index * 150);
+    });
+  }
+
+  // Función para animar filas de tabla
+  function animateTableRows(tableElement) {
+    const rows = tableElement.querySelectorAll('tbody tr');
+    rows.forEach((row, index) => {
+      row.style.opacity = '0';
+      row.style.transform = 'translateX(-30px)';
+      row.style.transition = 'all 0.5s ease';
+      
+      setTimeout(() => {
+        row.style.opacity = '1';
+        row.style.transform = 'translateX(0)';
+      }, index * 80);
+    });
+  }
+
+  // Función para animar contadores numéricos
+  function animateCounter(element, duration = 1000) {
+    const text = element.textContent;
+    const number = text.match(/\d+/);
+    if (!number) return;
+    
+    const finalNumber = parseInt(number[0]);
+    const suffix = text.replace(number[0], '');
+    const increment = finalNumber / (duration / 50);
+    let current = 0;
+    
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= finalNumber) {
+        element.textContent = finalNumber + suffix;
+        clearInterval(timer);
+      } else {
+        element.textContent = Math.floor(current) + suffix;
+      }
+    }, 50);
+  }
+
+  const observer = new IntersectionObserver(revealOnScroll, observerOptions);
+
+  // Observar elementos específicos para animaciones
+  const elementsToObserve = [
+    // Secciones principales
+    ...document.querySelectorAll('.content-section'),
+    // Grids específicos
+    ...document.querySelectorAll('.content-grid'),
+    ...document.querySelectorAll('.types-grid'),
+    ...document.querySelectorAll('.techniques-grid'),
+    ...document.querySelectorAll('.fragmentation-grid'),
+    // Elementos únicos
+    ...document.querySelectorAll('.memory-hierarchy'),
+    ...document.querySelectorAll('.pagination-components'),
+    ...document.querySelectorAll('.algorithms-table'),
+    ...document.querySelectorAll('.hero-stats')
+  ];
+
+  elementsToObserve.forEach(el => {
+    el.classList.add('fade-in');
+    observer.observe(el);
+  });
+  // ===== INDICADOR DE PROGRESO DE SCROLL MEJORADO =====
+  const scrollProgress = document.querySelector('.scroll-progress');
+  if (scrollProgress) {
+    let ticking = false;
+    
+    function updateScrollProgress() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = Math.min((winScroll / height) * 100, 100);
+      
+      scrollProgress.style.transform = `scaleX(${scrolled / 100})`;
+      ticking = false;
+    }
+    
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(updateScrollProgress);
+        ticking = true;
+      }
+    }
+    
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // ===== EFECTOS INTERACTIVOS PARA JERARQUÍA DE MEMORIA =====
+  const hierarchyLevels = document.querySelectorAll('.hierarchy-level');
+  hierarchyLevels.forEach((level, index) => {
+    level.setAttribute('tabindex', '0');
+    level.setAttribute('role', 'button');
+    level.setAttribute('aria-label', `Nivel de memoria ${index + 1}`);
+    
+    // Efecto hover mejorado
+    level.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-8px) scale(1.02)';
+      this.style.boxShadow = 'var(--memory-shadow-hover)';
+      this.style.zIndex = '10';
+      
+      // Pulso en el icono
+      const icon = this.querySelector('.level-icon i');
+      if (icon) {
+        icon.style.animation = 'pulse 0.6s ease-in-out';
+      }
+    });
+    
+    level.addEventListener('mouseleave', function() {
+      this.style.transform = '';
+      this.style.boxShadow = '';
+      this.style.zIndex = '';
+      
+      const icon = this.querySelector('.level-icon i');
+      if (icon) {
+        icon.style.animation = '';
+      }
+    });
+    
+    // Efecto click para mostrar detalles adicionales
+    level.addEventListener('click', function() {
+      this.style.animation = 'bounce 0.6s ease';
+      
+      // Resaltar estadísticas temporalmente
+      const stats = this.querySelectorAll('.level-stats span');
+      stats.forEach((stat, statIndex) => {
+        setTimeout(() => {
+          stat.style.background = 'var(--memory-primary)';
+          stat.style.color = 'white';
+          stat.style.transform = 'scale(1.1)';
+          
+          setTimeout(() => {
+            stat.style.background = '';
+            stat.style.color = '';
+            stat.style.transform = '';
+          }, 800);
+        }, statIndex * 100);
+      });
+    });
+    
+    // Accesibilidad con teclado
+    level.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        this.click();
+      }
+    });
+  });
+
+  // ===== EFECTOS INTERACTIVOS PARA CARDS =====
+  const interactiveCards = document.querySelectorAll(
+    '.info-card, .type-card, .technique-card, .fragmentation-card, .pagination-item'
+  );
+  
+  interactiveCards.forEach(card => {
+    card.setAttribute('tabindex', '0');
+    
+    // Efecto hover con transformación suave
+    card.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-8px) scale(1.02)';
+      this.style.boxShadow = 'var(--memory-shadow-hover)';
+      this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+      
+      // Efecto especial para iconos
+      const icon = this.querySelector('i');
+      if (icon) {
+        icon.style.transform = 'scale(1.1) rotate(5deg)';
+        icon.style.transition = 'transform 0.3s ease';
+      }
+    });
+    
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = '';
+      this.style.boxShadow = '';
+      
+      const icon = this.querySelector('i');
+      if (icon) {
+        icon.style.transform = '';
+      }
+    });
+    
+    // Efecto focus para accesibilidad
+    card.addEventListener('focus', function() {
+      this.style.outline = '3px solid var(--memory-primary)';
+      this.style.outlineOffset = '2px';
+    });
+    
+    card.addEventListener('blur', function() {
+      this.style.outline = '';
+      this.style.outlineOffset = '';
+    });
+  });
+
+  // ===== EFECTOS ESPECIALES PARA TABLA DE ALGORITMOS =====
+  const tableRows = document.querySelectorAll('.algorithms-table tbody tr');
+  tableRows.forEach((row, index) => {
+    row.addEventListener('mouseenter', function() {
+      this.style.backgroundColor = 'rgba(25, 135, 84, 0.1)';
+      this.style.transform = 'scale(1.01)';
+      this.style.boxShadow = '0 4px 8px rgba(25, 135, 84, 0.1)';
+      this.style.transition = 'all 0.3s ease';
+      
+      // Resaltar algoritmo principal
+      const algorithmName = this.querySelector('td strong');
+      if (algorithmName) {
+        algorithmName.style.color = 'var(--memory-primary)';
+        algorithmName.style.fontWeight = '700';
+      }
+    });
+    
+    row.addEventListener('mouseleave', function() {
+      this.style.backgroundColor = '';
+      this.style.transform = '';
+      this.style.boxShadow = '';
+      
+      const algorithmName = this.querySelector('td strong');
+      if (algorithmName) {
+        algorithmName.style.color = '';
+        algorithmName.style.fontWeight = '';
+      }
+    });
+  });
+
+  // ===== EFECTOS PARA TÉCNICAS MODERNAS =====
+  const techniqueCards = document.querySelectorAll('.technique-card');
+  techniqueCards.forEach(card => {
+    const icon = card.querySelector('.technique-icon');
+    
+    card.addEventListener('mouseenter', function() {
+      this.style.transform = 'translateY(-12px) scale(1.03)';
+      this.style.transition = 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)';
+      
+      if (icon) {
+        icon.style.transform = 'rotate(360deg) scale(1.1)';
+        icon.style.transition = 'transform 0.6s ease';
       }
       
-      await new Promise(resolve => setTimeout(resolve, 100));
-      attempts++;
-    }
+      // Efecto de brillo en el código
+      const codeElement = this.querySelector('code');
+      if (codeElement) {
+        codeElement.style.background = 'var(--memory-gradient)';
+        codeElement.style.color = 'white';
+        codeElement.style.transform = 'scale(1.05)';
+      }
+    });
     
-    console.warn('⚠️ Componentes tardaron en cargar, continuando...');
-  }
-
-  initializeDevelopmentPage() {
-    console.log('🔧 Inicializando página de desarrollo...');
-    
-    // Verificar que existe la sección de desarrollo
-    const developmentSection = document.querySelector('.development-section');
-    if (developmentSection) {
-      console.log('✅ Sección de desarrollo encontrada');
+    card.addEventListener('mouseleave', function() {
+      this.style.transform = '';
       
-      // Hacer visible la sección inmediatamente
-      developmentSection.style.opacity = '1';
-      developmentSection.style.transform = 'translateY(0)';
+      if (icon) {
+        icon.style.transform = '';
+      }
       
-      // Agregar efecto de entrada
-      setTimeout(() => {
-        developmentSection.classList.add('animate__animated', 'animate__fadeInUp');
-      }, 300);
-    } else {
-      console.warn('⚠️ Sección de desarrollo no encontrada');
-    }
-  }
-
-  initializeDevelopmentAnimations() {
-    console.log('🎨 Inicializando animaciones de desarrollo...');
-    
-    // Animar el icono principal
-    const developmentIcon = document.querySelector('.development-icon');
-    if (developmentIcon) {
-      // Agregar efecto hover adicional
-      developmentIcon.addEventListener('mouseenter', () => {
-        developmentIcon.style.transform = 'scale(1.1) rotate(10deg)';
-        developmentIcon.style.filter = 'drop-shadow(0 0 20px rgba(25, 135, 84, 0.8))';
-      });
-      
-      developmentIcon.addEventListener('mouseleave', () => {
-        developmentIcon.style.transform = '';
-        developmentIcon.style.filter = '';
-      });
-    }
-
-    // Animar la tarjeta de desarrollo
-    const developmentCard = document.querySelector('.development-card');
-    if (developmentCard) {
-      // Efecto de entrada retrasado
-      setTimeout(() => {
-        developmentCard.style.transform = 'translateY(0)';
-        developmentCard.style.opacity = '1';
-      }, 500);
-
-      // Efecto parallax sutil al hacer scroll
-      window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const parallax = scrolled * 0.1;
-        developmentCard.style.transform = `translateY(${parallax}px)`;
-      });
-    }
-
-    // Animar elementos de progreso
-    const progressFill = document.querySelector('.development-progress-fill');
-    if (progressFill) {
-      setTimeout(() => {
-        progressFill.style.width = '65%';
-      }, 1000);
-    }
-  }
-
-  initializeButtonInteractions() {
-    console.log('🎯 Configurando interacciones de botones...');
-    
-    // Botón de volver atrás
-    const backButtons = document.querySelectorAll('[onclick*="history.back"]');
-    backButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
+      const codeElement = this.querySelector('code');
+      if (codeElement) {
+        codeElement.style.background = '';
+        codeElement.style.color = '';
+        codeElement.style.transform = '';
+      }
+    });
+  });
+  // ===== SCROLL SUAVE PARA ANCLAS INTERNAS =====
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href').substring(1);
+      const target = document.getElementById(targetId);
+      if (target) {
         e.preventDefault();
-        console.log('🔙 Navegando hacia atrás');
         
-        // Efecto visual antes de navegar
-        button.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-          window.history.back();
-        }, 150);
-      });
-    });
-
-    // Botón de ir al inicio
-    const homeButtons = document.querySelectorAll('[onclick*="secotogpt.html"]');
-    homeButtons.forEach(button => {
-      button.addEventListener('click', (e) => {
-        e.preventDefault();
-        console.log('🏠 Navegando al inicio');
+        const headerHeight = 80;
+        const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight;
         
-        // Efecto visual antes de navegar
-        button.style.transform = 'scale(0.95)';
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+        
+        // Efecto de destaque en el elemento destino
         setTimeout(() => {
-          window.location.href = '../../../secotogpt.html';
-        }, 150);
-      });
+          target.style.animation = 'highlight 2s ease';
+        }, 500);
+      }
     });
+  });
 
-    // Agregar efectos hover a todos los botones de desarrollo
-    const developmentButtons = document.querySelectorAll('.btn-development');
-    developmentButtons.forEach(button => {
-      button.addEventListener('mouseenter', () => {
-        button.style.transform = 'translateY(-2px) scale(1.05)';
-      });
-      
-      button.addEventListener('mouseleave', () => {
-        button.style.transform = '';
-      });
-    });
-  }
-
-  removeLoadingClass() {
-    console.log('🎬 Removiendo clase de carga...');
+  // ===== FUNCIONALIDADES AVANZADAS =====
+  
+  // Detector de velocidad de scroll para optimizar animaciones
+  let lastScrollTime = 0;
+  let scrollVelocity = 0;
+  
+  function calculateScrollVelocity() {
+    const currentTime = Date.now();
+    const currentScroll = window.scrollY;
+    const timeDiff = currentTime - lastScrollTime;
     
-    // Remover clase de loading del body
-    document.body.classList.remove('component-loading');
-    
-    // Asegurar que el contenido sea visible
-    const developmentSection = document.querySelector('.development-section');
-    if (developmentSection) {
-      developmentSection.style.opacity = '1';
-      developmentSection.style.transform = 'translateY(0)';
-      developmentSection.style.transition = 'all 0.8s ease';
+    if (timeDiff > 0) {
+      scrollVelocity = Math.abs((currentScroll - (window.lastScrollY || 0)) / timeDiff);
     }
     
-    // Mostrar mensaje en consola
-    console.log('✅ Página de desarrollo visible y cargada correctamente');
-  }
-
-  // Método para debugging - verificar estado de elementos
-  debugPageState() {
-    console.log('🔍 Estado de la página:');
-    console.log('- Body classes:', document.body.classList.toString());
-    console.log('- Development section:', document.querySelector('.development-section') ? 'Existe' : 'No existe');
-    console.log('- Development card:', document.querySelector('.development-card') ? 'Existe' : 'No existe');
-    console.log('- Manager initialized:', this.initialized);
-  }
-
-  // Método para obtener información de desarrollo
-  getDevelopmentInfo() {
-    return {
-      page: 'Gestión de Memoria',
-      status: 'En desarrollo',
-      progress: '65%',
-      features: [
-        'Memoria física y virtual',
-        'Paginación y segmentación',
-        'Técnicas de optimización',
-        'Simuladores interactivos'
-      ]
-    };
-  }
-}
-
-// CSS adicional para animaciones específicas de memoria
-const memoryCSS = `
-  @keyframes cardEntrance {
-    0% {
-      opacity: 0;
-      transform: translateY(50px) scale(0.95);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
+    window.lastScrollY = currentScroll;
+    lastScrollTime = currentTime;
   }
   
-  @keyframes iconFloat {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-10px);
-    }
-  }
-  
-  @keyframes pulse {
-    0% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0.8);
-    }
-    50% {
-      opacity: 0.6;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(1.2);
-    }
-  }
-  
-  .development-section {
-    transition: all 0.8s ease;
-  }
-  
-  .component-loading .development-section {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  
-  body:not(.component-loading) .development-section {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+  window.addEventListener('scroll', calculateScrollVelocity, { passive: true });
 
-const styleSheet = document.createElement('style');
-styleSheet.textContent = memoryCSS;
-document.head.appendChild(styleSheet);
-
-// Inicialización cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('🏁 DOM cargado - Inicializando Gestión de Memoria (Desarrollo)');
-  
-  if (!window.gestionMemoriaManager) {
-    window.gestionMemoriaManager = new GestionMemoriaManager();
-  }
-});
-
-// Backup para asegurar inicialización
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    if (!window.gestionMemoriaManager) {
-      console.log('🔄 Inicialización de respaldo');
-      window.gestionMemoriaManager = new GestionMemoriaManager();
+  // Sistema de navegación por teclado mejorado
+  document.addEventListener('keydown', function(e) {
+    if (e.ctrlKey || e.metaKey) {
+      switch(e.key) {
+        case 'ArrowUp':
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          break;
+        case 'ArrowDown':
+          e.preventDefault();
+          window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+          break;
+      }
     }
   });
-} else {
-  // DOM ya está cargado
-  console.log('🚀 DOM ya cargado - Inicializando inmediatamente');
-  if (!window.gestionMemoriaManager) {
-    window.gestionMemoriaManager = new GestionMemoriaManager();
-  }
-}
 
-// Export para compatibilidad
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = GestionMemoriaManager;
-}
+  // ===== RESPONSIVE HELPERS Y OPTIMIZACIONES =====
+  function handleMobileOptimizations() {
+    const isMobile = window.innerWidth <= 768;
+    const isTablet = window.innerWidth <= 992 && window.innerWidth > 768;
+    
+    // Ajustes específicos para móvil
+    if (isMobile) {
+      // Reducir intensidad de animaciones en móvil
+      document.documentElement.style.setProperty('--animation-scale', '0.8');
+      
+      // Simplificar efectos hover en móvil (solo touch)
+      interactiveCards.forEach(card => {
+        card.style.transition = 'all 0.2s ease';
+      });
+      
+      // Ajustar tabla para móvil
+      const table = document.querySelector('.algorithms-table');
+      if (table) {
+        table.style.fontSize = '0.8rem';
+      }
+    } else {
+      document.documentElement.style.setProperty('--animation-scale', '1');
+    }
+    
+    // Ajustes específicos para tablet
+    if (isTablet) {
+      const grids = document.querySelectorAll('.types-grid, .techniques-grid');
+      grids.forEach(grid => {
+        grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+      });
+    }
+  }
+
+  // Ejecutar optimizaciones iniciales
+  handleMobileOptimizations();
+  
+  // Re-optimizar en resize con throttle
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(handleMobileOptimizations, 250);
+  });
+
+  // ===== SISTEMA DE TOOLTIP DINÁMICO =====
+  function createTooltip(element, text) {
+    const tooltip = document.createElement('div');
+    tooltip.className = 'custom-tooltip';
+    tooltip.textContent = text;
+    tooltip.style.cssText = `
+      position: absolute;
+      background: var(--memory-gradient);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      z-index: 1000;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    `;
+    
+    document.body.appendChild(tooltip);
+    
+    const rect = element.getBoundingClientRect();
+    tooltip.style.left = rect.left + (rect.width / 2) - (tooltip.offsetWidth / 2) + 'px';
+    tooltip.style.top = rect.top - tooltip.offsetHeight - 10 + 'px';
+    
+    requestAnimationFrame(() => {
+      tooltip.style.opacity = '1';
+      tooltip.style.transform = 'translateY(0)';
+    });
+    
+    return tooltip;
+  }
+  
+  // Agregar tooltips a elementos específicos
+  hierarchyLevels.forEach((level, index) => {
+    const levelNames = ['CPU', 'Caché', 'RAM', 'Almacenamiento'];
+    level.addEventListener('mouseenter', function() {
+      if (window.innerWidth > 768) { // Solo en desktop
+        this.tooltip = createTooltip(this, `Nivel ${index + 1}: ${levelNames[index]}`);
+      }
+    });
+    
+    level.addEventListener('mouseleave', function() {
+      if (this.tooltip) {
+        this.tooltip.style.opacity = '0';
+        setTimeout(() => {
+          if (this.tooltip && this.tooltip.parentNode) {
+            this.tooltip.parentNode.removeChild(this.tooltip);
+          }
+        }, 300);
+      }
+    });
+  });
+
+  // ===== EASTER EGG Y FUNCIONALIDADES DIVERTIDAS =====
+  let clickCount = 0;
+  const heroTitle = document.querySelector('.hero-title');
+  if (heroTitle) {
+    heroTitle.addEventListener('click', () => {
+      clickCount++;
+      if (clickCount === 5) {
+        // Efecto especial después de 5 clicks
+        document.body.style.animation = 'rainbow 2s ease';
+        setTimeout(() => {
+          document.body.style.animation = '';
+        }, 2000);
+        
+        console.log('🎉 ¡Efecto especial activado! Has descubierto el Easter Egg de Gestión de Memoria');
+        clickCount = 0;
+      }
+    });
+  }
+
+  // ===== MONITOREO DE RENDIMIENTO =====
+  function monitorPerformance() {
+    if ('performance' in window) {
+      const navigation = performance.getEntriesByType('navigation')[0];
+      const loadTime = navigation.loadEventEnd - navigation.loadEventStart;
+      
+      console.log(`⚡ Tiempo de carga: ${loadTime.toFixed(2)}ms`);
+      
+      // Si la carga es lenta, reducir animaciones
+      if (loadTime > 3000) {
+        document.documentElement.style.setProperty('--animation-duration', '0.3s');
+        console.log('🔧 Optimizando animaciones por carga lenta');
+      }
+    }
+  }
+
+  // Ejecutar monitoreo después de que todo esté cargado
+  window.addEventListener('load', monitorPerformance);
+
+  // ===== ESTILOS DINÁMICOS PARA ANIMACIONES AVANZADAS =====
+  const dynamicStyles = document.createElement('style');
+  dynamicStyles.textContent = `
+    /* Animaciones base mejoradas */
+    .fade-in { 
+      opacity: 0; 
+      transform: translateY(40px); 
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    .fade-in.visible { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+    
+    /* Animaciones específicas para grids */
+    .content-grid > *, 
+    .types-grid > *, 
+    .fragmentation-grid > *, 
+    .techniques-grid > *,
+    .pagination-components > * { 
+      opacity: 0; 
+      transform: translateY(30px) scale(0.98); 
+      transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    
+    .content-grid > .visible, 
+    .types-grid > .visible, 
+    .fragmentation-grid > .visible, 
+    .techniques-grid > .visible,
+    .pagination-components > .visible { 
+      opacity: 1; 
+      transform: translateY(0) scale(1); 
+    }
+    
+    /* Animaciones para jerarquía de memoria */
+    .memory-hierarchy .hierarchy-level { 
+      opacity: 0; 
+      transform: translateX(-50px) scale(0.9); 
+      transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); 
+    }
+    .memory-hierarchy .hierarchy-level.visible { 
+      opacity: 1; 
+      transform: translateX(0) scale(1); 
+    }
+    
+    /* Animaciones para elementos de estadísticas */
+    .level-stats span {
+      transition: all 0.4s ease;
+    }
+    
+    /* Indicador de progreso de scroll */
+    .scroll-progress { 
+      position: fixed; 
+      left: 0; 
+      top: 0; 
+      height: 4px; 
+      width: 100vw; 
+      background: var(--memory-gradient); 
+      transform: scaleX(0); 
+      transform-origin: left; 
+      z-index: 9999; 
+      transition: transform 0.2s; 
+    }
+    
+    /* Animación typing mejorada */
+    .typing-animate { 
+      min-height: 1.5em; 
+      display: inline-block; 
+      vertical-align: top;
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
+    
+    .typing-animate.typing-complete {
+      border-right: none;
+    }
+    
+    /* Efectos especiales */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes highlight {
+      0% { background-color: transparent; }
+      50% { background-color: rgba(25, 135, 84, 0.1); }
+      100% { background-color: transparent; }
+    }
+    
+    @keyframes rainbow {
+      0% { filter: hue-rotate(0deg); }
+      25% { filter: hue-rotate(90deg); }
+      50% { filter: hue-rotate(180deg); }
+      75% { filter: hue-rotate(270deg); }
+      100% { filter: hue-rotate(360deg); }
+    }
+    
+    /* Tooltips dinámicos */
+    .custom-tooltip {
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    /* Optimizaciones de rendimiento */
+    .hierarchy-level,
+    .info-card,
+    .type-card,
+    .technique-card,
+    .fragmentation-card {
+      will-change: transform;
+    }
+    
+    /* Responsive para animaciones */
+    @media (max-width: 768px) {
+      .fade-in { 
+        transition: all 0.4s ease; 
+      }
+      .typing-animate {
+        white-space: normal;
+        border-right: none;
+      }
+    }
+    
+    /* Preferencias de movimiento reducido */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      
+      .typing-animate {
+        animation: none;
+        border-right: none;
+      }
+    }
+  `;
+  document.head.appendChild(dynamicStyles);
+
+  console.log('🚀 Sistema avanzado de Gestión de Memoria inicializado correctamente');
+  console.log('💡 Funcionalidades activas:');
+  console.log('   - Animaciones escalonadas para grids');
+  console.log('   - Efectos interactivos para jerarquía de memoria');
+  console.log('   - Tabla de algoritmos animada');
+  console.log('   - Tooltips dinámicos');
+  console.log('   - Optimizaciones responsive');
+  console.log('   - Sistema de scroll inteligente');
+});
